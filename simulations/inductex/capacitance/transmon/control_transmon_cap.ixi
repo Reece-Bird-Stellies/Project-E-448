@@ -1,0 +1,22 @@
+$PARAMSTRING
+    -l process_transmon_cap.gds
+    -qt 
+    -zoff
+$END
+
+$STRUCT
+    Name cap
+    $GDS
+        name transmon_cap.gds
+    $END
+$END
+
+$MASK
+    MeshSize 10
+    XY
+        (  135.00000, -1540.00000)
+        (  615.00000, -1540.00000)
+        (  615.00000,  -985.70000)
+        (  135.00000,  -985.70000)
+        (  135.00000, -1540.00000)
+$END

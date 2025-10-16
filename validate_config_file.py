@@ -12,7 +12,11 @@ DEFAULTS = {
     },
     "simulations": {
         "inductex": {
-            "ixi": {"mask_segment_size": 10, "mask_scaling_factor": 1},
+            "ixi": {
+                "iteration_count": 500,
+                "mask_segment_size": 10, 
+                "mask_scaling_factor": 1
+                },
             "layer_definition_file": {
                 "segment_size_um": 35,
                 "substrate_choice": "silicon",

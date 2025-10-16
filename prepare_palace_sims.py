@@ -18,7 +18,7 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
     mesh_max_size                   = palace_cap_config["mesh_max_size"]
     mesh_sampling                   = palace_cap_config["mesh_sampling"]
     fillet_resolution               = palace_cap_config["fillet_resolution"]
-    number_of_cores                 = palace_cap_config["number_of_cores"]
+    number_of_cores                 = palace_cap_config["number_of_cores"]              # Doesnt do anything here
     fine_mesh_min_size_components   = palace_cap_config["fine_mesh_min_size_components"]
     fine_mesh_max_size_components   = palace_cap_config["fine_mesh_max_size_components"]
     palace_dir                      = ""
@@ -144,7 +144,7 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
         "mesh_max":            mesh_max_size,
         "mesh_sampling":       mesh_sampling,
         "fillet_resolution":   fillet_resolution,
-        "num_cpus":            number_of_cores,
+        "num_cpus":            number_of_cores,    # Doesnt do anything here
         "starting_freq":       starting_frequency,
         "number_of_freqs":     number_of_frequencies,
         "solns_to_save":       solutions_to_save,

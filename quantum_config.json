@@ -10,6 +10,7 @@
   "simulations": {
     "inductex": {
       "ixi": {
+        "iteration_count": 500,
         "mask_segment_size": 10,
         "mask_scaling_factor": 1
       },

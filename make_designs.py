@@ -56,12 +56,12 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     layer_launch2   = 4
     layer_feed      = 4
 
-    # Set qubit properties
-    qubit_options = best_design["design_options_qubit"]
-    qubit_options["orientation"] = 0
-    qubit_options["pos_x"] = '0.375mm'
-    qubit_options["pos_y"] = '-1.3'
-    qubit_options["layer"] = f'{layer_transmon}'
+    # Adjust qubit positions and orientation to make compact
+    qubit_options                   = best_design["design_options_qubit"]
+    qubit_options["orientation"]    = 0
+    qubit_options["pos_x"]          = '0.375mm'
+    qubit_options["pos_y"]          = '-1.3'
+    qubit_options["layer"]          = f'{layer_transmon}'
 
     # Create TransmonCross (pin name: 'readout')
     Q1 = TransmonCross(full_design, "transmon", options=qubit_options)
@@ -73,9 +73,9 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     # Q1.options['connection_pads']['readout']['cpw_gap'] = '0um'  
 
     # Extract geometry parameters
-    cross_width = extract_um(qubit_geo['cross_width'])
-    cross_length = extract_um(qubit_geo['cross_length'])
-    cross_gap = extract_um(qubit_geo['cross_gap'])
+    cross_width     = extract_um(qubit_geo['cross_width'])
+    cross_length    = extract_um(qubit_geo['cross_length'])
+    cross_gap       = extract_um(qubit_geo['cross_gap'])
 
     # Create dummy structure to place junction, will delete later
     xmon = Xmon(
@@ -118,7 +118,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
         )
     )
     # Launchpads
-    # launch pads are placed arbitrarily as x,y positions where not given on blue print
+    # launch pads are placed arbitrarily as x,y positions where not given on blueprint
     x1 = '-2mm'  # Replace this with database length?
     y1 = '0mm'
     x2 = '2mm'
@@ -156,6 +156,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     # Use RoutePathfinder to connect the two launchpads
     # The refenence example did not follow the strict database geometries and 
     # opted to use a RoutePathfinder instead of the data component coupled_line_tee
+    # works just fine so will keep it this way for nw
     feedline = RoutePathfinder(
         full_design, 'feedline', 
         options=dict(
@@ -208,7 +209,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     )
     """
 
-    # Open to ground for resonator
+    # Open to ground placed at arbitary x,y position as not given in blueprint
     otg1 = OpenToGround(
             full_design,
             'otg1',
