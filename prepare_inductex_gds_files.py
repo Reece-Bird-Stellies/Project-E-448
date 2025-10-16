@@ -885,9 +885,9 @@ def make_inductex_sparam_sim_transmon_gds(transmon_design, qubit_geo):
     p4 = (cx + cross_length + cross_gap, cy)
 
     _make_text_label(ly, top, L100_0, "P1+ main", text_size=10.0, position=p1)
-    _make_text_label(ly, top, L100_0, "P1- gd", text_size=10.0, position=p2)
+    _make_text_label(ly, top, L100_0, "P1- main", text_size=10.0, position=p2)
     _make_text_label(ly, top, L100_0, "P2+ main", text_size=10.0, position=p3)
-    _make_text_label(ly, top, L100_0, "P2- gd", text_size=10.0, position=p4)
+    _make_text_label(ly, top, L100_0, "P2- main", text_size=10.0, position=p4)
 
     start_left      = (start_left_x, start_left_y)
     start_right     = (start_right_x, start_right_y)
@@ -937,9 +937,9 @@ def make_inductex_sparam_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo
     p4 = (cx + cross_length + cross_gap, cy)
 
     _make_text_label(ly, top, L100_0, "P1+ main", text_size=10.0, position=p1)
-    _make_text_label(ly, top, L100_0, "P1- gd", text_size=10.0, position=p2)
+    _make_text_label(ly, top, L100_0, "P1- main", text_size=10.0, position=p2)
     _make_text_label(ly, top, L100_0, "P2+ main", text_size=10.0, position=p3)
-    _make_text_label(ly, top, L100_0, "P2- gd", text_size=10.0, position=p4)
+    _make_text_label(ly, top, L100_0, "P2- main", text_size=10.0, position=p4)
 
     start_left      = (start_left_x, start_left_y)
     start_right     = (start_right_x, start_right_y)
@@ -987,9 +987,9 @@ def make_inductex_sparam_sim_resonator_gds(resonator_design, resonator_geo):
     p4 = (end_mid_x, end_mid_y - trace_gap)
 
     _make_text_label(ly, top, L100_0, "P1+ main", text_size=10.0, position=p1)
-    _make_text_label(ly, top, L100_0, "P1- gd", text_size=10.0, position=p2)
+    _make_text_label(ly, top, L100_0, "P1- main", text_size=10.0, position=p2)
     _make_text_label(ly, top, L100_0, "P2+ main", text_size=10.0, position=p3)
-    _make_text_label(ly, top, L100_0, "P2- gd", text_size=10.0, position=p4)
+    _make_text_label(ly, top, L100_0, "P2- main", text_size=10.0, position=p4)
 
     start_left      = (start_left_x, start_left_y)
     start_right     = (start_right_x, start_right_y)

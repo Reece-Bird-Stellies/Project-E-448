@@ -33,7 +33,7 @@ def _center_and_scale_chip(design, component_name='transmon', scale_factor=1.3):
     # Set chip size and center  
     design.chips.main.size.size_x = f'{chip_width}mm'  
     design.chips.main.size.size_y = f'{chip_height}mm'  
-    design.chips.main.size.size_z = '-280um'  
+    design.chips.main.size.size_z = '-280um'                                                                #MAYBE CHANGE THIS
     design.chips.main.size.center_x = f'{comp_center_x}mm'  
     design.chips.main.size.center_y = f'{comp_center_y}mm' 
 
@@ -293,7 +293,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
             hfss_wire_bonds=False,
             fillet=resonator_geo['fillet'],
             lead=dict(
-                start_straight='300um'
+                start_straight='300um'                                                                 # This is not stricly correct but won't effect results
             ),
             pin_inputs=Dict(
                 start_pin=Dict(

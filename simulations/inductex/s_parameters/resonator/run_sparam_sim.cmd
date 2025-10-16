@@ -1,0 +1,1 @@
+inductex8 control_resonator_sparam.ixi

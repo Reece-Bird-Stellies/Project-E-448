@@ -1,0 +1,11 @@
+$PARAMSTRING
+  -l process_resonator_sparam.ldf     
+  -S LIN 2000000000.0 8000000000.0 200 50 50
+$END
+
+$STRUCT
+    Name cap
+    $GDS
+        name resonator_sparam.gds
+    $END
+$END
