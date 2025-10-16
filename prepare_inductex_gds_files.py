@@ -630,8 +630,8 @@ def make_inductex_cap_sim_resonator_gds(resonator_design, resonator_geo):
     (px, py)            = _get_pin_center_um(resonator_design, "resonator", "end")
     trace_gap           = extract_um(resonator_geo["trace_gap"])
     trace_width         = extract_um(resonator_geo["trace_width"])
-    p1                  = (px, py + trace_width)
-    p2                  = (px + trace_width + 2*trace_gap, py)
+    p1                  = (px + trace_width + 2*trace_gap, py)
+    p2                  = (px, py + trace_width)
 
     _make_text_label(ly, top, L100_0, "Cground main", text_size=10.0, position=p1)
     _make_text_label(ly, top, L100_0, "Cresonator main", text_size=10.0, position=p2)
@@ -654,8 +654,8 @@ def make_inductex_cap_sim_feedline_gds(feedline_design, feedline_geo):
     (cx, cy)            = _get_component_center_um(feedline_design, "feedline")
     prime_width        = extract_um(feedline_geo["prime_width"])
 
-    p1                  = (cx, cy)
-    p2                  = (cx, cy + 3*prime_width)
+    p1                  = (cx, cy + 3*prime_width)
+    p2                  = (cx, cy)
 
     _make_text_label(ly, top, L100_0, "Cground main", text_size=10.0, position=p1)
     _make_text_label(ly, top, L100_0, "Cfeedline main", text_size=10.0, position=p2)

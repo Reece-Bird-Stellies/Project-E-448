@@ -24,7 +24,7 @@ def _center_and_scale_chip(design, component_name='transmon', scale_factor=1.3):
     
     # Special handling for feedline to ensure enough height
     if component_name == 'feedline':
-        comp_height = design.components[component_name].p.trace_width * 20
+        comp_height = design.components[component_name].p.trace_width * 20 * scale_factor
 
     # Apply scaling factor  
     chip_width = comp_width * scale_factor  

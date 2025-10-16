@@ -15,16 +15,16 @@ DEFAULTS = {
             "ixi": {
                 "iteration_count": 500,
                 "mask_segment_size": 10, 
-                "mask_scaling_factor": 1
+                "mask_scaling_factor": 1.1
                 },
             "layer_definition_file": {
-                "segment_size_um": 35,
+                "segment_size_um": 20,
                 "substrate_choice": "silicon",
-                "thickness_um": 70,
+                "thickness_um": 0.07,
+                "lambda0_um": 0.016,
                 "temperature_k": 0.01,
                 "critical_temperature": 1.2,
-                "h_filaments_metal": 1,
-                "metal_choice": "al",
+                "h_filaments_metal": 3,
                 "decimation_distance": 1
             }
         },
@@ -72,6 +72,7 @@ DEFAULTS = {
     },
     "miscellaneous": {
         "sims": {
+            "base_chip_scaling_factor": 1.5,
             "extra_sims": True,
             "inductex": {
                 "cap_transmon": True,

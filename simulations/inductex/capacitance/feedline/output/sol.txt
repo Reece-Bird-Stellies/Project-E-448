@@ -1,0 +1,20 @@
+﻿InductEx v7.1.28 (8.0 beta) (8 October 2025). Copyright 2003-2025 Coenrad Fourie
+Licenced to:
+  Reece Bird, until 31 Dec 2025. [Super]
+
+Licensed for ACADEMIC USE ONLY.
+
+Execution start time stamp: 2025/10/17 00:02:22
+Parameter string: 
+control_feedline_cap.ixi -l process_feedline_cap.ldf -qt -zoff 
+(90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
+  Model and simulation settings:
+   - Solution method: EQS
+   - Mesh:            Triangle/Tetrahedron hybrid
+  Layout input files processed:
++=======+=======+==========================+==========================+==================+========+========+=============+============+
+| Chip# | Name  | Layout file              | LDF                      | Top-level struct | #Polys | #Terms | TecUnit (m) | DBUnit (m) |
++-------+-------+--------------------------+--------------------------+------------------+--------+--------+-------------+------------+
+| 0     | Chip0 | control_feedline_cap.ixi | process_feedline_cap.ldf | cap              | 3      | 0      | 1E-06       | 1E-09      |
++=======+=======+==========================+==========================+==================+========+========+=============+============+
+
