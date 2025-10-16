@@ -150,8 +150,8 @@ def fetch_design(design_specs, num_top=1):
         "second_width":         feedline_options["second_width"],
     }
 
-    Ej      = best_design["EJ"] * 1e9  # GHz
-    Ej      = Ej* h # Convert Hz to Joules
+    Ej      = best_design["EJ"] * 1e9   # GHz
+    Ej      = Ej* h                     # Convert Hz to Joules
     phi_0   = hbar / (2*e)
     LJs     = ((phi_0**2) / Ej)  *1e9
     return best_design, ref_design_specs, ref_capacitance_specs, qubit_geo, resonator_geo, feedline_geo, LJs

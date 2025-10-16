@@ -54,7 +54,7 @@ DEFAULTS = {
                 "fine_mesh_max_size_components": 1.2e-4,
                 "fine_mesh_min_size_junction": 2e-6,
                 "fine_mesh_max_size_junction": 6e-5,
-                "starting_frequency_ghz": 2,
+                "starting_frequency": 2e9,
                 "number_of_frequencies": 2,
                 "solutions_to_save": 0,
                 "assumed_junction_capacitance": 0
@@ -103,7 +103,7 @@ REQUIRED_PATHS = [
     "simulations.inductex.ixi.mask_segment_size",
     "simulations.inductex.layer_definition_file.segment_size_um",
     "simulations.palace.capacitance.mesh_min_size",
-    "simulations.palace.eigenmode.starting_frequency_ghz",
+    "simulations.palace.eigenmode.starting_frequency",
     "quantum_analysis.qubit_truncation",
     "miscellaneous.sims.extra_sims",
 ]
