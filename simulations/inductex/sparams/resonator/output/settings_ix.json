@@ -14,7 +14,7 @@
     },
     "MESHES": {
         "IXMesh0": {
-            "FILE": "C:/Users/reece/Desktop/Final Year Work/2nd Semester/Project (E) 448/Simulations/Final/simulations/inductex/s_parameters/transmon/output/ix.msh",
+            "FILE": "c:/Users/reece/Desktop/Final Year Work/2nd Semester/Project (E) 448/Simulations/Final/simulations/inductex/sparams/resonator/output/ix.msh",
             "FORMAT": "GMSH",
             "ENTITIES": {
                 "T0_0_main": {

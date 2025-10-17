@@ -1,0 +1,169 @@
+{
+    "COMPONENTS": {
+        "p1": {
+            "NODES": [
+                "IXMesh0::p1+",
+                "IXMesh0::p1-"
+            ],
+            "TYPE": "VOLTAGE",
+            "VALUE": 1
+        },
+        "p2": {
+            "NODES": [
+                "IXMesh0::p2+",
+                "IXMesh0::p2-"
+            ],
+            "TYPE": "VOLTAGE",
+            "VALUE": 1
+        }
+    },
+    "MATERIALS": {
+        "T0_0_main_COND": {
+            "LAMBDA": 1.6e-08,
+            "SIGMA": 0
+        },
+        "T0_0_sil_ISO": {
+            "LAMBDA": 1.6e-08,
+            "SIGMA": 0
+        },
+        "T0_DIELECTRIC_0": {
+            "REL_EPS": 11.7
+        },
+        "T0_DIELECTRIC_1": {
+            "REL_EPS": 11.45
+        },
+        "T0_DIELECTRIC_2": {
+            "REL_EPS": 1
+        }
+    },
+    "MESHES": {
+        "IXMesh0": {
+            "ENTITIES": {
+                "T0_0_main": {
+                    "INNER_MATERIAL": "T0_0_main_COND",
+                    "OUTER_MATERIAL": [
+                        "T0_DIELECTRIC_2",
+                        "T0_DIELECTRIC_1",
+                        "T0_DIELECTRIC_2"
+                    ],
+                    "SHEET_MODEL": "THICK",
+                    "SHEET_THICKNESS": [
+                        0,
+                        7e-08
+                    ]
+                },
+                "T0_DIELECTRICBOUND_1": {
+                    "INNER_MATERIAL": "T0_DIELECTRIC_0",
+                    "OUTER_MATERIAL": "T0_DIELECTRIC_1"
+                },
+                "T0_DIELECTRICBOUND_2": {
+                    "INNER_MATERIAL": "T0_DIELECTRIC_1",
+                    "OUTER_MATERIAL": "T0_DIELECTRIC_2"
+                },
+                "p1+": {
+                    "TERMINAL": true
+                },
+                "p1-": {
+                    "TERMINAL": true
+                },
+                "p2+": {
+                    "TERMINAL": true
+                },
+                "p2-": {
+                    "TERMINAL": true
+                }
+            },
+            "FILE": "c:/Users/reece/Desktop/Final Year Work/2nd Semester/Project (E) 448/Simulations/Final/simulations/inductex/sparams/transmon/output/ix.msh",
+            "FORMAT": "GMSH"
+        }
+    },
+    "OUTPUT": {
+        "PRINT": {
+            "CURRENT": {
+                "COMPONENTS": [
+                    "p1",
+                    "p2"
+                ],
+                "FILE": "i.txt"
+            }
+        }
+    },
+    "SETTINGS": {
+        "FMM": {
+            "ADAPTIVE": true,
+            "DEPTH": 6,
+            "MAXDEPTH": 10,
+            "NNBRS": 2,
+            "ORDER": 2,
+            "THREADS": "MAX",
+            "USE_MAX_DEPTH": false
+        },
+        "FREQUENCY": {
+            "LOGSCALE": false,
+            "NUM": 200,
+            "START": 2000000000.0,
+            "STOP": 8000000000.0
+        },
+        "JUNCTION": {
+            "CS": 7e-14,
+            "DELV": 0.0001,
+            "IC*RN": 0.0016,
+            "JC": 0.0001,
+            "RSG/RN": 10.0,
+            "VG": 0.0028
+        },
+        "MODE": {
+            "ANALYSIS": "AC",
+            "TYPE": "EMQS"
+        },
+        "PATHS": {
+            "LICENSE": "C:/InductEx/licenses/ix_license.txt",
+            "OUTPUT": "output"
+        },
+        "PRECONDITIONER": {
+            "CONDITIONNUMBER": true,
+            "ENABLED": true,
+            "EQUIL": false,
+            "FILLRATIO": 30,
+            "ILU_DROPRULE": [
+                "BASIC",
+                "AREA"
+            ],
+            "ILU_DROPTOL": 0.0001,
+            "ILU_FILLFACTOR": 10.0,
+            "ILU_FILLTOL": 0.01,
+            "ILU_MILU": "SILU",
+            "ILU_MILU_DIM": 3.0,
+            "ILU_NORM": "INF_NORM",
+            "ITERREFINE": "NOREFINE",
+            "PIVOTGROWTH": true,
+            "PRINTSTAT": true,
+            "SYMMETRICMODE": false,
+            "SYMPATTERN": false
+        },
+        "QUADRATURE": {
+            "SURFACE": [
+                1,
+                6
+            ],
+            "VOLUME": [
+                1,
+                6
+            ]
+        },
+        "SOLVER": {
+            "ABSTOL": 0.0001,
+            "MAXITER": 400,
+            "MINRESTART": 100,
+            "THREADS": "MAX",
+            "TOL": 0.0001,
+            "TYPE": "GMRES"
+        },
+        "TRANSIENT": {
+            "START": 0.0,
+            "STEP": 1e-10,
+            "STOP": 1e-08
+        }
+    },
+    "VERSION": 0.1
+}

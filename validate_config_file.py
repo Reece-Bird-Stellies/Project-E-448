@@ -16,11 +16,11 @@ DEFAULTS = {
                 "iteration_count": 500,
                 "mask_segment_size": 10, 
                 "mask_scaling_factor": 1.1,
-                "sparam_start_freq": 2e9,
-                "sparam_stop_freq": 8e9,
-                "sparam_steps": 200,
-                "sparam_p1_resistance": 50,
-                "sparam_p2_resistance": 50
+                "sparams_start_freq": 2e9,
+                "sparams_stop_freq": 8e9,
+                "sparams_steps": 200,
+                "sparams_p1_resistance": 50,
+                "sparams_p2_resistance": 50
                 },
             "layer_definition_file": {
                 "segment_size_um": 20,

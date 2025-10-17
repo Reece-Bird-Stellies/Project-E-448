@@ -811,7 +811,7 @@ def make_inductex_ind_sim_feedline_gds(feedline_design, feedline_geo):
 def make_inductex_sparam_sim_full_gds(full_design, qubit_geo):
     return
     input_file = "gds_files/processed_single_layer/full_processed.gds"
-    output_file = "simulations/inductex/sparam/full/full.gds"
+    output_file = "simulations/inductex/sparams/full/full.gds"
 
     ly = pya.Layout()
     ly.read(input_file)
@@ -827,7 +827,7 @@ def make_inductex_sparam_sim_full_gds(full_design, qubit_geo):
 def make_inductex_sparam_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
     return
     input_file = "gds_files/processed_single_layer/full_no_jj_processed.gds"
-    output_file = "simulations/inductex/sparam/full_no_jj/full_no_jj.gds"
+    output_file = "simulations/inductex/sparams/full_no_jj/full_no_jj.gds"
 
     ly = pya.Layout()
     ly.read(input_file)
@@ -843,7 +843,7 @@ def make_inductex_sparam_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
 def make_inductex_sparam_sim_junction_gds(junction_design, qubit_geo):
     return
     input_file = "gds_files/processed_single_layer/junction_processed.gds"
-    output_file = "simulations/inductex/sparam/junction/junction.gds"
+    output_file = "simulations/inductex/sparams/junction/junction.gds"
 
     ly = pya.Layout()
     ly.read(input_file)
@@ -859,7 +859,7 @@ def make_inductex_sparam_sim_junction_gds(junction_design, qubit_geo):
 def make_inductex_sparam_sim_transmon_gds(transmon_design, qubit_geo):
 
     input_file = "gds_files/processed_single_layer/transmon_processed.gds"
-    output_file = "simulations/inductex/s_parameters/transmon/transmon_sparam.gds"
+    output_file = "simulations/inductex/sparams/transmon/transmon_sparams.gds"
 
     ly = pya.Layout()
     ly.read(input_file)
@@ -911,7 +911,7 @@ def make_inductex_sparam_sim_transmon_gds(transmon_design, qubit_geo):
 
 def make_inductex_sparam_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo):
     input_file = "gds_files/processed_single_layer/transmon_no_jj_processed.gds"
-    output_file = "simulations/inductex/s_parameters/transmon_no_jj/transmon_no_jj_sparam.gds"
+    output_file = "simulations/inductex/sparams/transmon_no_jj/transmon_no_jj_sparams.gds"
 
     ly = pya.Layout()
     ly.read(input_file)
@@ -963,7 +963,7 @@ def make_inductex_sparam_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo
 
 def make_inductex_sparam_sim_resonator_gds(resonator_design, resonator_geo):
     input_file = "gds_files/processed_single_layer/resonator_processed.gds"
-    output_file = "simulations/inductex/s_parameters/resonator/resonator_sparam.gds"
+    output_file = "simulations/inductex/sparams/resonator/resonator_sparams.gds"
 
     ly = pya.Layout()
     ly.read(input_file)
@@ -1014,7 +1014,7 @@ def make_inductex_sparam_sim_resonator_gds(resonator_design, resonator_geo):
 def make_inductex_sparam_sim_feedline_gds(feedline_design, feedline_geo):
     return
     input_file = "gds_files/processed_single_layer/feedline_processed.gds"
-    output_file = "simulations/inductex/sparam/feedline/feedline.gds"
+    output_file = "simulations/inductex/sparams/feedline/feedline.gds"
 
     ly = pya.Layout()
     ly.read(input_file)

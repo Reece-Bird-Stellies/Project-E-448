@@ -117,9 +117,9 @@ def _make_ind_run_file(design_name):
 
 def _make_sparam_run_file(design_name):
 
-    run_contents = f"""inductex8 control_{design_name}_sparam.ixi"""
+    run_contents = f"""inductex8 control_{design_name}_sparams.ixi"""
 
-    output_path = rf"simulations/inductex/s_parameters/{design_name}/run_sparam_sim.cmd"
+    output_path = rf"simulations/inductex/sparams/{design_name}/run_sparams_sim.cmd"
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(run_contents.strip() + "\n")
@@ -282,12 +282,12 @@ $End"""
     _make_ldf_file(param_string, layers_list, output_path)
 
 def _make_sparam_ixi_file(design_name, mask_bounds, inductex_ixi_config):
-    design_name_sparam  = design_name + "_sparam"
-    start               = inductex_ixi_config["sparam_start_freq"]
-    stop                = inductex_ixi_config["sparam_stop_freq"]
-    step                = inductex_ixi_config["sparam_steps"]
-    p1_resistance       = inductex_ixi_config["sparam_p1_resistance"]
-    p2_resistance       = inductex_ixi_config["sparam_p2_resistance"]
+    design_name_sparam  = design_name + "_sparams"
+    start               = inductex_ixi_config["sparams_start_freq"]
+    stop                = inductex_ixi_config["sparams_stop_freq"]
+    step                = inductex_ixi_config["sparams_steps"]
+    p1_resistance       = inductex_ixi_config["sparams_p1_resistance"]
+    p2_resistance       = inductex_ixi_config["sparams_p2_resistance"]
 
     param_string = f"""$PARAMSTRING
   -l process_{design_name_sparam}.ldf     
@@ -303,12 +303,12 @@ $END"""
         {_get_mask_trace_string(mask_bounds, inductex_ixi_config["mask_scaling_factor"])}
 $END"""
     
-    output_path = rf"simulations/inductex/s_parameters/{design_name}/control_{design_name_sparam}.ixi"
+    output_path = rf"simulations/inductex/sparams/{design_name}/control_{design_name_sparam}.ixi"
 
     _make_ixi_file(param_string, design_name_sparam, mask_string, output_path)
 
 def _make_sparam_ldf_file(design_name, inductex_ldf_config):
-    design_name_sparam = design_name + "_sparam"
+    design_name_sparam = design_name + "_sparams"
 
     if inductex_ldf_config["substrate_choice"] == "silicon":
         epsilon = 11.45
@@ -354,7 +354,7 @@ $Layer
 	Filmtype 				= S
 $End"""
     layers_list = [substrate_layer_string, metal_layer_string]
-    output_path = rf"simulations/inductex/s_parameters/{design_name}/process_{design_name_sparam}.ldf"
+    output_path = rf"simulations/inductex/sparams/{design_name}/process_{design_name_sparam}.ldf"
     _make_ldf_file(param_string, layers_list, output_path)
 
 def make_inductex_cap_sim(design, design_name, create_mask, mask_component=None, inductex_ixi_config=None, inductex_ldf_config=None):
