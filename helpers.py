@@ -153,7 +153,7 @@ def fetch_design(design_specs, num_top=1):
     Ej      = best_design["EJ"] * 1e9   # GHz
     Ej      = Ej* h                     # Convert Hz to Joules
     phi_0   = hbar / (2*e)
-    LJs     = ((phi_0**2) / Ej)  *1e9
+    LJs     = ((phi_0**2) / Ej)
     return best_design, ref_design_specs, ref_capacitance_specs, qubit_geo, resonator_geo, feedline_geo, LJs
 
 def fetch_design_fast():
@@ -236,7 +236,7 @@ def fetch_design_fast():
     Ej      = best_design["EJ"] * 1e9  # GHz
     Ej      = Ej* h # Convert Hz to Joules
     phi_0   = hbar / (2*e)
-    LJs     = ((phi_0**2) / Ej)  *1e9
+    LJs     = ((phi_0**2) / Ej)
     return best_design, ref_design_specs, ref_capacitance_specs, qubit_geo, resonator_geo, feedline_geo, LJs
 
 def _to_json_safe(obj):

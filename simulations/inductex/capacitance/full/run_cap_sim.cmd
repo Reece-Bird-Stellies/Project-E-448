@@ -1,0 +1,1 @@
+inductex8 control_full_cap.ixi

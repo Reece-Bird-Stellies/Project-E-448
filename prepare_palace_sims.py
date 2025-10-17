@@ -76,15 +76,13 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
     cap_sim.fine_mesh_around_comp_boundaries(fine_mesh_components, min_size=fine_mesh_min_size_components, max_size=fine_mesh_max_size_components) 
 
     cap_sim.prepare_simulation()
-    cap_sim.display_conductor_indices()
 
     print(f"Finished making PALACE capacitance simulation MESH and JSON files for {design_name}")
+    return cap_sim
 
 def _setup_feedline_ports(eigen_sim):
     eigen_sim.create_port_CPW_on_Launcher('LP1', 20e-6)
     eigen_sim.create_port_CPW_on_Launcher('LP2', 20e-6)
-    eigen_sim.set_port_impedance(port_ind=1, impedance_R=45.6, impedance_L=0, impedance_C=0)
-    eigen_sim.set_port_impedance(port_ind=2, impedance_R=0, impedance_L=1e-15, impedance_C=0)
 
 def _setup_junction_ports(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
     eigen_sim.create_port_JosephsonJunction('junction', L_J=l_j, C_J=c_j, R_J= r_j)
@@ -95,11 +93,8 @@ def _setup_junction_ports(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_
                                     min_size       = fine_mesh_min_size_junction, 
                                     max_size       = fine_mesh_max_size_junction
                                     )
-
-
     
 def _setup_full_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
-    _setup_feedline_ports(eigen_sim)
     _setup_junction_ports(eigen_sim, 
                           design, 
                           l_j, 
@@ -109,11 +104,10 @@ def _setup_full_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mes
                           fine_mesh_min_size_junction, 
                           fine_mesh_max_size_junction
                           )
+    _setup_feedline_ports(eigen_sim)
 
 def _setup_full_no_jj_design(eigen_sim):
     _setup_feedline_ports(eigen_sim)
-
-
 
 def _setup_resonator_design(eigen_sim):
     fine_mesh_components = ['resonator']
@@ -177,15 +171,27 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
                                             )
 
 
+    qmpl                    = QiskitShapelyRenderer(None, design, None)  
+    gsdf                    = qmpl.get_net_coordinates(resolution=4)  
+    layers                  = np.unique(gsdf['layer'])  
+    fine_mesh_components    = list(design.components.keys())
 
-    # Call helper functions based on design_name
-    fine_mesh_components = list(design.components.keys())
+    if 'junction' in design.components:      # Only filter out junction layer if junction exists  
+        junction_layer = design.components['junction'].options.layer  
+        layers = layers[layers != junction_layer]  
+        
     if design_name == "full":
-         _setup_full_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction)
+        _setup_full_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction)   
+        eigen_sim.set_port_impedance(port_ind=2, impedance_R=45.6, impedance_L=0, impedance_C=0)
+        eigen_sim.set_port_impedance(port_ind=3, impedance_R=0, impedance_L=1e-15, impedance_C=0) 
     elif design_name == "full_no_jj":
         _setup_full_no_jj_design(eigen_sim)
+        eigen_sim.set_port_impedance(port_ind=1, impedance_R=45.6, impedance_L=0, impedance_C=0)
+        eigen_sim.set_port_impedance(port_ind=2, impedance_R=0, impedance_L=1e-15, impedance_C=0)
     elif design_name == "resonator":
         _setup_resonator_design(eigen_sim)
+        eigen_sim.set_port_impedance(port_ind=1, impedance_R=45.6, impedance_L=0, impedance_C=0)
+        eigen_sim.set_port_impedance(port_ind=2, impedance_R=0, impedance_L=1e-15, impedance_C=0)
         
 
     eigen_sim.fine_mesh_around_comp_boundaries(fine_mesh_components,
@@ -193,16 +199,9 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
                                                max_size=fine_mesh_max_size_components
                                                )
     
-
-    # Get all geometries from the design  
-    qmpl        = QiskitShapelyRenderer(None, design, None)  
-    gsdf        = qmpl.get_net_coordinates(resolution=4)  
-    
-    # Extract unique layer IDs  
-    layer_ids   = np.unique(gsdf['layer'])  
-    
-    for layer in layer_ids:
+    for layer in layers:
         eigen_sim.add_metallic(layer, threshold=1e-10, fuse_threshold=1e-10)
+
     eigen_sim.add_ground_plane(threshold=1e-10)
     eigen_sim.setup_EPR_interfaces(metal_air=MaterialInterface('Aluminium-Vacuum'),
                                 substrate_air=MaterialInterface('Silicon-Vacuum'),
@@ -211,6 +210,8 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
     eigen_sim.prepare_simulation()
 
     print(f"Finished making PALACE eigenmode simulation MESH and JSON files for {design_name}")
+
+    return eigen_sim
 
 
 # Not gonna use this anymore

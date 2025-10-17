@@ -43,7 +43,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     # Set up chip dimensions 
     full_design.chips.main.size.size_x = '4.6mm'
     full_design.chips.main.size.size_y = '2.4mm'
-    full_design.chips.main.size.size_z = '-280um'
+    full_design.chips.main.size.size_z = '-750um'
     full_design.chips.main.size.center_x = '0mm'
     full_design.chips.main.size.center_y = '-1mm'
 

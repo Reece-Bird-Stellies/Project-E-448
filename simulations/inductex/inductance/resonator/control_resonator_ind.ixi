@@ -1,0 +1,14 @@
+$PARAMSTRING
+    -l process_resonator_ind.ldf
+    -n circuit_resonator_ind.cir
+    -th 
+    -zoff
+    -hb 0
+$END
+
+$STRUCT
+    Name cap
+    $GDS
+        name resonator_ind.gds
+    $END
+$END

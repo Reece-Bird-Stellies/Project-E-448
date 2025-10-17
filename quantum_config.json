@@ -34,7 +34,7 @@
       "capacitance": {
         "mesh_refinement": 0,
         "dielectric_material": "silicon",
-        "solver_order": 3,
+        "solver_order": 2,
         "solver_tolerance": 1e-08,
         "solver_max_iterations": 500,
         "mesh_min_size": 1e-05,
@@ -57,11 +57,11 @@
         "mesh_sampling": 130,
         "fillet_resolution": 12,
         "number_of_cores": 4,
-        "fine_mesh_min_size_components": 1e-05,
+        "fine_mesh_min_size_components": 5e-06,
         "fine_mesh_max_size_components": 0.00012,
-        "fine_mesh_min_size_junction": 2e-06,
+        "fine_mesh_min_size_junction": 1e-05,
         "fine_mesh_max_size_junction": 6e-05,
-        "starting_frequency": 2000000000.0,
+        "starting_frequency": 2e9,
         "number_of_frequencies": 2,
         "solutions_to_save": 0,
         "assumed_junction_capacitance": 0
@@ -76,24 +76,24 @@
   "miscellaneous": {
     "sims": {
       "base_chip_scaling_factor": 1.5,
-      "extra_sims": true,
+      "extra_sims": false,
       "inductex": {
         "cap_transmon": true,
         "cap_resonator": true,
-        "cap_feedline": true,
-        "induc_transmon": true,
+        "cap_feedline": false,
+        "induc_transmon": false,
         "induc_resonator": true,
-        "induc_feedline": true,
-        "s_parm_transmon": true,
-        "s_parm_resonator": true,
-        "s_parm_whole": true,
+        "induc_feedline": false,
+        "s_parm_transmon": false,
+        "s_parm_resonator": false,
+        "s_parm_whole": false,
         "efield_whole": true,
         "hfield_whole": true
       },
       "palace": {
         "cap_transmon": true,
         "cap_resonator": true,
-        "cap_feedline": true,
+        "cap_feedline": false,
         "eigenmode_transmon": true
       }
     }

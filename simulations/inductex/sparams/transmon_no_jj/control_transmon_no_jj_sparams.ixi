@@ -1,0 +1,11 @@
+$PARAMSTRING
+  -l process_transmon_no_jj_sparams.ldf     
+  -S LIN 2000000000.0 8000000000.0 8 50 50
+$END
+
+$STRUCT
+    Name cap
+    $GDS
+        name transmon_no_jj_sparams.gds
+    $END
+$END
