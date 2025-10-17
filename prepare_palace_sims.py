@@ -2,7 +2,11 @@ from SQDMetal.PALACE.Eigenmode_Simulation import PALACE_Eigenmode_Simulation
 from SQDMetal.PALACE.Capacitance_Simulation import PALACE_Capacitance_Simulation
 from SQDMetal.Utilities.Materials import MaterialInterface
 from SQDMetal.Utilities.QiskitShapelyRenderer import QiskitShapelyRenderer 
+from qiskit_metal.qlibrary.tlines.meandered import RouteMeander
+from qiskit_metal.qlibrary.terminations.open_to_ground import OpenToGround
+from qiskit_metal import Dict
 import numpy as np
+
 
 def make_palace_cap_sim(design, design_name, palace_cap_config):
 
@@ -56,7 +60,6 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
     
     # Extract unique layer IDs  
     layer_ids   = np.unique(gsdf['layer'])  
-    print(f"Layers in design: {layer_ids}")
 
     cap_sim.add_ground_plane(threshold=1e-10)
 
@@ -75,26 +78,16 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
     cap_sim.prepare_simulation()
     cap_sim.display_conductor_indices()
 
-def _setup_full_design(eigen_sim, design, ref_design_junction_inductance, assumed_junction_capacitance, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
-    fine_mesh_components = ['resonator', 'transmon', 'feedline', 'LP1', 'LP2']
+    print(f"Finished making PALACE capacitance simulation MESH and JSON files for {design_name}")
+
+def _setup_feedline_ports(eigen_sim):
     eigen_sim.create_port_CPW_on_Launcher('LP1', 20e-6)
     eigen_sim.create_port_CPW_on_Launcher('LP2', 20e-6)
-    eigen_sim.create_port_JosephsonJunction('junction', L_J=ref_design_junction_inductance, C_J=assumed_junction_capacitance)
-    bounds = design.components["junction"].qgeometry_bounds()
-    bounds = bounds * 1e-3
-    eigen_sim.fine_mesh_in_rectangle(bounds[0], bounds[1], bounds[2], bounds[3],
-                                    mesh_sampling  = mesh_sampling, 
-                                    min_size       = fine_mesh_min_size_junction, 
-                                    max_size       = fine_mesh_max_size_junction
-                                    )
     eigen_sim.set_port_impedance(port_ind=1, impedance_R=45.6, impedance_L=0, impedance_C=0)
     eigen_sim.set_port_impedance(port_ind=2, impedance_R=0, impedance_L=1e-15, impedance_C=0)
-    return fine_mesh_components
 
-def _setup_transmon_design(eigen_sim, design, ref_design_junction_inductance, assumed_junction_capacitance, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
-    fine_mesh_components = ['transmon']
-    eigen_sim.create_port_CPW_on_Route('transmon', pin_name='readout', len_launch=20e-6)
-    eigen_sim.create_port_JosephsonJunction('junction', L_J=ref_design_junction_inductance, C_J=assumed_junction_capacitance)
+def _setup_junction_ports(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
+    eigen_sim.create_port_JosephsonJunction('junction', L_J=l_j, C_J=c_j, R_J= r_j)
     bounds = design.components["junction"].qgeometry_bounds()
     bounds = bounds * 1e-3
     eigen_sim.fine_mesh_in_rectangle(bounds[0], bounds[1], bounds[2], bounds[3],
@@ -102,7 +95,25 @@ def _setup_transmon_design(eigen_sim, design, ref_design_junction_inductance, as
                                     min_size       = fine_mesh_min_size_junction, 
                                     max_size       = fine_mesh_max_size_junction
                                     )
-    return fine_mesh_components
+
+
+    
+def _setup_full_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
+    _setup_feedline_ports(eigen_sim)
+    _setup_junction_ports(eigen_sim, 
+                          design, 
+                          l_j, 
+                          c_j, 
+                          r_j,
+                          mesh_sampling, 
+                          fine_mesh_min_size_junction, 
+                          fine_mesh_max_size_junction
+                          )
+
+def _setup_full_no_jj_design(eigen_sim):
+    _setup_feedline_ports(eigen_sim)
+
+
 
 def _setup_resonator_design(eigen_sim):
     fine_mesh_components = ['resonator']
@@ -133,8 +144,9 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
     starting_frequency              = palace_eigenmode_config["starting_frequency"]
     number_of_frequencies           = palace_eigenmode_config["number_of_frequencies"]
     solutions_to_save               = palace_eigenmode_config["solutions_to_save"]
-    assumed_junction_capacitance    = palace_eigenmode_config["assumed_junction_capacitance"]
-    ref_design_junction_inductance  = palace_eigenmode_config["lj"]
+    c_j                             = palace_eigenmode_config["assumed_junction_capacitance"]
+    l_j                             = palace_eigenmode_config["lj"]
+    r_j                             = 0
     path_to_palace                  = ""
     user_defined_options = {
         "mesh_refinement":     mesh_refinement,
@@ -164,13 +176,30 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
                                             create_files            = True
                                             )
 
+
+
+    # Call helper functions based on design_name
+    fine_mesh_components = list(design.components.keys())
+    if design_name == "full":
+         _setup_full_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction)
+    elif design_name == "full_no_jj":
+        _setup_full_no_jj_design(eigen_sim)
+    elif design_name == "resonator":
+        _setup_resonator_design(eigen_sim)
+        
+
+    eigen_sim.fine_mesh_around_comp_boundaries(fine_mesh_components,
+                                               min_size=fine_mesh_min_size_components, 
+                                               max_size=fine_mesh_max_size_components
+                                               )
+    
+
     # Get all geometries from the design  
-    qmpl         = QiskitShapelyRenderer(None, design, None)  
+    qmpl        = QiskitShapelyRenderer(None, design, None)  
     gsdf        = qmpl.get_net_coordinates(resolution=4)  
     
     # Extract unique layer IDs  
     layer_ids   = np.unique(gsdf['layer'])  
-    print(f"Layers in design: {layer_ids}")
     
     for layer in layer_ids:
         eigen_sim.add_metallic(layer, threshold=1e-10, fuse_threshold=1e-10)
@@ -178,20 +207,77 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
     eigen_sim.setup_EPR_interfaces(metal_air=MaterialInterface('Aluminium-Vacuum'),
                                 substrate_air=MaterialInterface('Silicon-Vacuum'),
                                 substrate_metal=MaterialInterface('Silicon-Aluminium'))
-
-    # Call helper functions based on design_name
-    if design_name == "full":
-        fine_mesh_components = _setup_full_design(eigen_sim, design, ref_design_junction_inductance, assumed_junction_capacitance, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction)
-    elif design_name == "transmon":
-        fine_mesh_components = _setup_transmon_design(eigen_sim, design, ref_design_junction_inductance, assumed_junction_capacitance, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction)
-    elif design_name == "resonator":
-        fine_mesh_components = _setup_resonator_design(eigen_sim)
-
-    eigen_sim.fine_mesh_around_comp_boundaries(fine_mesh_components,
-                                               min_size=fine_mesh_min_size_components, 
-                                               max_size=fine_mesh_max_size_components
-                                               )
-
+    
     eigen_sim.prepare_simulation()
 
+    print(f"Finished making PALACE eigenmode simulation MESH and JSON files for {design_name}")
 
+
+# Not gonna use this anymore
+"""
+def _create_short_readout_stub(design):
+    # First, get the transmon's readout pin position to place OTG above it  
+    transmon = design.components["transmon"]  
+    readout_pin = transmon.pins['readout']  
+    pin_x = readout_pin['middle'][0]  # x-coordinate  
+    pin_y = readout_pin['middle'][1]  # y-coordinate  
+      
+    # Calculate position directly above (add small offset, e.g., 100um)  
+    otg_y = pin_y + 100e-6  # 100 microns above  
+      
+    # Create OpenToGround termination above the readout pin  
+    OpenToGround(  
+        design,   
+        'transmon_readout_otg',  
+        options=Dict(  
+            pos_x=f'{pin_x*1e3}um',  
+            pos_y=f'{otg_y*1e3}um',  
+            orientation='90',  # Pointing upward  
+            width='10um',  
+            gap='6um',  
+            termination_gap='10um'  
+        )  
+    )  
+      
+    # Create short meander connecting transmon readout to OTG  
+    RouteMeander(  
+        design,  
+        'transmon_readout_stub',  
+        Dict(  
+            total_length='50um',  
+            hfss_wire_bonds=False,  
+            fillet='10um',  
+            trace_width='10um',  
+            trace_gap='6um',  
+            pin_inputs=Dict(  
+                start_pin=Dict(component="transmon", pin='readout'),  
+                end_pin=Dict(component='transmon_readout_otg', pin='open')  
+            )  
+        )  
+    )  
+
+def _setup_transmon_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
+    _create_short_readout_stub(design)
+    eigen_sim.create_port_CPW_on_Route('transmon_readout_stub', pin_name='end', len_launch=20e-6)  
+    _setup_junction_ports(eigen_sim, 
+                          design, 
+                          l_j, 
+                          c_j, 
+                          r_j,
+                          mesh_sampling, 
+                          fine_mesh_min_size_junction, 
+                          fine_mesh_max_size_junction,
+                          )
+
+def _setup_transmon_no_jj_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction):
+    _create_short_readout_stub(design)
+    eigen_sim.create_port_CPW_on_Route('transmon', pin_name='readout', len_launch=20e-6)
+    _setup_junction_ports(eigen_sim, 
+                          design, 
+                          l_j, 
+                          c_j, 
+                          r_j,
+                          mesh_sampling, 
+                          fine_mesh_min_size_junction, 
+                          fine_mesh_max_size_junction,
+                          )"""

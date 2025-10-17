@@ -1,0 +1,107 @@
+﻿InductEx v7.1.28 (8.0 beta) (8 October 2025). Copyright 2003-2025 Coenrad Fourie
+Licenced to:
+  Reece Bird, until 31 Dec 2025. [Super]
+
+Licensed for ACADEMIC USE ONLY.
+
+Execution start time stamp: 2025/10/17 18:57:02
+Parameter string: 
+control_resonator_sparams.ixi -l process_resonator_sparams.ldf -S LIN 2000000000.0 8000000000.0 8 50 50 
+(90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
+  Model and simulation settings:
+   - Solution method: EMQS
+   - Mesh:            Triangle/Tetrahedron hybrid
+  Layout input files processed:
++=======+=======+===============================+===============================+==================+========+========+=============+============+
+| Chip# | Name  | Layout file                   | LDF                           | Top-level struct | #Polys | #Terms | TecUnit (m) | DBUnit (m) |
++-------+-------+-------------------------------+-------------------------------+------------------+--------+--------+-------------+------------+
+| 0     | Chip0 | control_resonator_sparams.ixi | process_resonator_sparams.ldf | cap              | 3      | 4      | 1E-06       | 1E-09      |
++=======+=======+===============================+===============================+==================+========+========+=============+============+
+
+Polygon map size chip 0: 23 polygons.
+
+Layer penetration depths adjusted for temperature:
+  MAIN:   T=0.01 K  TC=1.2 K            Lambda(T)=16 nm
+
+S-Parameter extraction overrides inductance and capacitance extraction commands.
+  Ports:
++====+======+=========+===========+
+| Nr | Name | Type    | Amplitude |
++----+------+---------+-----------+
+| 0  | p1   | Voltage | 1         |
+| 1  | p2   | Voltage | 1         |
++====+======+=========+===========+
+  Terminals:
++======+========+=======+===================+=================+
+| Name | Layout | Layer | Geometry          | On Basemap Poly |
++------+--------+-------+-------------------+-----------------+
+| p1+  | 0      | main  | Line/Edge Surface | 13              |
+| p1-  | 0      | main  | Line/Edge Surface | 10              |
+| p2+  | 0      | main  | Line/Edge Surface | 6               |
+| p2-  | 0      | main  | Line/Edge Surface | 12              |
++======+========+=======+===================+=================+
+  Model info: [0] Chip0
++=========+=====+======+
+| Layer   | SIL | MAIN |
++---------+-----+------+
+| Objects | 0   | 9    |
++=========+=====+======+
+  Mesh info:
++============+=========+
+| #Triangles | #Tetras |
++------------+---------+
+| 8440       | 0       |
++============+=========+
+  Time allocation (s):
++=================+==========+=======+==========+=======+
+| Input file read | Polygons | Mesh  | 3D model | TTH   |
++-----------------+----------+-------+----------+-------+
+| 0.46            | 0.458    | 1.384 | 0.041    | 426.5 |
++=================+==========+=======+==========+=======+
+
+A -1.31E-04 x-------x--------x-------x--------x-------x--------x-------x LEGEND
+m           |                                                          | S11 **
+p           |                                                          | S21 xx
+l           |                                                          |
+i           |                                                          |
+t           |                                                          |
+u           |                                                          |
+d           |                                                          |
+e           |                                                          |
+            |                                                          |
+(           |                                                          |
+d           |                                                          |
+B           |                                                          |
+)           |                                                          |
+            |                                                          |
+            |                                         *        *       *
+            |                        *        *                        |
+            |                *                                         |
+            |       *                                                  |
+  -4.54E+01 *----------------------------------------------------------+
+            2.00E+09                                            8.00E+09
+            Frequency (Hz)
+
+A -1.20E-04 x-------x--------x-------x--------x-------x--------x-------x LEGEND
+m           |                                                          | S22 **
+p           |                                                          | S12 xx
+l           |                                                          |
+i           |                                                          |
+t           |                                                          |
+u           |                                                          |
+d           |                                                          |
+e           |                                                          |
+            |                                                          |
+(           |                                                          |
+d           |                                                          |
+B           |                                                          |
+)           |                                                          |
+            |                                                          |
+            |                                         *        *       *
+            |                        *        *                        |
+            |                *                                         |
+            |       *                                                  |
+  -4.54E+01 *----------------------------------------------------------+
+            2.00E+09                                            8.00E+09
+            Frequency (Hz)
+Job finished in 429.070 seconds.

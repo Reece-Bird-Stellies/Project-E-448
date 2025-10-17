@@ -15,7 +15,7 @@
         "mask_scaling_factor": 1.1,
         "sparams_start_freq": 2000000000.0,
         "sparams_stop_freq": 8000000000.0,
-        "sparams_steps": 200,
+        "sparams_steps": 8,
         "sparams_p1_resistance": 50,
         "sparams_p2_resistance": 50
       },
@@ -49,7 +49,7 @@
       "eigenmode": {
         "mesh_refinement": 0,
         "dielectric_material": "silicon",
-        "solver_order": 2,
+        "solver_order": 1,
         "solver_tolerance": 1e-05,
         "solver_max_iterations": 300,
         "mesh_min_size": 1e-05,

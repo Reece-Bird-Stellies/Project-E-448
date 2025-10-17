@@ -1,0 +1,65 @@
+{
+  "ElapsedTime": {
+    "Counts": {
+      "Adaptation": 0,
+      "CoarseSolve": 16,
+      "Construction": 1,
+      "DiskIO": 2,
+      "Div.-FreeProjection": 0,
+      "EigenvalueSolve": 0,
+      "Estimation": 2,
+      "Initialization": 2,
+      "LinearSolve": 2,
+      "MeshPreprocessing": 1,
+      "OperatorConstruction": 1,
+      "PROMConstruction": 0,
+      "PROMSolve": 0,
+      "Postprocessing": 6,
+      "Preconditioner": 16,
+      "Rebalancing": 0,
+      "Setup": 1,
+      "Solve": 2,
+      "TimeStepping": 0,
+      "Total": 1,
+      "WavePorts": 0
+    },
+    "Durations": {
+      "Adaptation": 0.0,
+      "CoarseSolve": 0.044104385999999995,
+      "Construction": 9.112054905,
+      "DiskIO": 1.457584982,
+      "Div.-FreeProjection": 0.0,
+      "EigenvalueSolve": 0.0,
+      "Estimation": 0.28028369599999997,
+      "Initialization": 0.13565776,
+      "LinearSolve": 0.699057518,
+      "MeshPreprocessing": 4.8924323780000005,
+      "OperatorConstruction": 1.445214608,
+      "PROMConstruction": 0.0,
+      "PROMSolve": 0.0,
+      "Postprocessing": 1.5409277789999998,
+      "Preconditioner": 15.813368821,
+      "Rebalancing": 0.0,
+      "Setup": 13.65065805,
+      "Solve": 24.235428641,
+      "TimeStepping": 0.0,
+      "Total": 73.338017832,
+      "WavePorts": 0.0
+    }
+  },
+  "GitTag": "v0.14.0-156-g1652a90e",
+  "LinearSolver": {
+    "TotalIts": 12,
+    "TotalSolves": 2
+  },
+  "Problem": {
+    "DegreesOfFreedom": 542176,
+    "MPISize": 4,
+    "MeshElements": 108779,
+    "MultigridDegreesOfFreedom": [
+      23422,
+      167887,
+      542176
+    ]
+  }
+}

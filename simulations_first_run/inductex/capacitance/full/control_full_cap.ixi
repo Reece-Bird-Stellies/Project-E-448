@@ -1,0 +1,12 @@
+$PARAMSTRING
+    -l process_full_cap.ldf
+    -qt 
+    -zoff
+$END
+
+$STRUCT
+    Name cap
+    $GDS
+        name full_cap.gds
+    $END
+$END

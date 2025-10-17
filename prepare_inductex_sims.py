@@ -364,8 +364,8 @@ def make_inductex_cap_sim(design, design_name, create_mask, mask_component=None,
     else:
         mask_bounds = None
         
-    _make_cap_ixi_file(design_name, mask_bounds, inductex_ixi_config or {})
-    _make_cap_ldf_file(design_name, inductex_ldf_config or {})
+    _make_cap_ixi_file(design_name, mask_bounds, inductex_ixi_config)
+    _make_cap_ldf_file(design_name, inductex_ldf_config)
     _make_cap_run_file(design_name)
 
 def make_inductex_ind_sim(design, design_name, create_mask, mask_component=None, inductex_ixi_config=None, inductex_ldf_config=None):
@@ -375,8 +375,8 @@ def make_inductex_ind_sim(design, design_name, create_mask, mask_component=None,
     else:
         mask_bounds = None
 
-    _make_ind_ixi_file(design_name, mask_bounds, inductex_ixi_config or {})
-    _make_ind_ldf_file(design_name, inductex_ldf_config or {})
+    _make_ind_ixi_file(design_name, mask_bounds, inductex_ixi_config)
+    _make_ind_ldf_file(design_name, inductex_ldf_config)
     _make_cir_file(design_name)
     _make_ind_run_file(design_name)
 
@@ -387,6 +387,6 @@ def make_inductex_sparam_sim(design, design_name, create_mask, mask_component=No
     else:
         mask_bounds = None
 
-    _make_sparam_ixi_file(design_name, mask_bounds, inductex_ixi_config or {})
-    _make_sparam_ldf_file(design_name, inductex_ldf_config or {})
+    _make_sparam_ixi_file(design_name, mask_bounds, inductex_ixi_config)
+    _make_sparam_ldf_file(design_name, inductex_ldf_config)
     _make_sparam_run_file(design_name)
