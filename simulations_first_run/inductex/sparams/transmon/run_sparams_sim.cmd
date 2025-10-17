@@ -1,1 +1,0 @@
-inductex8 control_transmon_sparams.ixi

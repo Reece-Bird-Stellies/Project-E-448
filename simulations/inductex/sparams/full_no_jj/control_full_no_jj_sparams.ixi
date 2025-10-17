@@ -1,6 +1,6 @@
 $PARAMSTRING
   -l process_full_no_jj_sparams.ldf     
-  -S LIN 2000000000.0 8000000000.0 8 50 50
+  -S LIN 2000000000.0 8000000000.0 200 50 50
 $END
 
 $STRUCT
