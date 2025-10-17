@@ -137,7 +137,7 @@
     }
   },
   "Solver": {
-    "Order": 1,
+    "Order": 2,
     "Eigenmode": {
       "N": 2,
       "Tol": 1e-05,

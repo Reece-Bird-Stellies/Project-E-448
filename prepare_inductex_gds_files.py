@@ -580,9 +580,10 @@ def make_inductex_cap_sim_transmon_gds(transmon_design, qubit_geo):
     p2                  = (px, py - claw_cpw_length/2)
     p3                  = (cx, cy)
 
+    # Order which appears here is how they are positioned in capacitance matrix
     _make_text_label(ly, top, L100_0, "Cground main", text_size=10.0, position=p1)
-    _make_text_label(ly, top, L100_0, "Cclaw main", text_size=10.0, position=p2)
     _make_text_label(ly, top, L100_0, "Ccross main", text_size=10.0, position=p3)
+    _make_text_label(ly, top, L100_0, "Cclaw main", text_size=10.0, position=p2)
 
     if os.path.exists(output_file):
         os.remove(output_file)
@@ -607,10 +608,10 @@ def make_inductex_cap_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo):
     p1                  = (cx + cross_length + 2*cross_gap, cy)
     p2                  = (px, py - claw_cpw_length/2)
     p3                  = (cx, cy)
-
+    # Order which appears here is how they are positioned in capacitance matrix
     _make_text_label(ly, top, L100_0, "Cground main", text_size=10.0, position=p1)
-    _make_text_label(ly, top, L100_0, "Cclaw main", text_size=10.0, position=p2)
     _make_text_label(ly, top, L100_0, "Ccross main", text_size=10.0, position=p3)
+    _make_text_label(ly, top, L100_0, "Cclaw main", text_size=10.0, position=p2)
 
     if os.path.exists(output_file):
         os.remove(output_file)

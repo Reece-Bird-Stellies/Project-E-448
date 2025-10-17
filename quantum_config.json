@@ -34,7 +34,7 @@
       "capacitance": {
         "mesh_refinement": 0,
         "dielectric_material": "silicon",
-        "solver_order": 1,
+        "solver_order": 3,
         "solver_tolerance": 1e-08,
         "solver_max_iterations": 500,
         "mesh_min_size": 1e-05,
@@ -43,12 +43,13 @@
         "fillet_resolution": 12,
         "number_of_cores": 4,
         "fine_mesh_min_size_components": 1e-05,
-        "fine_mesh_max_size_components": 0.00012
+        "fine_mesh_max_size_components": 0.00012,
+        "solutions_to_save": 0
       },
       "eigenmode": {
         "mesh_refinement": 0,
         "dielectric_material": "silicon",
-        "solver_order": 1,
+        "solver_order": 2,
         "solver_tolerance": 1e-05,
         "solver_max_iterations": 300,
         "mesh_min_size": 1e-05,

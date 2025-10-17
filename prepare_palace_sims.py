@@ -21,6 +21,7 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
     number_of_cores                 = palace_cap_config["number_of_cores"]              # Doesnt do anything here
     fine_mesh_min_size_components   = palace_cap_config["fine_mesh_min_size_components"]
     fine_mesh_max_size_components   = palace_cap_config["fine_mesh_max_size_components"]
+    solutions_to_save               = palace_cap_config["solutions_to_save"]
     palace_dir                      = ""
 
     user_defined_options            = {
@@ -34,10 +35,11 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
         "mesh_sampling":       mesh_sampling,
         "fillet_resolution":   fillet_resolution,
         "num_cpus":            number_of_cores,
+        "solns_to_save":       solutions_to_save,
         "palace_dir":          palace_dir
     }
 
-    #Creat the Palace Eigenmode simulation
+    #Create the Palace Eigenmode simulation
     cap_sim = PALACE_Capacitance_Simulation(name                    = design_name,             #name of simulation
                                             metal_design            = design,                  #feed in qiskit metal design
                                             sim_parent_directory    = path_to_output,          #choose directory where mesh file, config file and HPC batch file will be saved
@@ -55,9 +57,6 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
     # Extract unique layer IDs  
     layer_ids   = np.unique(gsdf['layer'])  
     print(f"Layers in design: {layer_ids}")
-    
-    for layer in layer_ids:
-        cap_sim.add_metallic(layer, threshold=1e-10, fuse_threshold=1e-10)
 
     cap_sim.add_ground_plane(threshold=1e-10)
 
@@ -67,6 +66,9 @@ def make_palace_cap_sim(design, design_name, palace_cap_config):
         fine_mesh_components = ['transmon']
     else:
         fine_mesh_components = [design_name]
+
+    for layer in layer_ids:
+        cap_sim.add_metallic(layer, threshold=1e-10, fuse_threshold=1e-10)
 
     cap_sim.fine_mesh_around_comp_boundaries(fine_mesh_components, min_size=fine_mesh_min_size_components, max_size=fine_mesh_max_size_components) 
 

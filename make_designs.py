@@ -64,7 +64,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     qubit_options["layer"]          = f'{layer_transmon}'
 
     # Create TransmonCross (pin name: 'readout')
-    Q1 = TransmonCross(full_design, "transmon", options=qubit_options)
+    TransmonCross(full_design, "transmon", options=qubit_options)
 
     # Components are tested seperately so some geometry is tuned for this
     # we chose this to adjust it for a complete system: DOESNT WORK, CAN USE IN REPORT FOR 
@@ -99,7 +99,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     )
 
     # Junction
-    junction = JunctionDolanPinStretch(
+    JunctionDolanPinStretch(
         full_design,
         'junction',
         options=Dict(
@@ -150,14 +150,14 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
         trace_gap=resonator_geo["trace_gap"]
     )
 
-    LP1 = LaunchpadWirebond(full_design, 'LP1', options=launch_options1)
-    LP2 = LaunchpadWirebond(full_design, 'LP2', options=launch_options2)
+    LaunchpadWirebond(full_design, 'LP1', options=launch_options1)
+    LaunchpadWirebond(full_design, 'LP2', options=launch_options2)
 
     # Use RoutePathfinder to connect the two launchpads
     # The refenence example did not follow the strict database geometries and 
     # opted to use a RoutePathfinder instead of the data component coupled_line_tee
     # works just fine so will keep it this way for nw
-    feedline = RoutePathfinder(
+    RoutePathfinder(
         full_design, 'feedline', 
         options=dict(
             chip='main',
@@ -210,7 +210,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     """
 
     # Open to ground placed at arbitary x,y position as not given in blueprint
-    otg1 = OpenToGround(
+    OpenToGround(
             full_design,
             'otg1',
             options=dict(
@@ -282,7 +282,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     )
     """
     # Adjusted resonator from tutorial, still 'incorrect' asymmetry, spacing and start length but shouldn't effect result
-    res1 = RouteMeander( 
+    RouteMeander( 
         full_design,
         'resonator',
         Dict(
