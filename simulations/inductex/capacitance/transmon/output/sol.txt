@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 2025/10/18 10:47:07
+Execution start time stamp: 2025/10/18 14:46:34
 Parameter string: 
 control_transmon_cap.ixi -l process_transmon_cap.ldf -qt -zoff 
 (90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
@@ -44,4 +44,4 @@ cground           9.80936E-14  8.93148E-14
 ccross                         6.86716E-15
 cclaw                                     
 
-Job finished in 14.796 seconds.
+Job finished in 15.769 seconds.

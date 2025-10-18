@@ -141,6 +141,13 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
     c_j                             = palace_eigenmode_config["assumed_junction_capacitance"]
     l_j                             = palace_eigenmode_config["lj"]
     r_j                             = 0
+    port_1_r                        = palace_eigenmode_config["port_1_resistance"]
+    port_1_l                        = palace_eigenmode_config["port_1_inductance"]
+    port_1_c                        = palace_eigenmode_config["port_1_capacitance"]
+    port_2_r                        = palace_eigenmode_config["port_2_resistance"]
+    port_2_l                        = palace_eigenmode_config["port_2_inductance"]
+    port_2_c                        = palace_eigenmode_config["port_2_capacitance"]
+
     path_to_palace                  = ""
     user_defined_options = {
         "mesh_refinement":     mesh_refinement,
@@ -179,20 +186,20 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
     if 'junction' in design.components:      # Only filter out junction layer if junction exists  
         junction_layer = design.components['junction'].options.layer  
         layers = layers[layers != junction_layer]  
-        
+
     if design_name == "full":
         _setup_full_design(eigen_sim, design, l_j, c_j, r_j, mesh_sampling, fine_mesh_min_size_junction, fine_mesh_max_size_junction)   
-        eigen_sim.set_port_impedance(port_ind=2, impedance_R=45.6, impedance_L=0, impedance_C=0)
-        eigen_sim.set_port_impedance(port_ind=3, impedance_R=0, impedance_L=1e-15, impedance_C=0) 
+        eigen_sim.set_port_impedance(port_ind=2, impedance_R=port_1_r, impedance_L=port_1_l, impedance_C=port_1_c)
+        eigen_sim.set_port_impedance(port_ind=3, impedance_R=port_2_r, impedance_L=port_2_l, impedance_C=port_2_c) 
     elif design_name == "full_no_jj":
         _setup_full_no_jj_design(eigen_sim)
-        eigen_sim.set_port_impedance(port_ind=1, impedance_R=45.6, impedance_L=0, impedance_C=0)
-        eigen_sim.set_port_impedance(port_ind=2, impedance_R=0, impedance_L=1e-15, impedance_C=0)
+        eigen_sim.set_port_impedance(port_ind=1, impedance_R=port_1_r, impedance_L=port_1_l, impedance_C=port_1_c)
+        eigen_sim.set_port_impedance(port_ind=2, impedance_R=port_2_r, impedance_L=port_2_l, impedance_C=port_2_c) 
     elif design_name == "resonator":
         _setup_resonator_design(eigen_sim)
-        eigen_sim.set_port_impedance(port_ind=1, impedance_R=45.6, impedance_L=0, impedance_C=0)
-        eigen_sim.set_port_impedance(port_ind=2, impedance_R=0, impedance_L=1e-15, impedance_C=0)
-        
+        eigen_sim.set_port_impedance(port_ind=1, impedance_R=port_1_r, impedance_L=port_1_l, impedance_C=port_1_c)
+        eigen_sim.set_port_impedance(port_ind=2, impedance_R=1e-12, impedance_L=port_2_l, impedance_C=port_2_c)
+
 
     eigen_sim.fine_mesh_around_comp_boundaries(fine_mesh_components,
                                                min_size=fine_mesh_min_size_components, 

@@ -15,7 +15,7 @@
         "mask_scaling_factor": 1.1,
         "sparams_start_freq": 2000000000.0,
         "sparams_stop_freq": 8000000000.0,
-        "sparams_steps": 200,
+        "sparams_steps": 8,
         "sparams_p1_resistance": 50,
         "sparams_p2_resistance": 50
       },
@@ -59,12 +59,18 @@
         "number_of_cores": 4,
         "fine_mesh_min_size_components": 5e-06,
         "fine_mesh_max_size_components": 0.00012,
-        "fine_mesh_min_size_junction": 2e-06,
+        "fine_mesh_min_size_junction": 10e-06,
         "fine_mesh_max_size_junction": 6e-05,
         "starting_frequency": 2000000000.0,
         "number_of_frequencies": 2,
         "solutions_to_save": 0,
-        "assumed_junction_capacitance": 0
+        "assumed_junction_capacitance": 0,
+        "port_1_resistance": 50,
+        "port_1_inductance": 0,
+        "port_1_capacitance": 0,
+        "port_2_resistance": 1e-12,
+        "port_2_inductance": 0,
+        "port_2_capacitance": 0
       }
     }
   },

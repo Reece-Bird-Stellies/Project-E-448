@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 2025/10/18 10:39:05
+Execution start time stamp: 2025/10/18 14:47:45
 Parameter string: 
 control_feedline_cap.ixi -l process_feedline_cap.ldf -qt -zoff 
 (90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
@@ -42,4 +42,4 @@ SPICE capacitance matrix (floating at infinity) [F]
 cground             7.52226E-13
 cfeedline                      
 
-Job finished in 105.000 seconds.
+Job finished in 107.970 seconds.

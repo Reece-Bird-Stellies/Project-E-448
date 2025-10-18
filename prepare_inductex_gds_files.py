@@ -287,7 +287,7 @@ def process_full_gds():
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
     ly.write(output_file_multi_layer)
-    print(f"Done. Wrote {output_file_multi_layer}")
+    print(f"✅  Wrote {output_file_multi_layer}")
 
     _boolean_layer_operation(ly, top, L0_0, L1_0, L0_0, operation="OR")
     _boolean_layer_operation(ly, top, L0_0, L2_0, L0_0, operation="OR")
@@ -301,7 +301,7 @@ def process_full_gds():
     if os.path.exists(output_file_single_layer):
         os.remove(output_file_single_layer)
     ly.write(output_file_single_layer)
-    print(f"Done. Wrote {output_file_single_layer}")
+    print(f"✅  Wrote {output_file_single_layer}")
 
 def process_full_no_jj_gds():
     input_file = "gds_files/processed_multi_layer/full_processed_multi.gds"
@@ -321,7 +321,7 @@ def process_full_no_jj_gds():
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
     ly.write(output_file_multi_layer)
-    print(f"Done. Wrote {output_file_multi_layer}")
+    print(f"✅  Wrote {output_file_multi_layer}")
 
     _boolean_layer_operation(ly, top, L0_0, L1_0, L0_0, operation="OR")
     _boolean_layer_operation(ly, top, L0_0, L3_0, L0_0, operation="OR")
@@ -333,7 +333,7 @@ def process_full_no_jj_gds():
     if os.path.exists(output_file_single_layer):
         os.remove(output_file_single_layer)
     ly.write(output_file_single_layer)
-    print(f"Done. Wrote {output_file_single_layer}")
+    print(f"✅  Wrote {output_file_single_layer}")
 
 def process_junction_gds():
     """
@@ -356,7 +356,7 @@ def process_junction_gds():
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
     ly.write(output_file_multi_layer)
-    print(f"Done. Wrote {output_file_multi_layer}")
+    print(f"✅  Wrote {output_file_multi_layer}")
 
     _boolean_layer_operation(ly, top, L2_0, L2_0, L0_0, operation="OR")
     _delete_layer(ly, L2_0)
@@ -364,7 +364,7 @@ def process_junction_gds():
     if os.path.exists(output_file_single_layer):
         os.remove(output_file_single_layer)
     ly.write(output_file_single_layer)
-    print(f"Done. Wrote {output_file_single_layer}")
+    print(f"✅  Wrote {output_file_single_layer}")
 
 def process_transmon_gds():
     """
@@ -394,7 +394,7 @@ def process_transmon_gds():
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
     ly.write(output_file_multi_layer)
-    print(f"Done. Wrote {output_file_multi_layer}")
+    print(f"✅  Wrote {output_file_multi_layer}")
 
     _boolean_layer_operation(ly, top, L0_0, L1_0, L0_0, operation="OR")
     _boolean_layer_operation(ly, top, L0_0, L2_0, L0_0, operation="OR")
@@ -404,7 +404,7 @@ def process_transmon_gds():
     if os.path.exists(output_file_single_layer):
         os.remove(output_file_single_layer)
     ly.write(output_file_single_layer)
-    print(f"Done. Wrote {output_file_single_layer}")
+    print(f"✅  Wrote {output_file_single_layer}")
 
 def process_transmon_no_jj_gds():
     input_file = "gds_files/processed_multi_layer/transmon_processed_multi.gds"
@@ -424,7 +424,7 @@ def process_transmon_no_jj_gds():
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
     ly.write(output_file_multi_layer)
-    print(f"Done. Wrote {output_file_multi_layer}")
+    print(f"✅  Wrote {output_file_multi_layer}")
 
     _boolean_layer_operation(ly, top, L0_0, L1_0, L0_0, operation="OR")
     _delete_layer(ly, L1_0)
@@ -432,7 +432,7 @@ def process_transmon_no_jj_gds():
     if os.path.exists(output_file_single_layer):
         os.remove(output_file_single_layer)
     ly.write(output_file_single_layer)
-    print(f"Done. Wrote {output_file_single_layer}")
+    print(f"✅  Wrote {output_file_single_layer}")
 
 def process_resonator_gds():
     """
@@ -462,7 +462,7 @@ def process_resonator_gds():
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
     ly.write(output_file_multi_layer)
-    print(f"Done. Wrote {output_file_multi_layer}")
+    print(f"✅  Wrote {output_file_multi_layer}")
 
     _boolean_layer_operation(ly, top, L0_0, L1_0, L0_0, operation="OR")
     _delete_layer(ly, L1_0)
@@ -470,7 +470,7 @@ def process_resonator_gds():
     if os.path.exists(output_file_single_layer):
         os.remove(output_file_single_layer)
     ly.write(output_file_single_layer)
-    print(f"Done. Wrote {output_file_single_layer}")
+    print(f"✅  Wrote {output_file_single_layer}")
 
 def process_feedline_gds():
     """
@@ -501,7 +501,7 @@ def process_feedline_gds():
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
     ly.write(output_file_multi_layer)
-    print(f"Done. Wrote {output_file_multi_layer}")
+    print(f"✅  Wrote {output_file_multi_layer}")
 
     _convert_layer_to_dtype0(ly, 3)
 
@@ -511,55 +511,7 @@ def process_feedline_gds():
     if os.path.exists(output_file_single_layer):
         os.remove(output_file_single_layer)
     ly.write(output_file_single_layer)
-    print(f"Done. Wrote {output_file_single_layer}")
-
-def make_inductex_cap_sim_full_gds(full_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/full_processed.gds"
-    output_file = "simulations/inductex/capacitance/full/full.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_cap_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/full_no_jj_processed.gds"
-    output_file = "simulations/inductex/capacitance/full_no_jj/full_no_jj.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_cap_sim_junction_gds(junction_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/junction_processed.gds"
-    output_file = "simulations/inductex/capacitance/junction/junction.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file_single_layer}")
 
 def make_inductex_cap_sim_transmon_gds(transmon_design, qubit_geo):
     input_file = "gds_files/processed_single_layer/transmon_processed.gds"
@@ -588,7 +540,7 @@ def make_inductex_cap_sim_transmon_gds(transmon_design, qubit_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_cap_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo):
     input_file = "gds_files/processed_single_layer/transmon_no_jj_processed.gds"
@@ -616,7 +568,7 @@ def make_inductex_cap_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_cap_sim_resonator_gds(resonator_design, resonator_geo):
     input_file = "gds_files/processed_single_layer/resonator_processed.gds"
@@ -640,7 +592,7 @@ def make_inductex_cap_sim_resonator_gds(resonator_design, resonator_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_cap_sim_feedline_gds(feedline_design, feedline_geo):
     input_file = "gds_files/processed_single_layer/feedline_processed.gds"
@@ -664,87 +616,7 @@ def make_inductex_cap_sim_feedline_gds(feedline_design, feedline_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_ind_sim_full_gds(full_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/full_processed.gds"
-    output_file = "simulations/inductex/inductance/full/full.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_ind_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/full_no_jj_processed.gds"
-    output_file = "simulations/inductex/inductance/full_no_jj/full_no_jj.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_ind_sim_junction_gds(junction_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/junction_processed.gds"
-    output_file = "simulations/inductex/inductance/junction/junction.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_ind_sim_transmon_gds(transmon_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/transmon_processed.gds"
-    output_file = "simulations/inductex/inductance/transmon/transmon.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_ind_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/transmon_no_jj_processed.gds"
-    output_file = "simulations/inductex/inductance/transmon_no_jj/transmon_no_jj.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_ind_sim_resonator_gds(resonator_design, resonator_geo):
     input_file = "gds_files/processed_multi_layer/resonator_processed_multi.gds"
@@ -793,69 +665,7 @@ def make_inductex_ind_sim_resonator_gds(resonator_design, resonator_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_ind_sim_feedline_gds(feedline_design, feedline_geo):
-    pass
-    input_file = "gds_files/processed_multi_layer/feedline_processed_multi.gds"
-    output_file = "simulations/inductex/inductance/feedline/feedline_ind.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_sparam_sim_full_gds(full_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/full_processed.gds"
-    output_file = "simulations/inductex/sparams/full/full.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_sparam_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/full_no_jj_processed.gds"
-    output_file = "simulations/inductex/sparams/full_no_jj/full_no_jj.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
-
-def make_inductex_sparam_sim_junction_gds(junction_design, qubit_geo):
-    return
-    input_file = "gds_files/processed_single_layer/junction_processed.gds"
-    output_file = "simulations/inductex/sparams/junction/junction.gds"
-
-    ly = pya.Layout()
-    ly.read(input_file)
-    top = ly.top_cell()
-
-    # Example: Add labels or paths as needed here
-
-    if os.path.exists(output_file):
-        os.remove(output_file)
-    ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_sparam_sim_transmon_gds(transmon_design, qubit_geo):
 
@@ -908,7 +718,7 @@ def make_inductex_sparam_sim_transmon_gds(transmon_design, qubit_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_sparam_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo):
     input_file = "gds_files/processed_single_layer/transmon_no_jj_processed.gds"
@@ -960,7 +770,7 @@ def make_inductex_sparam_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_sparam_sim_resonator_gds(resonator_design, resonator_geo):
     input_file = "gds_files/processed_single_layer/resonator_processed.gds"
@@ -1010,7 +820,23 @@ def make_inductex_sparam_sim_resonator_gds(resonator_design, resonator_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
+
+
+# Unimplemented functions below
+def make_inductex_ind_sim_feedline_gds(feedline_design, feedline_geo):
+    return
+    input_file = "gds_files/processed_multi_layer/feedline_processed_multi.gds"
+    output_file = "simulations/inductex/inductance/feedline/feedline_ind.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
 
 def make_inductex_sparam_sim_feedline_gds(feedline_design, feedline_geo):
     return
@@ -1026,4 +852,180 @@ def make_inductex_sparam_sim_feedline_gds(feedline_design, feedline_geo):
     if os.path.exists(output_file):
         os.remove(output_file)
     ly.write(output_file)
-    print(f"Done. Wrote {output_file}")
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_ind_sim_transmon_gds(transmon_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/transmon_processed.gds"
+    output_file = "simulations/inductex/inductance/transmon/transmon.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_sparam_sim_junction_gds(junction_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/junction_processed.gds"
+    output_file = "simulations/inductex/sparams/junction/junction.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_sparam_sim_full_gds(full_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/full_processed.gds"
+    output_file = "simulations/inductex/sparams/full/full.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_sparam_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/full_no_jj_processed.gds"
+    output_file = "simulations/inductex/sparams/full_no_jj/full_no_jj.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_ind_sim_transmon_no_jj_gds(transmon_no_jj_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/transmon_no_jj_processed.gds"
+    output_file = "simulations/inductex/inductance/transmon_no_jj/transmon_no_jj.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_ind_sim_full_gds(full_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/full_processed.gds"
+    output_file = "simulations/inductex/inductance/full/full.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_ind_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/full_no_jj_processed.gds"
+    output_file = "simulations/inductex/inductance/full_no_jj/full_no_jj.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_ind_sim_junction_gds(junction_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/junction_processed.gds"
+    output_file = "simulations/inductex/inductance/junction/junction.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_cap_sim_full_gds(full_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/full_processed.gds"
+    output_file = "simulations/inductex/capacitance/full/full.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_cap_sim_full_no_jj_gds(full_no_jj_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/full_no_jj_processed.gds"
+    output_file = "simulations/inductex/capacitance/full_no_jj/full_no_jj.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")
+
+def make_inductex_cap_sim_junction_gds(junction_design, qubit_geo):
+    return
+    input_file = "gds_files/processed_single_layer/junction_processed.gds"
+    output_file = "simulations/inductex/capacitance/junction/junction.gds"
+
+    ly = pya.Layout()
+    ly.read(input_file)
+    top = ly.top_cell()
+
+    # Example: Add labels or paths as needed here
+
+    if os.path.exists(output_file):
+        os.remove(output_file)
+    ly.write(output_file)
+    print(f"✅  Wrote {output_file}")

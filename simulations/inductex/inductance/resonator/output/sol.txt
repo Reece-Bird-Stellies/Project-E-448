@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 2025/10/18 10:50:29
+Execution start time stamp: 2025/10/18 14:49:34
 Parameter string: 
 control_resonator_ind.ixi -l process_resonator_ind.ldf -n circuit_resonator_ind.cir -th -zoff -hb 0 
 (90 SIL)  [0 GD]  (1 MAIN)  {110 TERM} {100 TEXT} 
@@ -64,11 +64,11 @@ Layer penetration depths adjusted for temperature:
 | 24         | 55287   |
 +============+=========+
   Time allocation (s):
-+=================+==========+=======+==========+=======+
-| Input file read | Polygons | Mesh  | 3D model | TTH   |
-+-----------------+----------+-------+----------+-------+
-| 0.268           | 0.114    | 1.475 | 0.092    | 191.4 |
-+=================+==========+=======+==========+=======+
++=================+==========+======+==========+=======+
+| Input file read | Polygons | Mesh | 3D model | TTH   |
++-----------------+----------+------+----------+-------+
+| 0.314           | 0.165    | 1.59 | 0.094    | 209.6 |
++=================+==========+======+==========+=======+
 
 SVD solution information (A*x = b):
  - Unknowns = 1; rank = 1. 
@@ -80,4 +80,4 @@ Inductance [H]
 Name      Design        Extracted     AbsDiff       PercDiff
 L1        --            1.30043E-09   +1.3004E-09   --%
 
-Job finished in 193.740 seconds.
+Job finished in 212.130 seconds.

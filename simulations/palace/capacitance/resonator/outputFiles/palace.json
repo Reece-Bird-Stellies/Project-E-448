@@ -2,7 +2,7 @@
   "ElapsedTime": {
     "Counts": {
       "Adaptation": 0,
-      "CoarseSolve": 34,
+      "CoarseSolve": 36,
       "Construction": 1,
       "DiskIO": 2,
       "Div.-FreeProjection": 0,
@@ -15,7 +15,7 @@
       "PROMConstruction": 0,
       "PROMSolve": 0,
       "Postprocessing": 6,
-      "Preconditioner": 34,
+      "Preconditioner": 36,
       "Rebalancing": 0,
       "Setup": 1,
       "Solve": 2,
@@ -25,40 +25,40 @@
     },
     "Durations": {
       "Adaptation": 0.0,
-      "CoarseSolve": 0.05286541899999999,
-      "Construction": 2.912639,
-      "DiskIO": 0.639624,
+      "CoarseSolve": 0.07076546099999999,
+      "Construction": 2.15207787,
+      "DiskIO": 0.773120272,
       "Div.-FreeProjection": 0.0,
       "EigenvalueSolve": 0.0,
-      "Estimation": 0.08879235600000002,
-      "Initialization": 0.10678920499999998,
-      "LinearSolve": 0.513278757,
-      "MeshPreprocessing": 2.8588188,
-      "OperatorConstruction": 0.383006256,
+      "Estimation": 0.09236867199999999,
+      "Initialization": 0.139763788,
+      "LinearSolve": 0.6188905600000002,
+      "MeshPreprocessing": 3.270811331,
+      "OperatorConstruction": 0.413000214,
       "PROMConstruction": 0.0,
       "PROMSolve": 0.0,
-      "Postprocessing": 0.441579801,
-      "Preconditioner": 4.183367398999999,
+      "Postprocessing": 0.495702367,
+      "Preconditioner": 5.121721867999999,
       "Rebalancing": 0.0,
-      "Setup": 1.558787,
-      "Solve": 25.342737980000003,
+      "Setup": 0.998557375,
+      "Solve": 26.907200359999997,
       "TimeStepping": 0.0,
-      "Total": 39.113320377,
+      "Total": 41.083722723,
       "WavePorts": 0.0
     }
   },
   "GitTag": "v0.14.0-156-g1652a90e",
   "LinearSolver": {
-    "TotalIts": 30,
+    "TotalIts": 32,
     "TotalSolves": 2
   },
   "Problem": {
-    "DegreesOfFreedom": 138593,
+    "DegreesOfFreedom": 140669,
     "MPISize": 4,
-    "MeshElements": 90414,
+    "MeshElements": 91591,
     "MultigridDegreesOfFreedom": [
-      19220,
-      138593
+      19542,
+      140669
     ]
   }
 }

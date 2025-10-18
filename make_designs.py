@@ -1,12 +1,14 @@
 from qiskit_metal import designs, Dict
 from qiskit_metal.qlibrary.tlines.meandered import RouteMeander
 from qiskit_metal.qlibrary.tlines.pathfinder import RoutePathfinder
-from qiskit_metal.qlibrary.couplers.coupled_line_tee import CoupledLineTee
 from qiskit_metal.qlibrary.terminations.launchpad_wb import LaunchpadWirebond
 from qiskit_metal.qlibrary.terminations.open_to_ground import OpenToGround
 from SQDMetal.Comps.Xmon import Xmon
 from SQDMetal.Comps.Junctions import JunctionDolanPinStretch
 from qiskit_metal.qlibrary.qubits.transmon_cross import TransmonCross
+
+from qiskit_metal.qlibrary.couplers.coupled_line_tee import CoupledLineTee
+from qiskit_metal.qlibrary.terminations.short_to_ground import ShortToGround
 
 from helpers import extract_um
 
@@ -293,7 +295,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
             hfss_wire_bonds=False,
             fillet=resonator_geo['fillet'],
             lead=dict(
-                start_straight='300um'                                                                 # This is not stricly correct but won't effect results
+                start_straight='300um'                                                                 # This is not strictly correct but won't effect results
             ),
             pin_inputs=Dict(
                 start_pin=Dict(

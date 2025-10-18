@@ -1,12 +1,12 @@
-﻿InductEx v7.1.28 (8.0 beta) (8 October 2025). Copyright 2003-2025 Coenrad Fourie
+﻿InductEx v7.1.30 (8.0 beta) (16 October 2025). Copyright 2003-2025 Coenrad Fourie
 Licenced to:
   Reece Bird, until 31 Dec 2025. [Super]
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 2025/10/18 01:26:58
+Execution start time stamp: 2025/10/18 14:57:42
 Parameter string: 
-control_resonator_sparams.ixi -l process_resonator_sparams.ldf -S LIN 2000000000.0 8000000000.0 500 45.6 0.00001 
+control_resonator_sparams.ixi -l process_resonator_sparams.ldf -S LIN 2000000000.0 8000000000.0 8 50 50 
 (90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
   Model and simulation settings:
    - Solution method: EMQS
@@ -50,9 +50,58 @@ S-Parameter extraction overrides inductance and capacitance extraction commands.
 +============+=========+
 | #Triangles | #Tetras |
 +------------+---------+
-| 8440       | 0       |
+| 14432      | 0       |
 +============+=========+
+  Time allocation (s):
++=================+==========+=======+==========+=======+
+| Input file read | Polygons | Mesh  | 3D model | TTH   |
++-----------------+----------+-------+----------+-------+
+| 0.444           | 0.449    | 2.035 | 0.055    | 504.8 |
++=================+==========+=======+==========+=======+
 
+A -1.31E-04 x-------x--------x-------x--------x-------x--------x-------x LEGEND
+m           |                                                          | S11 **
+p           |                                                          | S21 xx
+l           |                                                          |
+i           |                                                          |
+t           |                                                          |
+u           |                                                          |
+d           |                                                          |
+e           |                                                          |
+            |                                                          |
+(           |                                                          |
+d           |                                                          |
+B           |                                                          |
+)           |                                                          |
+            |                                                          |
+            |                                         *        *       *
+            |                        *        *                        |
+            |                *                                         |
+            |       *                                                  |
+  -4.54E+01 *----------------------------------------------------------+
+            2.00E+09                                            8.00E+09
+            Frequency (Hz)
 
-Controlled exit. Log file written.
-(80) TTH did not complete execution, and error log not found.
+A -1.20E-04 x-------x--------x-------x--------x-------x--------x-------x LEGEND
+m           |                                                          | S22 **
+p           |                                                          | S12 xx
+l           |                                                          |
+i           |                                                          |
+t           |                                                          |
+u           |                                                          |
+d           |                                                          |
+e           |                                                          |
+            |                                                          |
+(           |                                                          |
+d           |                                                          |
+B           |                                                          |
+)           |                                                          |
+            |                                                          |
+            |                                         *        *       *
+            |                        *        *                        |
+            |                *                                         |
+            |       *                                                  |
+  -4.54E+01 *----------------------------------------------------------+
+            2.00E+09                                            8.00E+09
+            Frequency (Hz)
+Job finished in 507.820 seconds.

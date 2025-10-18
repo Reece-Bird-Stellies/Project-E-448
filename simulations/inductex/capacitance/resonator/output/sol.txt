@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 2025/10/18 11:05:14
+Execution start time stamp: 2025/10/18 14:47:05
 Parameter string: 
 control_resonator_cap.ixi -l process_resonator_cap.ldf -qt -zoff 
 (90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
@@ -42,4 +42,4 @@ SPICE capacitance matrix (floating at infinity) [F]
 cground              5.27104E-13
 cresonator                      
 
-Job finished in 35.731 seconds.
+Job finished in 39.264 seconds.

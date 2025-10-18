@@ -1,4 +1,5 @@
 import json, os
+import json, os
 
 # ---------- Default configuration ----------
 DEFAULTS = {
@@ -67,8 +68,14 @@ DEFAULTS = {
                 "starting_frequency": 2e9,
                 "number_of_frequencies": 2,
                 "solutions_to_save": 0,
-                "assumed_junction_capacitance": 0
-            }
+                "assumed_junction_capacitance": 0,
+                "port_1_resistance": 50,
+                "port_1_inductance": 0,
+                "port_1_capacitance": 0,
+                "port_2_resistance": 1e-12,
+                "port_2_inductance": 0,
+                "port_2_capacitance": 0
+             }
         }
     },
     "quantum_analysis": {
@@ -82,22 +89,24 @@ DEFAULTS = {
             "extra_sims": True,
             "inductex": {
                 "cap_transmon": True,
+                "cap_transmon_no_jj": True,
                 "cap_resonator": True,
                 "cap_feedline": True,
-                "induc_transmon": True,
                 "induc_resonator": True,
-                "induc_feedline": True,
                 "s_parm_transmon": True,
+                "s_parm_transmon_no_jj": True,
                 "s_parm_resonator": True,
-                "s_parm_whole": True,
                 "efield_whole": True,
                 "hfield_whole": True
             },
             "palace": {
                 "cap_transmon": True,
+                "cap_transmon_no_jj": True,
                 "cap_resonator": True,
                 "cap_feedline": True,
-                "eigenmode_transmon": True
+                "eigenmode_full": True,
+                "eigenmode_full_no_jj": True,
+                "eigenmode_resonator": True
             }
         }
     }
@@ -129,6 +138,38 @@ def _get(d, path):
         cur = cur[p]
     return cur
 
+def _set(d, path, value):
+    """Safely set nested dict values by dot path."""
+    keys = path.split(".")
+    cur = d
+    for key in keys[:-1]:
+        if key not in cur:
+            cur[key] = {}
+        cur = cur[key]
+    cur[keys[-1]] = value
+
+def _compare_dicts(loaded, defaults, path=""):
+    """
+    Recursively compare loaded config with defaults.
+    Print differences found.
+    """
+    if isinstance(defaults, dict):
+        for key, default_value in defaults.items():
+            new_path = f"{path}.{key}" if path else key
+            
+            if key not in loaded:
+                continue
+            
+            loaded_value = loaded[key]
+            
+            if isinstance(default_value, dict):
+                _compare_dicts(loaded_value, default_value, new_path)
+            else:
+                if loaded_value != default_value:
+                    # Format the path for display
+                    display_path = new_path.replace(".", '"]["')
+                    print(f'[INFO] {display_path} is: {loaded_value} (Default: {default_value})')
+
 def _is_valid(d):
     """Check that all required paths exist."""
     return all(_get(d, p) is not None for p in REQUIRED_PATHS)
@@ -137,7 +178,7 @@ def ensure_config(path):
     """
     - If file missing: create it with defaults.
     - If present but invalid: print message and return None.
-    - If valid: print success message and return loaded config.
+    - If valid: print success message, compare with defaults, and return loaded config.
     """
     # Case 1: Missing file → create
     if not os.path.exists(path):
@@ -159,6 +200,10 @@ def ensure_config(path):
     # Case 3: Validate structure
     if _is_valid(data):
         print(f"[config] Validation successful: '{path}' is valid.")
+        
+        # Compare with defaults and report differences
+        _compare_dicts(data, DEFAULTS)
+        
         return data
 
     # Case 4: Invalid → report missing keys
