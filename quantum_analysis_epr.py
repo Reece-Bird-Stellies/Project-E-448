@@ -173,15 +173,7 @@ def compute_hamiltonian_epr(
     # Final Hamiltonian 
     H                                       = H_lin + H_nl
 
-    return dict(
-        H=H, H_lin=H_lin, H_nl=H_nl,
-        a_c=a_c, adag_c=adag_c, n_c=n_c,
-        a_q=a_q, adag_q=adag_q, n_q=n_q,
-        phiJ=phiJ,
-        phi_c=phi_c, phi_q=phi_q,
-        EJ=EJ, w_c=w_c, w_q=w_q,
-        N=N, cos_order=cos_order
-    )
+    return H
 
 
 # =========================
