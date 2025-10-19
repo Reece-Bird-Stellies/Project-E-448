@@ -45,7 +45,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     # Set up chip dimensions 
     full_design.chips.main.size.size_x = '4.6mm'
     full_design.chips.main.size.size_y = '2.4mm'
-    full_design.chips.main.size.size_z = '-750um'
+    full_design.chips.main.size.size_z = '-750um'                                                               #changed this
     full_design.chips.main.size.center_x = '0mm'
     full_design.chips.main.size.center_y = '-1mm'
 
@@ -284,7 +284,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     )
     """
     # Adjusted resonator from tutorial, still 'incorrect' asymmetry, spacing and start length but shouldn't effect result
-    RouteMeander( 
+    RouteMeander(
         full_design,
         'resonator',
         Dict(
@@ -295,7 +295,11 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
             hfss_wire_bonds=False,
             fillet=resonator_geo['fillet'],
             lead=dict(
-                start_straight='300um'                                                                 # This is not strictly correct but won't effect results
+                start_straight='100um',                                                                 # This is not strictly correct but won't effect results
+            ),
+            meander=Dict(
+                spacing=resonator_geo['spacing'],   # Spacing between meander segments
+                asymmetry=resonator_geo['asymmetry']    # Asymmetry offset for meander pattern
             ),
             pin_inputs=Dict(
                 start_pin=Dict(
@@ -310,6 +314,24 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
         )
     )
 
+    # Use RouteMeander to fix the total length of the resonator
+    """res1 = RouteMeander(
+        full_design,
+        'resonator',
+        Dict(
+            layer=layer_rout,
+            trace_width='10um',
+            trace_gap='6um',
+            total_length='3.7mm',
+            hfss_wire_bonds=False,
+            fillet='99.9um',
+            lead=Dict(start_straight='300um'),
+            pin_inputs=Dict(
+                start_pin=Dict(component='otg1', pin='open'),
+                end_pin=Dict(component='transmon', pin='readout')
+            )
+        )
+    )"""
     full_design.delete_component('xmon')
     return full_design
 

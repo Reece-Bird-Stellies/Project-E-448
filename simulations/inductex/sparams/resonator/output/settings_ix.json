@@ -14,7 +14,7 @@
     },
     "MESHES": {
         "IXMesh0": {
-            "FILE": "c:/Users/reece/Desktop/Final Year Work/2nd Semester/Project (E) 448/Simulations/Final/simulations/inductex/sparams/resonator/output/ix.msh",
+            "FILE": "C:/Users/reece/Desktop/Final Year Work/2nd Semester/Project (E) 448/Simulations/Final/simulations/inductex/sparams/resonator/output/ix.msh",
             "FORMAT": "GMSH",
             "ENTITIES": {
                 "T0_0_main": {
@@ -79,9 +79,9 @@
             "ANALYSIS": "AC"
         },
         "FREQUENCY": {
-            "START": 2E009,
-            "STOP": 8E009,
-            "NUM": 8,
+            "START": 5.9E009,
+            "STOP": 6.1E009,
+            "NUM": 36,
             "LOGSCALE": false
         }
     }

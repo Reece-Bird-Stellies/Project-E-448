@@ -5,7 +5,7 @@
     "junction": null,
     "transmon": 15.769,
     "transmon_no_jj": 13.717,
-    "resonator": 39.264,
+    "resonator": 66.673,
     "feedline": 107.97
   },
   "inductance": {
@@ -14,7 +14,7 @@
     "junction": null,
     "transmon": null,
     "transmon_no_jj": null,
-    "resonator": 212.13,
+    "resonator": 349.65,
     "feedline": null
   },
   "sparams": {
@@ -23,7 +23,7 @@
     "junction": null,
     "transmon": 121.21,
     "transmon_no_jj": 151.88,
-    "resonator": 507.82,
+    "resonator": 2145.8,
     "feedline": null
   },
   "electric_field": {

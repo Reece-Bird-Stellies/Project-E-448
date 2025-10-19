@@ -57,9 +57,9 @@
         "mesh_sampling": 130,
         "fillet_resolution": 12,
         "number_of_cores": 4,
-        "fine_mesh_min_size_components": 5e-06,
+        "fine_mesh_min_size_components": 1e-05,
         "fine_mesh_max_size_components": 0.00012,
-        "fine_mesh_min_size_junction": 10e-06,
+        "fine_mesh_min_size_junction": 6e-06,
         "fine_mesh_max_size_junction": 6e-05,
         "starting_frequency": 2000000000.0,
         "number_of_frequencies": 2,
@@ -75,9 +75,14 @@
     }
   },
   "quantum_analysis": {
-    "qubit_truncation": 30,
-    "cavity_truncation": 30,
-    "charge_truncation": 30
+    "lom": {
+      "qubit_truncation": 20,
+      "cavity_truncation": 20,
+      "charge_truncation": 20
+    },
+    "epr": {
+      "mode_truncation": 20
+    }
   },
   "miscellaneous": {
     "sims": {
@@ -85,23 +90,41 @@
       "extra_sims": true,
       "inductex": {
         "cap_transmon": true,
+        "cap_transmon_no_jj": true,
         "cap_resonator": true,
         "cap_feedline": true,
-        "induc_transmon": true,
         "induc_resonator": true,
-        "induc_feedline": true,
         "s_parm_transmon": true,
+        "s_parm_transmon_no_jj": true,
         "s_parm_resonator": true,
-        "s_parm_whole": true,
         "efield_whole": true,
         "hfield_whole": true
       },
       "palace": {
         "cap_transmon": true,
+        "cap_transmon_no_jj": true,
         "cap_resonator": true,
         "cap_feedline": true,
-        "eigenmode_transmon": true
+        "eigenmode_full": true,
+        "eigenmode_full_no_jj": true,
+        "eigenmode_resonator": true
       }
     }
+  },
+  "lom": {
+    "mesh_size": 1e-06,
+    "solver_tolerance": 1e-09,
+    "max_iterations": 1000,
+    "material": "niobium",
+    "temperature_k": 4.2
+  },
+  "epr": {
+    "solver_order": 2,
+    "solver_tolerance": 1e-06,
+    "max_iterations": 500,
+    "mesh_min_size": 1e-05,
+    "mesh_max_size": 0.0001,
+    "number_of_modes": 5,
+    "save_fields": true
   }
 }

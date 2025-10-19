@@ -4,9 +4,9 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 2025/10/18 14:57:42
+Execution start time stamp: 2025/10/19 10:57:44
 Parameter string: 
-control_resonator_sparams.ixi -l process_resonator_sparams.ldf -S LIN 2000000000.0 8000000000.0 8 50 50 
+control_resonator_sparams.ixi -l process_resonator_sparams.ldf -S LIN 5.9e9 6.1e9 36 4645 1e-12 
 (90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
   Model and simulation settings:
    - Solution method: EMQS
@@ -18,7 +18,7 @@ control_resonator_sparams.ixi -l process_resonator_sparams.ldf -S LIN 2000000000
 | 0     | Chip0 | control_resonator_sparams.ixi | process_resonator_sparams.ldf | cap              | 3      | 4      | 1E-06       | 1E-09      |
 +=======+=======+===============================+===============================+==================+========+========+=============+============+
 
-Polygon map size chip 0: 23 polygons.
+Polygon map size chip 0: 19 polygons.
 
 Layer penetration depths adjusted for temperature:
   MAIN:   T=0.01 K  TC=1.2 K            Lambda(T)=16 nm
@@ -35,10 +35,10 @@ S-Parameter extraction overrides inductance and capacitance extraction commands.
 +======+========+=======+===================+=================+
 | Name | Layout | Layer | Geometry          | On Basemap Poly |
 +------+--------+-------+-------------------+-----------------+
-| p1+  | 0      | main  | Line/Edge Surface | 13              |
-| p1-  | 0      | main  | Line/Edge Surface | 10              |
+| p1+  | 0      | main  | Line/Edge Surface | 7               |
+| p1-  | 0      | main  | Line/Edge Surface | 5               |
 | p2+  | 0      | main  | Line/Edge Surface | 6               |
-| p2-  | 0      | main  | Line/Edge Surface | 12              |
+| p2-  | 0      | main  | Line/Edge Surface | 5               |
 +======+========+=======+===================+=================+
   Model info: [0] Chip0
 +=========+=====+======+
@@ -50,16 +50,16 @@ S-Parameter extraction overrides inductance and capacitance extraction commands.
 +============+=========+
 | #Triangles | #Tetras |
 +------------+---------+
-| 14432      | 0       |
+| 15779      | 0       |
 +============+=========+
   Time allocation (s):
-+=================+==========+=======+==========+=======+
-| Input file read | Polygons | Mesh  | 3D model | TTH   |
-+-----------------+----------+-------+----------+-------+
-| 0.444           | 0.449    | 2.035 | 0.055    | 504.8 |
-+=================+==========+=======+==========+=======+
++=================+==========+=======+==========+======+
+| Input file read | Polygons | Mesh  | 3D model | TTH  |
++-----------------+----------+-------+----------+------+
+| 0.298           | 1.509    | 3.739 | 0.04     | 2140 |
++=================+==========+=======+==========+======+
 
-A -1.31E-04 x-------x--------x-------x--------x-------x--------x-------x LEGEND
+A -1.25E-14 *-**-*-**-*-**-*-*-**-*-**-*-**-*-**-*-**-*-*-**-*-**-*-**-* LEGEND
 m           |                                                          | S11 **
 p           |                                                          | S21 xx
 l           |                                                          |
@@ -74,15 +74,15 @@ d           |                                                          |
 B           |                                                          |
 )           |                                                          |
             |                                                          |
-            |                                         *        *       *
-            |                        *        *                        |
-            |                *                                         |
-            |       *                                                  |
-  -4.54E+01 *----------------------------------------------------------+
-            2.00E+09                                            8.00E+09
+            |                                                          |
+            |                                                          |
+            |                                                          |
+            |                                                          |
+  -1.45E+02 x-xx-x-xx-x-xx-x-x-xx-x-xx-x-xx-x-xx-x-xx-x-x-xx-x-xx-x-xx-x
+            5.90E+09                                            6.10E+09
             Frequency (Hz)
 
-A -1.20E-04 x-------x--------x-------x--------x-------x--------x-------x LEGEND
+A -1.25E-14 *-**-*-**-*-**-*-*-**-*-**-*-**-*-**-*-**-*-*-**-*-**-*-**-* LEGEND
 m           |                                                          | S22 **
 p           |                                                          | S12 xx
 l           |                                                          |
@@ -97,11 +97,11 @@ d           |                                                          |
 B           |                                                          |
 )           |                                                          |
             |                                                          |
-            |                                         *        *       *
-            |                        *        *                        |
-            |                *                                         |
-            |       *                                                  |
-  -4.54E+01 *----------------------------------------------------------+
-            2.00E+09                                            8.00E+09
+            |                                                          |
+            |                                                          |
+            |                                                          |
+            |                                                          |
+  -1.45E+02 x-xx-x-xx-x-xx-x-x-xx-x-xx-x-xx-x-xx-x-xx-x-x-xx-x-xx-x-xx-x
+            5.90E+09                                            6.10E+09
             Frequency (Hz)
-Job finished in 507.820 seconds.
+Job finished in 2145.800 seconds. (0.6 hours.)

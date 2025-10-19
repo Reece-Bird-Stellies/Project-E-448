@@ -63,7 +63,7 @@ DEFAULTS = {
                 "number_of_cores": 4,
                 "fine_mesh_min_size_components": 1e-5,
                 "fine_mesh_max_size_components": 1.2e-4,
-                "fine_mesh_min_size_junction": 2e-6,
+                "fine_mesh_min_size_junction": 6e-6,
                 "fine_mesh_max_size_junction": 6e-5,
                 "starting_frequency": 2e9,
                 "number_of_frequencies": 2,
@@ -79,9 +79,14 @@ DEFAULTS = {
         }
     },
     "quantum_analysis": {
-        "qubit_truncation": 30,
-        "cavity_truncation": 30,
-        "charge_truncation": 30
+        "lom": {
+            "qubit_truncation": 20,
+            "cavity_truncation": 20,
+            "charge_truncation": 20
+        },
+        "epr": {
+            "mode_truncation": 20
+        }
     },
     "miscellaneous": {
         "sims": {
@@ -109,6 +114,22 @@ DEFAULTS = {
                 "eigenmode_resonator": True
             }
         }
+    },
+    "lom": {
+        "mesh_size": 1e-6,
+        "solver_tolerance": 1e-9,
+        "max_iterations": 1000,
+        "material": "niobium",
+        "temperature_k": 4.2
+    },
+    "epr": {
+        "solver_order": 2,
+        "solver_tolerance": 1e-6,
+        "max_iterations": 500,
+        "mesh_min_size": 1e-5,
+        "mesh_max_size": 1e-4,
+        "number_of_modes": 5,
+        "save_fields": True
     }
 }
 
@@ -120,12 +141,18 @@ REQUIRED_PATHS = [
     "design_specs.coupling_g_mhz",
     "design_specs.kappa_khz",
     "design_specs.resonator_type",
+    "simulations.inductex.ixi.iteration_count",
     "simulations.inductex.ixi.mask_segment_size",
     "simulations.inductex.layer_definition_file.segment_size_um",
     "simulations.palace.capacitance.mesh_min_size",
     "simulations.palace.eigenmode.starting_frequency",
-    "quantum_analysis.qubit_truncation",
+    "quantum_analysis.lom.qubit_truncation",
+    "quantum_analysis.lom.cavity_truncation",
+    "quantum_analysis.lom.charge_truncation",
+    "quantum_analysis.epr.mode_truncation",
     "miscellaneous.sims.extra_sims",
+    "miscellaneous.sims.inductex.cap_transmon",
+    "miscellaneous.sims.palace.eigenmode_full",
 ]
 
 # ---------- Helper functions ----------

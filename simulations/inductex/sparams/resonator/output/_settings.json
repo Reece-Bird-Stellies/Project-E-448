@@ -73,7 +73,7 @@
                     "TERMINAL": true
                 }
             },
-            "FILE": "c:/Users/reece/Desktop/Final Year Work/2nd Semester/Project (E) 448/Simulations/Final/simulations/inductex/sparams/resonator/output/ix.msh",
+            "FILE": "C:/Users/reece/Desktop/Final Year Work/2nd Semester/Project (E) 448/Simulations/Final/simulations/inductex/sparams/resonator/output/ix.msh",
             "FORMAT": "GMSH"
         }
     },
@@ -100,9 +100,9 @@
         },
         "FREQUENCY": {
             "LOGSCALE": false,
-            "NUM": 8,
-            "START": 2000000000.0,
-            "STOP": 8000000000.0
+            "NUM": 36,
+            "START": 5900000000.0,
+            "STOP": 6100000000.0
         },
         "JUNCTION": {
             "CS": 7e-14,

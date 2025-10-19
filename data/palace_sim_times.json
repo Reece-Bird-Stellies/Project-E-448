@@ -5,16 +5,16 @@
     "junction": null,
     "transmon": 32.218670941,
     "transmon_no_jj": 17.805777428,
-    "resonator": 41.083722723,
+    "resonator": 26.988296273,
     "feedline": 25.648529079
   },
   "eigenmode": {
-    "full": null,
+    "full": 524.800759152,
     "full_no_jj": 167.744531453,
     "junction": null,
     "transmon": null,
     "transmon_no_jj": null,
-    "resonator": 288.939266148,
+    "resonator": 58.539652583,
     "feedline": null
   }
 }

@@ -1,14 +1,14 @@
 *Solutions
-81.7084
+99.6856
 *Singular values
-0.0173081
+0.0141867
 *Error (||A*x - b||):
-6.28037e-16
+4.71028e-16
 *Relative error (||A*x - b||/||b||):
-4.44089e-16
+3.33067e-16
 *Euclidean norm of RHS (||b||):
 1.41421
 *Max error (max(|A*x - b|)):
-4.44089e-16
+3.33067e-16
 *Max relative error (max(|A*x - b|)/||b||):
-3.14018e-16
+2.35514e-16

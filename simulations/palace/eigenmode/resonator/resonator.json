@@ -15,7 +15,7 @@
     "Materials": [
       {
         "Attributes": [
-          9
+          10
         ],
         "Permeability": 1.0,
         "Permittivity": 1.0,
@@ -23,7 +23,7 @@
       },
       {
         "Attributes": [
-          7
+          8
         ],
         "Permeability": 1,
         "Permittivity": 11.45,
@@ -35,6 +35,7 @@
     "PEC": {
       "Attributes": [
         6,
+        7,
         5
       ]
     },
@@ -63,7 +64,7 @@
             ]
           }
         ],
-        "R": 45.6,
+        "R": 46.45,
         "L": 0,
         "C": 0
       },
@@ -101,7 +102,7 @@
         {
           "Index": 1,
           "Attributes": [
-            8
+            9
           ],
           "Type": "SA",
           "Thickness": 2e-06,
@@ -112,6 +113,7 @@
           "Index": 2,
           "Attributes": [
             6,
+            7,
             5
           ],
           "Type": "MS",
@@ -123,6 +125,7 @@
           "Index": 3,
           "Attributes": [
             6,
+            7,
             5
           ],
           "Type": "MA",

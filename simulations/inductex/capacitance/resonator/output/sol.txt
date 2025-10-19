@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 2025/10/18 14:47:05
+Execution start time stamp: 2025/10/19 01:07:13
 Parameter string: 
 control_resonator_cap.ixi -l process_resonator_cap.ldf -qt -zoff 
 (90 SIL)  (0 MAIN)  {110 TERM} {100 TEXT} 
@@ -18,7 +18,7 @@ control_resonator_cap.ixi -l process_resonator_cap.ldf -qt -zoff
 | 0     | Chip0 | control_resonator_cap.ixi | process_resonator_cap.ldf | cap              | 3      | 0      | 1E-06       | 1E-09      |
 +=======+=======+===========================+===========================+==================+========+========+=============+============+
 
-Polygon map size chip 0: 17 polygons.
+Polygon map size chip 0: 15 polygons.
 
 Layer penetration depths adjusted for temperature:
   MAIN:   T=0.01 K  TC=1.2 K            Lambda(T)=16 nm
@@ -28,18 +28,18 @@ Capacitance extraction overrides inductance extraction.
 +============+=========+
 | #Triangles | #Tetras |
 +------------+---------+
-| 32266      | 0       |
+| 39809      | 0       |
 +============+=========+
 
 
 Maxwell capacitance matrix (grounded at infinity) [F]
-            cground     cresonator  
-cground     8.1962E-13  -5.30061E-13
-cresonator              5.27134E-13 
+            cground      cresonator  
+cground     9.21196E-13  -5.29328E-13
+cresonator               5.53945E-13 
 
 SPICE capacitance matrix (floating at infinity) [F]
-            cground  cresonator 
-cground              5.27104E-13
-cresonator                      
+            cground  cresonator
+cground              5.5249E-13
+cresonator                     
 
-Job finished in 39.264 seconds.
+Job finished in 66.673 seconds.

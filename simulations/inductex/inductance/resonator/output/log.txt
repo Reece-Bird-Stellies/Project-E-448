@@ -7,39 +7,123 @@ Times:
   Polygon map building : 0.000
 --------------------------------------------------------------------------------
 Chip 0
-  Base map polygons: 24
-  Base map mesh triangles: 6906
+  Base map polygons: 48
+  Base map mesh triangles: 8976
        Poly#  AllEdgsLinked     AllTrisCCW    AllTrisLinked
   -------------------------
          Poly#  Constraints       Points    Triangles      BadTris   Iterations  TimeTriangulate       TimeRefine        TimeClean
-             0           70         1034         1737            0         2174             0.00             0.03             0.00
-             1            8          162          160            0            0             0.00             0.00             0.00
-             2            8           24           28            0           12             0.00             0.00             0.00
-             3           20           41           39            0            0             0.00             0.00             0.00
-             4            4            4            2            0            0             0.00             0.00             0.00
-             5            8           18           16            0            0             0.00             0.00             0.00
-             6            8           18           16            0            0             0.00             0.00             0.00
-             7            5            5            3            0            0             0.00             0.00             0.00
-             8           10           20           18            0            0             0.00             0.00             0.00
-             9           10           20           18            0            0             0.00             0.00             0.00
-            10            4           38           36            0            0             0.00             0.00             0.00
-            11            4           38           36            0            0             0.00             0.00             0.00
-            12           10          236          234            0            0             0.00             0.00             0.00
-            13           75         1136         1894            0         2289             0.01             0.04             0.00
-            14          117          429          496            0          138             0.01             0.01             0.00
-            15          146          439          437            0            0             0.02             0.01             0.00
-            16          138          430          428            0            0             0.02             0.01             0.00
-            17           54          150          148            0            0             0.00             0.00             0.00
-            18           52          148          146            0            0             0.00             0.00             0.00
-            19           54          150          148            0            0             0.00             0.00             0.00
-            20           46          144          142            0            0             0.00             0.00             0.00
-            21            4            4            2            0            0             0.00             0.00             0.00
-            22          118          361          359            0            0             0.01             0.01             0.00
-            23          123          365          363            0            0             0.01             0.01             0.00
-  Time to build edge slopes: 1.271
+             0           52         1100         1890            0         2764             0.00             0.04             0.00
+             1            6          150          148            0            0             0.00             0.00             0.00
+             2            7          151          149            0            0             0.00             0.00             0.00
+             3           27          747         1254            0         1538             0.00             0.02             0.00
+             4           20          196          322            0          388             0.00             0.01             0.00
+             5            4           47           60            0           30             0.00             0.00             0.00
+             6            4            5            3            0            0             0.00             0.00             0.00
+             7            5           35           33            0            0             0.00             0.00             0.00
+             8            5           35           33            0            0             0.00             0.00             0.00
+             9            6            6            4            0            0             0.00             0.00             0.00
+            10            4           32           30            0            0             0.00             0.00             0.00
+            11            4           32           30            0            0             0.00             0.00             0.00
+            12            3            3            1            0            0             0.00             0.00             0.00
+            13            3            3            1            0            0             0.00             0.00             0.00
+            14           14           72           70            0            0             0.00             0.00             0.00
+            15           41          157          180            0           50             0.00             0.00             0.00
+            16           38          136          134            0            0             0.00             0.00             0.00
+            17           42          138          136            0            0             0.00             0.00             0.00
+            18           39          136          134            0            0             0.00             0.00             0.00
+            19           39          119          117            0            0             0.00             0.00             0.00
+            20           38          124          122            0            0             0.00             0.00             0.00
+            21           38          121          119            0            0             0.00             0.00             0.00
+            22            6          150          148            0            0             0.00             0.00             0.00
+            23            7          151          149            0            0             0.00             0.00             0.00
+            24           35          642         1073            0         1422             0.00             0.02             0.00
+            25           16          201          325            0          426             0.00             0.01             0.00
+            26           11          135          210            0          163             0.00             0.00             0.00
+            27           33          181          221            0           84             0.00             0.00             0.00
+            28           44          138          136            0            0             0.00             0.00             0.00
+            29           33          139          137            0            0             0.00             0.00             0.00
+            30           38          139          138            0            1             0.00             0.00             0.00
+            31           32          134          132            0            0             0.00             0.00             0.00
+            32           32          138          136            0            0             0.00             0.00             0.00
+            33           32          136          134            0            0             0.00             0.00             0.00
+            34           58          175          204            0           61             0.00             0.00             0.00
+            35           21           69           67            0            0             0.00             0.00             0.00
+            36           22           62           60            0            0             0.00             0.00             0.00
+            37           18           70           68            0            0             0.00             0.00             0.00
+            38           20           60           58            0            0             0.00             0.00             0.00
+            39            4            5            3            0            0             0.00             0.00             0.00
+            40           41           81           79            0            0             0.00             0.00             0.00
+            41           43           79           77            0            0             0.00             0.00             0.00
+            42            6            6            4            0            0             0.00             0.00             0.00
+            43           43           79           77            0            0             0.00             0.00             0.00
+            44           38           82           80            0            0             0.00             0.00             0.00
+            45            3            3            1            0            0             0.00             0.00             0.00
+            46            3            3            1            0            0             0.00             0.00             0.00
+            47          122          290          288            0            0             0.01             0.01             0.00
+  Time to build edge slopes: 0.874
 --------------------------------------------------------------------------------
  ERRORS
 --------------------------------------------------------------------------------
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
 Minimum triangle angle 0.0001 discarded.
 Minimum triangle angle 0.0001 discarded.
 Minimum triangle angle 0.0001 discarded.

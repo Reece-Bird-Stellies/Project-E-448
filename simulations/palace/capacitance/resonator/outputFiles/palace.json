@@ -2,7 +2,7 @@
   "ElapsedTime": {
     "Counts": {
       "Adaptation": 0,
-      "CoarseSolve": 36,
+      "CoarseSolve": 20,
       "Construction": 1,
       "DiskIO": 2,
       "Div.-FreeProjection": 0,
@@ -15,7 +15,7 @@
       "PROMConstruction": 0,
       "PROMSolve": 0,
       "Postprocessing": 6,
-      "Preconditioner": 36,
+      "Preconditioner": 20,
       "Rebalancing": 0,
       "Setup": 1,
       "Solve": 2,
@@ -25,40 +25,40 @@
     },
     "Durations": {
       "Adaptation": 0.0,
-      "CoarseSolve": 0.07076546099999999,
-      "Construction": 2.15207787,
-      "DiskIO": 0.773120272,
+      "CoarseSolve": 0.05744946,
+      "Construction": 2.723131977,
+      "DiskIO": 1.035705727,
       "Div.-FreeProjection": 0.0,
       "EigenvalueSolve": 0.0,
-      "Estimation": 0.09236867199999999,
-      "Initialization": 0.139763788,
-      "LinearSolve": 0.6188905600000002,
-      "MeshPreprocessing": 3.270811331,
-      "OperatorConstruction": 0.413000214,
+      "Estimation": 0.16634343100000004,
+      "Initialization": 0.129025837,
+      "LinearSolve": 0.46287022000000005,
+      "MeshPreprocessing": 4.844208132,
+      "OperatorConstruction": 0.7286403879999999,
       "PROMConstruction": 0.0,
       "PROMSolve": 0.0,
-      "Postprocessing": 0.495702367,
-      "Preconditioner": 5.121721867999999,
+      "Postprocessing": 0.709924799,
+      "Preconditioner": 3.810159843000001,
       "Rebalancing": 0.0,
-      "Setup": 0.998557375,
-      "Solve": 26.907200359999997,
+      "Setup": 3.165487457,
+      "Solve": 9.13024972,
       "TimeStepping": 0.0,
-      "Total": 41.083722723,
+      "Total": 26.988296273,
       "WavePorts": 0.0
     }
   },
   "GitTag": "v0.14.0-156-g1652a90e",
   "LinearSolver": {
-    "TotalIts": 32,
+    "TotalIts": 16,
     "TotalSolves": 2
   },
   "Problem": {
-    "DegreesOfFreedom": 140669,
+    "DegreesOfFreedom": 160923,
     "MPISize": 4,
-    "MeshElements": 91591,
+    "MeshElements": 104029,
     "MultigridDegreesOfFreedom": [
-      19542,
-      140669
+      22526,
+      160923
     ]
   }
 }
