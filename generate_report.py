@@ -226,9 +226,9 @@ def generate_quantum_report(Lj,
     
     # PALACE
     palace_eigen_Fq                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_1"]
-    palace_eigen_Fc                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_2"]
+    palace_eigen_Fc                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_3"]
     palace_eigen_Pq                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_1"])
-    palace_eigen_Pc                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_2"])
+    palace_eigen_Pc                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_3"])
     
     # Eigenmode percentage differences
     # InductEx vs HFSS
@@ -238,6 +238,43 @@ def generate_quantum_report(Lj,
     diff_eigen_inductex_Pc           = _calculate_percentage_diff(inductex_eigen_Pc, hfss_eigen_Pc)
     
     # PALACE vs HFSS
+    diff_eigen_palace_Fq             = _calculate_percentage_diff(palace_eigen_Fq, hfss_eigen_Fq)
+    diff_eigen_palace_Fc             = _calculate_percentage_diff(palace_eigen_Fc, hfss_eigen_Fc)
+    diff_eigen_palace_Pq             = _calculate_percentage_diff(palace_eigen_Pq, hfss_eigen_Pq)
+    diff_eigen_palace_Pc             = _calculate_percentage_diff(palace_eigen_Pc, hfss_eigen_Pc)
+
+    # Design values for eigenmode
+    design_eigen_Fq                  = quantum_config["design_specs"]["qubit_frequency_ghz"]
+    design_eigen_Fc                  = quantum_config["design_specs"]["cavity_frequency_ghz"]
+    design_eigen_Pq                  = 0  # Not specified in design
+    design_eigen_Pc                  = 0  # Not specified in design
+
+    # Eigenmode percentage differences - add Design comparisons
+    # HFSS vs Design
+    diff_eigen_hfss_Fq_design        = _calculate_percentage_diff(hfss_eigen_Fq, design_eigen_Fq)
+    diff_eigen_hfss_Fc_design        = _calculate_percentage_diff(hfss_eigen_Fc, design_eigen_Fc)
+    diff_eigen_hfss_Pq_design        = _calculate_percentage_diff(hfss_eigen_Pq, design_eigen_Pq) if design_eigen_Pq != 0 else "N/A"
+    diff_eigen_hfss_Pc_design        = _calculate_percentage_diff(hfss_eigen_Pc, design_eigen_Pc) if design_eigen_Pc != 0 else "N/A"
+
+    # Update the existing InductEx differences to include design comparison
+    diff_eigen_inductex_Fq_design    = _calculate_percentage_diff(inductex_eigen_Fq, design_eigen_Fq)
+    diff_eigen_inductex_Fc_design    = _calculate_percentage_diff(inductex_eigen_Fc, design_eigen_Fc)
+    diff_eigen_inductex_Pq_design    = _calculate_percentage_diff(inductex_eigen_Pq, design_eigen_Pq) if design_eigen_Pq != 0 else "N/A"
+    diff_eigen_inductex_Pc_design    = _calculate_percentage_diff(inductex_eigen_Pc, design_eigen_Pc) if design_eigen_Pc != 0 else "N/A"
+
+    # Keep existing HFSS reference comparisons
+    diff_eigen_inductex_Fq           = _calculate_percentage_diff(inductex_eigen_Fq, hfss_eigen_Fq)
+    diff_eigen_inductex_Fc           = _calculate_percentage_diff(inductex_eigen_Fc, hfss_eigen_Fc)
+    diff_eigen_inductex_Pq           = _calculate_percentage_diff(inductex_eigen_Pq, hfss_eigen_Pq)
+    diff_eigen_inductex_Pc           = _calculate_percentage_diff(inductex_eigen_Pc, hfss_eigen_Pc)
+
+    # Update Palace differences to include design comparison  
+    diff_eigen_palace_Fq_design      = _calculate_percentage_diff(palace_eigen_Fq, design_eigen_Fq)
+    diff_eigen_palace_Fc_design      = _calculate_percentage_diff(palace_eigen_Fc, design_eigen_Fc)
+    diff_eigen_palace_Pq_design      = _calculate_percentage_diff(palace_eigen_Pq, design_eigen_Pq) if design_eigen_Pq != 0 else "N/A"
+    diff_eigen_palace_Pc_design      = _calculate_percentage_diff(palace_eigen_Pc, design_eigen_Pc) if design_eigen_Pc != 0 else "N/A"
+
+    # Keep existing HFSS reference comparisons
     diff_eigen_palace_Fq             = _calculate_percentage_diff(palace_eigen_Fq, hfss_eigen_Fq)
     diff_eigen_palace_Fc             = _calculate_percentage_diff(palace_eigen_Fc, hfss_eigen_Fc)
     diff_eigen_palace_Pq             = _calculate_percentage_diff(palace_eigen_Pq, hfss_eigen_Pq)
@@ -676,7 +713,10 @@ def generate_quantum_report(Lj,
             <thead>
                 <tr>
                     <th>Mode Parameter</th>
+                    <th>Design</th>
+                    <th>Δ%</th>
                     <th>HFSS</th>
+                    <th>Δ%</th>
                     <th>InductEx</th>
                     <th>Δ%</th>
                     <th>PALACE</th>
@@ -686,35 +726,47 @@ def generate_quantum_report(Lj,
             <tbody>
                 <tr>
                     <td><strong>Qubit Frequency (F<sub>q</sub>) (GHz)</strong></td>
+                    <td>{design_eigen_Fq:.4f}</td>
+                    <td class="diff">-</td>
                     <td>{hfss_eigen_Fq:.4f}</td>
+                    <td class="diff">{diff_eigen_hfss_Fq_design}</td>
                     <td>{inductex_eigen_Fq:.4f}</td>
-                    <td class="diff">{diff_eigen_inductex_Fq}</td>
+                    <td class="diff">{diff_eigen_inductex_Fq_design}<br>{diff_eigen_inductex_Fq}</td>
                     <td>{palace_eigen_Fq:.4f}</td>
-                    <td class="diff">{diff_eigen_palace_Fq}</td>
+                    <td class="diff">{diff_eigen_palace_Fq_design}<br>{diff_eigen_palace_Fq}</td>
                 </tr>
                 <tr>
                     <td><strong>Cavity Frequency (F<sub>c</sub>) (GHz)</strong></td>
+                    <td>{design_eigen_Fc:.4f}</td>
+                    <td class="diff">-</td>
                     <td>{hfss_eigen_Fc:.4f}</td>
+                    <td class="diff">{diff_eigen_hfss_Fc_design}</td>
                     <td>{inductex_eigen_Fc:.4f}</td>
-                    <td class="diff">{diff_eigen_inductex_Fc}</td>
+                    <td class="diff">{diff_eigen_inductex_Fc_design}<br>{diff_eigen_inductex_Fc}</td>
                     <td>{palace_eigen_Fc:.4f}</td>
-                    <td class="diff">{diff_eigen_palace_Fc}</td>
+                    <td class="diff">{diff_eigen_palace_Fc_design}<br>{diff_eigen_palace_Fc}</td>
                 </tr>
                 <tr>
                     <td><strong>Qubit Participation Ratio (P<sub>q</sub>) (Unitless)</strong></td>
+                    <td>{design_eigen_Pq:.6f}</td>
+                    <td class="diff">-</td>
                     <td>{hfss_eigen_Pq:.6f}</td>
+                    <td class="diff">{diff_eigen_hfss_Pq_design}</td>
                     <td>{inductex_eigen_Pq:.6f}</td>
-                    <td class="diff">{diff_eigen_inductex_Pq}</td>
+                    <td class="diff">{diff_eigen_inductex_Pq_design}<br>{diff_eigen_inductex_Pq}</td>
                     <td>{palace_eigen_Pq:.6f}</td>
-                    <td class="diff">{diff_eigen_palace_Pq}</td>
+                    <td class="diff">{diff_eigen_palace_Pq_design}<br>{diff_eigen_palace_Pq}</td>
                 </tr>
                 <tr>
                     <td><strong>Cavity Participation Ratio (P<sub>c</sub>) (Unitless)</strong></td>
+                    <td>{design_eigen_Pc:.6f}</td>
+                    <td class="diff">-</td>
                     <td>{hfss_eigen_Pc:.6f}</td>
+                    <td class="diff">{diff_eigen_hfss_Pc_design}</td>
                     <td>{inductex_eigen_Pc:.6f}</td>
-                    <td class="diff">{diff_eigen_inductex_Pc}</td>
+                    <td class="diff">{diff_eigen_inductex_Pc_design}<br>{diff_eigen_inductex_Pc}</td>
                     <td>{palace_eigen_Pc:.6f}</td>
-                    <td class="diff">{diff_eigen_palace_Pc}</td>
+                    <td class="diff">{diff_eigen_palace_Pc_design}<br>{diff_eigen_palace_Pc}</td>
                 </tr>
             </tbody>
         </table>

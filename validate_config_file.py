@@ -114,22 +114,6 @@ DEFAULTS = {
                 "eigenmode_resonator": True
             }
         }
-    },
-    "lom": {
-        "mesh_size": 1e-6,
-        "solver_tolerance": 1e-9,
-        "max_iterations": 1000,
-        "material": "niobium",
-        "temperature_k": 4.2
-    },
-    "epr": {
-        "solver_order": 2,
-        "solver_tolerance": 1e-6,
-        "max_iterations": 500,
-        "mesh_min_size": 1e-5,
-        "mesh_max_size": 1e-4,
-        "number_of_modes": 5,
-        "save_fields": True
     }
 }
 
