@@ -168,7 +168,9 @@ def _make_cap_ldf_file(design_name, inductex_ldf_config):
     Lambda0					= {inductex_ldf_config["lambda0_um"]}
 	LambdaFit				= 4
 	Temperature		 		= {inductex_ldf_config["temperature_k"]}
-	TC						= {inductex_ldf_config["critical_temperature"]}"""
+	TC						= {inductex_ldf_config["critical_temperature"]}
+    EpsilonRAbove		    = 1.0
+    EpsilonRBelow	        = {epsilon}"""
 
     substrate_layer_string = f"""* ------------Silicon Base Layer-------------
 $Layer
@@ -243,7 +245,9 @@ def _make_ind_ldf_file(design_name, inductex_ldf_config):
     Lambda0					= {inductex_ldf_config["lambda0_um"]}
 	LambdaFit				= 4
 	Temperature		 		= {inductex_ldf_config["temperature_k"]}
-	TC						= {inductex_ldf_config["critical_temperature"]}"""
+	TC						= {inductex_ldf_config["critical_temperature"]}
+    EpsilonRAbove		    = 1.0
+    EpsilonRBelow	        = {epsilon}"""
 
     substrate_layer_string = f"""* ------------Silicon Base Layer-------------
 $Layer
@@ -330,7 +334,9 @@ def _make_sparam_ldf_file(design_name, inductex_ldf_config):
     Lambda0					= {inductex_ldf_config["lambda0_um"]}
 	LambdaFit				= 4
 	Temperature		 		= {inductex_ldf_config["temperature_k"]}
-	TC						= {inductex_ldf_config["critical_temperature"]}"""
+	TC						= {inductex_ldf_config["critical_temperature"]}
+    EpsilonRAbove		    = 1.0
+    EpsilonRBelow	        = {epsilon}"""
 
     substrate_layer_string = f"""* ------------Silicon Base Layer-------------
 $Layer

@@ -25,6 +25,12 @@ def _calculate_percentage_diff(value, reference):
     else:
         return f"{diff:.2f}%"
 
+def _format_value(value, threshold=1e-3):
+    """Format value: use scientific notation if |value| < threshold, else fixed-point."""
+    if abs(value) < threshold and value != 0:
+        return f"{value:.4e}"
+    else:
+        return f"{value:.4f}"
 # ============================================================================
 # LOM MATRICES (as strings for display)
 # ============================================================================
@@ -97,7 +103,8 @@ def generate_quantum_report(Lj,
                             results_lom_palace,
                             results_epr_inductex,
                             results_epr_palace,
-                            output_file="simulation_report.html"
+                            compute_other_values,
+                            output_file="Simulation Results and Analysis.html"
                             ):
     """
     Generate an HTML report for quantum simulation results.
@@ -121,22 +128,22 @@ def generate_quantum_report(Lj,
     # ELECTROSTATICS - HFSS (Reference)
     # ============================================================================
     hfss_Lj                          = Lj* 1e9
-    hfss_Cj                          = 0
+    hfss_Cj                          = compute_other_values["cj_hfss"]
     hfss_Cclaw_claw                  = best_design["claw_to_claw"]
     hfss_Cclaw_ground                = best_design["claw_to_ground"]
     hfss_Ccross_claw                 = best_design["cross_to_claw"]  # Cg
     hfss_Ccross_cross                = best_design["cross_to_cross"]  # Cs
     hfss_Ccross_ground               = best_design["cross_to_ground"]
     hfss_Cground_ground              = best_design["ground_to_ground"]
-    hfss_Lr                          = 0
-    hfss_Cr                          = 0
+    hfss_Lr                          = results_inductex["inductance"]["resonator"]["L1"] * 1e9
+    hfss_Cr                          = compute_other_values["cr_hfss"] * 1e15
     hfss_Cfeedline                   = 0
     
     # ============================================================================
     # ELECTROSTATICS - InductEx
     # ============================================================================
     inductex_Lj                      = Lj * 1e9
-    inductex_Cj                      = (results_inductex["capacitance"]["transmon"]["CCROSS-CCROSS"] - results_inductex["capacitance"]["transmon_no_jj"]["CCROSS-CCROSS"]) * 1e15
+    inductex_Cj                      = 0 * 1e15
     inductex_Cclaw_claw              = results_inductex["capacitance"]["transmon"]["CCLAW-CCLAW"] * 1e15
     inductex_Cclaw_ground            = abs(results_inductex["capacitance"]["transmon"]["CGROUND-CCLAW"]) * 1e15
     inductex_Ccross_claw             = abs(results_inductex["capacitance"]["transmon"]["CCROSS-CCLAW"]) * 1e15  # Cg
@@ -151,14 +158,14 @@ def generate_quantum_report(Lj,
     # ELECTROSTATICS - PALACE
     # ============================================================================
     palace_Lj                        = Lj* 1e9
-    palace_Cj                        = (palace_results["capacitance"]["transmon"]["C2-C2"] - palace_results["capacitance"]["transmon_no_jj"]["C2-C2"]) * 1e15
+    palace_Cj                        = 0 * 1e15
     palace_Cclaw_claw                = palace_results["capacitance"]["transmon"]["C3-C3"] * 1e15
     palace_Cclaw_ground              = abs(palace_results["capacitance"]["transmon"]["C1-C3"]) * 1e15
     palace_Ccross_claw               = abs(palace_results["capacitance"]["transmon"]["C2-C3"]) * 1e15  # Cg
     palace_Ccross_cross              = palace_results["capacitance"]["transmon"]["C2-C2"] * 1e15  # Cs
     palace_Ccross_ground             = abs(palace_results["capacitance"]["transmon"]["C1-C2"]) * 1e15
     palace_Cground_ground            = palace_results["capacitance"]["transmon"]["C1-C1"] * 1e15
-    palace_Lr                        = 0
+    palace_Lr                        = compute_other_values["lr_palace"]
     palace_Cr                        = palace_results["capacitance"]["resonator"]["C2-C2"] * 1e15
     palace_Cfeedline                 = palace_results["capacitance"]["feedline"]["C2-C2"] * 1e15
 
@@ -261,25 +268,25 @@ def generate_quantum_report(Lj,
     hfss_ref_g                       = best_design["g_MHz"]
     
     # HFSS LOM
-    hfss_lom_Fq                      = 0
-    hfss_lom_Fc                      = 0
-    hfss_lom_alpha                   = 0
-    hfss_lom_kappa                   = 0
-    hfss_lom_g                       = 0
+    hfss_lom_Fq                      = results_lom_hfss["qubit_frequency_ghz"]
+    hfss_lom_Fc                      = results_lom_hfss["cavity_frequency_ghz"]
+    hfss_lom_alpha                   = results_lom_hfss["anharmonicity_mhz"]
+    hfss_lom_kappa                   = results_lom_hfss["kappa_khz"]
+    hfss_lom_g                       = results_lom_hfss["coupling_g_mhz"]
     
     # InductEx LOM
-    inductex_lom_Fq                  = 0
-    inductex_lom_Fc                  = 0
-    inductex_lom_alpha               = 0
-    inductex_lom_kappa               = 0
-    inductex_lom_g                   = 0
+    inductex_lom_Fq                  = results_lom_inductex["qubit_frequency_ghz"]
+    inductex_lom_Fc                  = results_lom_inductex["cavity_frequency_ghz"]
+    inductex_lom_alpha               = results_lom_inductex["anharmonicity_mhz"]
+    inductex_lom_kappa               = results_lom_inductex["kappa_khz"]
+    inductex_lom_g                   = results_lom_inductex["coupling_g_mhz"]
     
     # PALACE LOM
-    palace_lom_Fq                    = 0
-    palace_lom_Fc                    = 0
-    palace_lom_alpha                 = 0
-    palace_lom_kappa                 = 0
-    palace_lom_g                     = 0
+    palace_lom_Fq                    = results_lom_palace["qubit_frequency_ghz"]
+    palace_lom_Fc                    = results_lom_palace["cavity_frequency_ghz"]
+    palace_lom_alpha                 = results_lom_palace["anharmonicity_mhz"]
+    palace_lom_kappa                 = results_lom_palace["kappa_khz"]
+    palace_lom_g                     = results_lom_palace["coupling_g_mhz"]
     
     # ============================================================================
     # LOM PERCENTAGE DIFFERENCES
@@ -337,18 +344,18 @@ def generate_quantum_report(Lj,
     # EPR HAMILTONIAN PARAMETERS
     # ============================================================================
     # InductEx EPR
-    inductex_epr_Fq                  = 0
-    inductex_epr_Fc                  = 0
-    inductex_epr_alpha               = 0
-    inductex_epr_kappa               = 0
-    inductex_epr_g                   = 0
+    inductex_epr_Fq                  = results_epr_inductex["qubit_frequency_ghz"]
+    inductex_epr_Fc                  = results_epr_inductex["cavity_frequency_ghz"]
+    inductex_epr_alpha               = results_epr_inductex["anharmonicity_mhz"]
+    inductex_epr_kappa               = results_epr_inductex["kappa_khz"]
+    inductex_epr_g                   = results_epr_inductex["coupling_g_mhz"]
     
     # PALACE EPR
-    palace_epr_Fq                    = 0
-    palace_epr_Fc                    = 0
-    palace_epr_alpha                 = 0
-    palace_epr_kappa                 = 0
-    palace_epr_g                     = 0
+    palace_epr_Fq                    = results_epr_palace["qubit_frequency_ghz"]
+    palace_epr_Fc                    = results_epr_palace["cavity_frequency_ghz"]
+    palace_epr_alpha                 = results_epr_palace["anharmonicity_mhz"]
+    palace_epr_kappa                 = results_epr_palace["kappa_khz"]
+    palace_epr_g                     = results_epr_palace["coupling_g_mhz"]
     
     # ============================================================================
     # EPR PERCENTAGE DIFFERENCES
@@ -563,10 +570,10 @@ def generate_quantum_report(Lj,
                 </tr>
                 <tr>
                     <td><strong>C<sub>j</sub> (fF)</strong></td>
-                    <td class="reference">{hfss_Cj:.4f}*</td>
-                    <td>{inductex_Cj:.4f}</td>
+                    <td class="reference">{_format_value(hfss_Cj)}*</td>
+                    <td>{_format_value(inductex_Cj)}</td>
                     <td class="diff">{diff_inductex_Cj}</td>
-                    <td>{palace_Cj:.4f}</td>
+                    <td>{_format_value(palace_Cj)}</td>
                     <td class="diff">{diff_palace_Cj}</td>
                 </tr>
                 <tr>
@@ -619,7 +626,7 @@ def generate_quantum_report(Lj,
                 </tr>
                 <tr>
                     <td><strong>L<sub>r</sub> (nH)</strong></td>
-                    <td class="reference">{hfss_Lr:.4f}</td>
+                    <td class="reference">{hfss_Lr:.4f} (InductEx)</td>
                     <td>{inductex_Lr:.4f}</td>
                     <td class="diff">{diff_inductex_Lr}</td>
                     <td>{palace_Lr:.4f}***</td>

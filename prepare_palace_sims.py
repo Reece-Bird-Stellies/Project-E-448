@@ -113,8 +113,6 @@ def _setup_resonator_design(eigen_sim):
     fine_mesh_components = ['resonator']
     eigen_sim.create_port_CPW_on_Route('resonator', pin_name='start', len_launch=20e-6)
     eigen_sim.create_port_CPW_on_Route('resonator', pin_name='end', len_launch=20e-6)
-    eigen_sim.set_port_impedance(port_ind=1, impedance_R=50, impedance_L=0, impedance_C=0)
-    eigen_sim.set_port_impedance(port_ind=2, impedance_R=0, impedance_L=1e-15, impedance_C=0)
     return fine_mesh_components
 
 def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
@@ -198,7 +196,7 @@ def make_palace_eigenmode_sim(design, design_name, palace_eigenmode_config):
     elif design_name == "resonator":
         _setup_resonator_design(eigen_sim)
         eigen_sim.set_port_impedance(port_ind=1, impedance_R=port_1_r, impedance_L=port_1_l, impedance_C=port_1_c)
-        eigen_sim.set_port_impedance(port_ind=2, impedance_R=1e-12, impedance_L=port_2_l, impedance_C=port_2_c)
+        eigen_sim.set_port_impedance(port_ind=2, impedance_R=port_2_r, impedance_L=port_2_l, impedance_C=port_2_c)
 
 
     eigen_sim.fine_mesh_around_comp_boundaries(fine_mesh_components,

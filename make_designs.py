@@ -380,7 +380,7 @@ def make_resonator_design(best_design, qubit_geo, resonator_geo, feedline_geo, s
             'otg2',
             options=dict(
                     chip='main',
-                    layer=resonator_design.components['resonator'].options["layer"], # Ensure OTG does make its own ground layer by putting it on the same layer as resonator
+                    layer=resonator_design.components['resonator'].options["layer"], # Ensure OTG doesnt make its own ground layer by putting it on the same layer as resonator
                     pos_x=f'{pin_coords[0]}mm',
                     pos_y=f'{pin_coords[1]}mm',
                     orientation=270,
