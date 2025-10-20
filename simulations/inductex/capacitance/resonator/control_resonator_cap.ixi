@@ -1,0 +1,12 @@
+$PARAMSTRING
+    -l process_resonator_cap.ldf
+    -qt 
+    -zoff
+$END
+
+$STRUCT
+    Name cap
+    $GDS
+        name resonator_cap.gds
+    $END
+$END

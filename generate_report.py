@@ -165,7 +165,7 @@ def generate_quantum_report(Lj,
     palace_Ccross_cross              = palace_results["capacitance"]["transmon"]["C2-C2"] * 1e15  # Cs
     palace_Ccross_ground             = abs(palace_results["capacitance"]["transmon"]["C1-C2"]) * 1e15
     palace_Cground_ground            = palace_results["capacitance"]["transmon"]["C1-C1"] * 1e15
-    palace_Lr                        = compute_other_values["lr_palace"]
+    palace_Lr                        = compute_other_values["lr_palace"]*1e9
     palace_Cr                        = palace_results["capacitance"]["resonator"]["C2-C2"] * 1e15
     palace_Cfeedline                 = palace_results["capacitance"]["feedline"]["C2-C2"] * 1e15
 
@@ -226,9 +226,9 @@ def generate_quantum_report(Lj,
     
     # PALACE
     palace_eigen_Fq                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_1"]
-    palace_eigen_Fc                  = palace_results["eigenmode"]["resonator"]["eigen_mode_frequencies"]["mode_1"]
+    palace_eigen_Fc                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_2"]
     palace_eigen_Pq                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_1"])
-    palace_eigen_Pc                  = abs(palace_results["eigenmode"]["resonator"]["eigen_mode_epr"]["mode_1"])
+    palace_eigen_Pc                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_2"])
     
     # Eigenmode percentage differences
     # InductEx vs HFSS

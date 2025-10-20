@@ -1,0 +1,47 @@
+* -------------------------------------------
+* PARAMETERS
+* -------------------------------------------
+$Parameters
+    Units 					= 1e-6
+	SegmentSize 			= 20
+	GPOverhang 				= 5.0
+	AbsMin 					= 0.025
+	ProcessHasGroundPlane 	= False
+	TextLayer 				= 100
+	TermLayer 				= 110
+	TerminalInRange 		= 0.2
+	UnitL 					= 1
+	HFilaments 				= 3
+	PolyDecimation 			= True 
+	DecimationDistance 		= 1
+    Lambda0					= 0.016
+	LambdaFit				= 4
+	Temperature		 		= 0.01
+	TC						= 1.2
+    EpsilonRAbove		    = 1.0
+    EpsilonRBelow	        = 11.45
+$End
+* -------------------------------------------
+* LAYERS
+* -------------------------------------------
+
+* ------------Silicon Base Layer-------------
+$Layer
+    Number 					= 90
+	Name 					= sil
+	Thickness 				= 750
+	EpsilonR 				= 11.45
+	MuR 					= 1
+	Order 					= 0
+	Mask 					= -1
+	Filmtype 				= I
+$End
+* -----------Main Metal Layer----------------
+$Layer
+    Number 					= 0
+	Name 					= main
+	Thickness 				= 0.07
+	Order 					= 1
+	Mask 					= 1
+	Filmtype 				= S
+$End

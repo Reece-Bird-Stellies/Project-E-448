@@ -1,0 +1,20 @@
+{
+  "capacitance": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": 36.665435505,
+    "transmon_no_jj": 17.519433896,
+    "resonator": 45.012084859,
+    "feedline": 21.6542773
+  },
+  "eigenmode": {
+    "full": 440.989734665,
+    "full_no_jj": 193.523297339,
+    "junction": null,
+    "transmon": null,
+    "transmon_no_jj": null,
+    "resonator": 46.867050943,
+    "feedline": null
+  }
+}

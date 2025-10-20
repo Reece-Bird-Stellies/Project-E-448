@@ -1,0 +1,47 @@
+{
+  "capacitance": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": 12.429,
+    "transmon_no_jj": 10.21,
+    "resonator": 34.906,
+    "feedline": 105.33
+  },
+  "inductance": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": null,
+    "transmon_no_jj": null,
+    "resonator": 255.13,
+    "feedline": null
+  },
+  "sparams": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": 112.51,
+    "transmon_no_jj": 113.68,
+    "resonator": 346.18,
+    "feedline": null
+  },
+  "electric_field": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": null,
+    "transmon_no_jj": null,
+    "resonator": null,
+    "feedline": null
+  },
+  "magnetic_field": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": null,
+    "transmon_no_jj": null,
+    "resonator": null,
+    "feedline": null
+  }
+}

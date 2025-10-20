@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation Results and Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #0d1117;
+            color: #c9d1d9;
+        }
+        .container {
+            background: #161b22;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border: 1px solid #30363d;
+        }
+        h1 {
+            color: #58a6ff;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        h2 {
+            color: #58a6ff;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+        .metadata {
+            background: #0d1117;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+        .metadata p {
+            margin: 8px 0;
+            font-size: 1.1em;
+            color: #8b949e;
+        }
+        .metadata strong {
+            color: #c9d1d9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #0d1117;
+            border: 1px solid #30363d;
+        }
+        th {
+            background: #21262d;
+            color: #58a6ff;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+            border-bottom: 1px solid #30363d;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+        }
+        tr:hover {
+            background-color: #161b22;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .reference {
+            background-color: #0d1117;
+            font-weight: 500;
+        }
+        .diff {
+            color: #58a6ff;
+            font-weight: 600;
+        }
+        .description {
+            background: #0d1117;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            line-height: 1.8;
+            color: #8b949e;
+            border: 1px solid #30363d;
+        }
+        .description p {
+            margin: 10px 0;
+        }
+        .formula {
+            background: #0d1117;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.2em;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+        .matrix {
+            background: #0d1117;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #30363d;
+        }
+        .matrix h3 {
+            color: #58a6ff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .matrix-content {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            line-height: 2;
+            background: #161b22;
+            padding: 25px;
+            border-radius: 6px;
+            overflow-x: auto;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+        }
+        .code-block {
+            background: #161b22;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            margin: 10px 0;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulation Results and Analysis</h1>
+        
+        <div class="metadata">
+            <p><strong>Design Created by:</strong> Andre Kuo from USC</p>
+            <p><strong>SQUaDDS Design Number:</strong> 1900</p>
+            <p><strong>Design Type:</strong> Qubit-Cavity System</p>
+            <p><strong>Resonator Type:</strong> quarter</p>
+        </div>
+
+        <h2>Electrostatics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th class="reference">HFSS (Reference)</th>
+                    <th>InductEx</th>
+                    <th>Δ%</th>
+                    <th>PALACE</th>
+                    <th>Δ%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>L<sub>j</sub> (nH)</strong></td>
+                    <td class="reference">15.9040</td>
+                    <td>15.9040</td>
+                    <td class="diff">0.00%</td>
+                    <td>15.9040</td>
+                    <td class="diff">0.00%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>j</sub> (fF)</strong></td>
+                    <td class="reference">1.2622e-29*</td>
+                    <td>0.0000</td>
+                    <td class="diff">-100.00%</td>
+                    <td>0.0000</td>
+                    <td class="diff">-100.00%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>claw-claw</sub> (fF)</strong></td>
+                    <td class="reference">102.5036</td>
+                    <td>96.3147</td>
+                    <td class="diff">-6.04%</td>
+                    <td>131.1508</td>
+                    <td class="diff">+27.95%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>claw-ground</sub> (fF)</strong></td>
+                    <td class="reference">94.6678</td>
+                    <td>86.8479</td>
+                    <td class="diff">-8.26%</td>
+                    <td>119.1369</td>
+                    <td class="diff">+25.85%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>cross-claw</sub> (C<sub>g</sub>) (fF)</strong></td>
+                    <td class="reference">7.2447</td>
+                    <td>6.6213</td>
+                    <td class="diff">-8.61%</td>
+                    <td>6.8556</td>
+                    <td class="diff">-5.37%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>cross-cross</sub> (C<sub>s</sub>) (fF)</strong></td>
+                    <td class="reference">100.0766</td>
+                    <td>105.5738</td>
+                    <td class="diff">+5.49%</td>
+                    <td>121.0908</td>
+                    <td class="diff">+21.00%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>cross-ground</sub> (fF)</strong></td>
+                    <td class="reference">100.0766</td>
+                    <td>92.1862</td>
+                    <td class="diff">-7.88%</td>
+                    <td>95.2907</td>
+                    <td class="diff">-4.78%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>ground-ground</sub> (fF)</strong></td>
+                    <td class="reference">246.9427</td>
+                    <td>364.5664</td>
+                    <td class="diff">+47.63%</td>
+                    <td>484.8362</td>
+                    <td class="diff">+96.34%</td>
+                </tr>
+                <tr>
+                    <td><strong>L<sub>r</sub> (nH)</strong></td>
+                    <td class="reference">1.2880 (InductEx)</td>
+                    <td>1.2880</td>
+                    <td class="diff">0.00%</td>
+                    <td>0.5218***</td>
+                    <td class="diff">-59.49%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>r</sub> (fF)</strong></td>
+                    <td class="reference">378.7724**</td>
+                    <td>526.4663</td>
+                    <td class="diff">+38.99%</td>
+                    <td>715.0283</td>
+                    <td class="diff">+88.78%</td>
+                </tr>
+                <tr>
+                    <td><strong>C<sub>feedline</sub> (fF)</strong></td>
+                    <td class="reference">0.0000</td>
+                    <td>753.8815</td>
+                    <td class="diff">N/A</td>
+                    <td>1019.3584</td>
+                    <td class="diff">N/A</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="description">
+            <p><strong>*</strong> Extracted using E<sub>c</sub>, C<sub>g</sub> and C<sub>s</sub>:</p>
+            <div class="formula">
+                \( C_j = \frac{e^2}{2E_c} - C_g - C_s \approx 0 \)
+            </div>
+            
+            <p><strong>**</strong> Extracted using InductEx resonator inductance value as reference and HFSS reference cavity frequency:</p>
+            <div class="formula">
+                \( C_r = \frac{1}{(2\pi F_c)^2 \cdot L_r} \)
+            </div>
+            
+            <p><strong>***</strong> Extracted using PALACE resonator capacitance and PALACE cavity frequency:</p>
+            <div class="formula">
+                \( L_r = \frac{1}{(2\pi F_c)^2 \cdot C_r} \)
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Mean % difference for C<sub>g</sub> and C<sub>s</sub> for InductEx:</strong> 7.05%</p>
+            <p><strong>Mean % difference for C<sub>g</sub> and C<sub>s</sub> for PALACE:</strong> 13.18%</p>
+        </div>
+
+        <h2>Eigenmode Analysis</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mode Parameter</th>
+                    <th>HFSS</th>
+                    <th>InductEx</th>
+                    <th>Δ%</th>
+                    <th>PALACE</th>
+                    <th>Δ%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Qubit Frequency (F<sub>q</sub>) (GHz)</strong></td>
+                    <td>3.6621</td>
+                    <td>0.0000</td>
+                    <td class="diff">-100.00%</td>
+                    <td>3.4273</td>
+                    <td class="diff">-6.41%</td>
+                </tr>
+                <tr>
+                    <td><strong>Cavity Frequency (F<sub>c</sub>) (GHz)</strong></td>
+                    <td>7.2056</td>
+                    <td>0.0000</td>
+                    <td class="diff">-100.00%</td>
+                    <td>5.9417</td>
+                    <td class="diff">-17.54%</td>
+                </tr>
+                <tr>
+                    <td><strong>Qubit Participation Ratio (P<sub>q</sub>) (Unitless)</strong></td>
+                    <td>0.000000</td>
+                    <td>0.000000</td>
+                    <td class="diff">N/A</td>
+                    <td>0.992336</td>
+                    <td class="diff">N/A</td>
+                </tr>
+                <tr>
+                    <td><strong>Cavity Participation Ratio (P<sub>c</sub>) (Unitless)</strong></td>
+                    <td>0.000000</td>
+                    <td>0.000000</td>
+                    <td class="diff">N/A</td>
+                    <td>0.000000</td>
+                    <td class="diff">N/A</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Local Oscillator Model (LOM): Hamiltonian Extraction and Analysis</h2>
+        
+        <div class="matrix">
+            <h3>H<sub>HFSS</sub> [10×10]</h3>
+            <div class="matrix-content">
+\[
+\begin{bmatrix}
+-5.56×10^{-24}+0j & -1.02×10^{-41}+0j & 0 & \cdots \\
+-1.02×10^{-41}+0j & -7.90×10^{-25}+0j & -1.45×10^{-41}+0j & \cdots \\
+0 & -1.45×10^{-41}+0j & 3.98×10^{-24}+0j & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+\]
+            </div>
+        </div>
+
+        <div class="matrix">
+            <h3>H<sub>InductEx</sub> [10×10]</h3>
+            <div class="matrix-content">
+\[
+\begin{bmatrix}
+-5.51×10^{-24}+0j & 4.27×10^{-42}+0j & 0 & \cdots \\
+4.27×10^{-42}+0j & -1.46×10^{-24}+0j & 6.04×10^{-42}+0j & \cdots \\
+0 & 6.04×10^{-42}+0j & 2.59×10^{-24}+0j & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+\]
+            </div>
+        </div>
+
+        <div class="matrix">
+            <h3>H<sub>PALACE</sub> [10×10]</h3>
+            <div class="matrix-content">
+\[
+\begin{bmatrix}
+-5.60×10^{-24}+0j & 7.37×10^{-42}+0j & 0 & \cdots \\
+7.37×10^{-42}+0j & -1.42×10^{-25}+0j & 1.04×10^{-41}+0j & \cdots \\
+0 & 1.04×10^{-41}+0j & 5.32×10^{-24}+0j & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+\]
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Design</th>
+                    <th>Δ%</th>
+                    <th>HFSS Reference</th>
+                    <th>Δ%</th>
+                    <th>HFSS<sub>LOM</sub></th>
+                    <th>Δ%</th>
+                    <th>InductEx<sub>LOM</sub></th>
+                    <th>Δ%</th>
+                    <th>PALACE<sub>LOM</sub></th>
+                    <th>Δ%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Qubit Frequency (F<sub>q</sub>) (GHz)</strong></td>
+                    <td>3.7000</td>
+                    <td class="diff">-</td>
+                    <td>3.6621</td>
+                    <td class="diff">-1.02%</td>
+                    <td>3.6590</td>
+                    <td class="diff">-1.11%<br>-0.09%</td>
+                    <td>3.8026</td>
+                    <td class="diff">+2.77%<br>+3.83%</td>
+                    <td>3.5543</td>
+                    <td class="diff">-3.94%<br>-2.94%</td>
+                </tr>
+                <tr>
+                    <td><strong>Cavity Frequency (F<sub>c</sub>) (GHz)</strong></td>
+                    <td>6.9800</td>
+                    <td class="diff">-</td>
+                    <td>7.2056</td>
+                    <td class="diff">+3.23%</td>
+                    <td>7.1135</td>
+                    <td class="diff">+1.91%<br>-1.28%</td>
+                    <td>6.1135</td>
+                    <td class="diff">-12.41%<br>-15.16%</td>
+                    <td>6.9171</td>
+                    <td class="diff">-0.90%<br>-4.00%</td>
+                </tr>
+                <tr>
+                    <td><strong>Anharmonicity (α) (MHz)</strong></td>
+                    <td>-210.00</td>
+                    <td class="diff">-</td>
+                    <td>-205.11</td>
+                    <td class="diff">-2.33%</td>
+                    <td>-204.52</td>
+                    <td class="diff">-2.61%<br>-0.29%</td>
+                    <td>-1491.59</td>
+                    <td class="diff">+610.28%<br>+627.22%</td>
+                    <td>-191.55</td>
+                    <td class="diff">-8.78%<br>-6.61%</td>
+                </tr>
+                <tr>
+                    <td><strong>Kappa (κ) (kHz)</strong></td>
+                    <td>405.00</td>
+                    <td class="diff">-</td>
+                    <td>405.81</td>
+                    <td class="diff">+0.20%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                </tr>
+                <tr>
+                    <td><strong>Coupling Strength (g) (MHz)</strong></td>
+                    <td>100.00</td>
+                    <td class="diff">-</td>
+                    <td>98.90</td>
+                    <td class="diff">-1.10%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Energy Participation Ratio (EPR): Hamiltonian Extraction and Analysis</h2>
+        
+        <div class="description">
+            <p><em>Note: Design does not supply participation ratios</em></p>
+        </div>
+
+        <div class="matrix">
+            <h3>H<sub>InductEx</sub> [10×10]</h3>
+            <div class="matrix-content">
+\[
+\begin{bmatrix}
+N/A
+\end{bmatrix}
+\]
+            </div>
+        </div>
+
+        <div class="matrix">
+            <h3>H<sub>PALACE</sub> [10×10]</h3>
+            <div class="matrix-content">
+\[
+\begin{bmatrix}
+-6.83×10^{-24}+0j & 0 & -6.32×10^{-26}+0j & \cdots \\
+0 & -4.65×10^{-24}+0j & 0 & \cdots \\
+-6.32×10^{-26}+0j & 0 & -2.56×10^{-24}+0j & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+\]
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Design</th>
+                    <th>Δ%</th>
+                    <th>HFSS Reference</th>
+                    <th>Δ%</th>
+                    <th>InductEx<sub>EPR</sub></th>
+                    <th>Δ%</th>
+                    <th>PALACE<sub>EPR</sub></th>
+                    <th>Δ%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Qubit Frequency (F<sub>q</sub>) (GHz)</strong></td>
+                    <td>3.7000</td>
+                    <td class="diff">-</td>
+                    <td>3.6621</td>
+                    <td class="diff">-1.02%</td>
+                    <td>0.0000</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>3.2804</td>
+                    <td class="diff">-11.34%<br>-10.42%</td>
+                </tr>
+                <tr>
+                    <td><strong>Cavity Frequency (F<sub>c</sub>) (GHz)</strong></td>
+                    <td>6.9800</td>
+                    <td class="diff">-</td>
+                    <td>7.2056</td>
+                    <td class="diff">+3.23%</td>
+                    <td>0.0000</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>6.4051</td>
+                    <td class="diff">-8.24%<br>-11.11%</td>
+                </tr>
+                <tr>
+                    <td><strong>Anharmonicity (α) (MHz)</strong></td>
+                    <td>-210.00</td>
+                    <td class="diff">-</td>
+                    <td>-205.11</td>
+                    <td class="diff">-2.33%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>-155.78</td>
+                    <td class="diff">-25.82%<br>-24.05%</td>
+                </tr>
+                <tr>
+                    <td><strong>Kappa (κ) (kHz)</strong></td>
+                    <td>405.00</td>
+                    <td class="diff">-</td>
+                    <td>405.81</td>
+                    <td class="diff">+0.20%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                </tr>
+                <tr>
+                    <td><strong>Coupling Strength (g) (MHz)</strong></td>
+                    <td>100.00</td>
+                    <td class="diff">-</td>
+                    <td>98.90</td>
+                    <td class="diff">-1.10%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                    <td>0.00</td>
+                    <td class="diff">-100.00%<br>-100.00%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

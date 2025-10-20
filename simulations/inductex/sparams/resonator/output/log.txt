@@ -1,0 +1,67 @@
+Mesh quality
+Chip 0
+  Base polygon map complete : True
+  Triangle map rise/fall fit : True
+Times:
+  Polygon edge slicing : 0.000
+  Polygon map building : 0.000
+--------------------------------------------------------------------------------
+Chip 0
+  Base map polygons: 19
+  Base map mesh triangles: 7892
+       Poly#  AllEdgsLinked     AllTrisCCW    AllTrisLinked
+  -------------------------
+         Poly#  Constraints       Points    Triangles      BadTris   Iterations  TimeTriangulate       TimeRefine        TimeClean
+             0            9          382          380            0            0             0.00             0.01             0.00
+             1          128         1300         2196            0         2896             0.01             0.04             0.00
+             2            4          146          144            0            0             0.00             0.00             0.00
+             3            9          408          406            0            0             0.00             0.01             0.01
+             4           88         1031         1725            0         2149             0.01             0.03             0.00
+             5          284          582          580            0            0             0.07             0.02             0.00
+             6            4            4            2            0            0             0.00             0.00             0.00
+             7          304          568          566            0            0             0.08             0.02             0.00
+             8           98          224          222            0            0             0.01             0.00             0.00
+             9          203          461          522            0          127             0.04             0.01             0.00
+            10            4            4            2            0            0             0.00             0.00             0.00
+            11           23           39           37            0            0             0.00             0.00             0.00
+            12          137          231          229            0            0             0.01             0.00             0.00
+            13            4            4            2            0            0             0.00             0.00             0.00
+            14          110          183          181            0            0             0.01             0.00             0.00
+            15            5            5            3            0            0             0.00             0.00             0.00
+            16          196          388          386            0            0             0.03             0.01             0.00
+            17           84          193          191            0            0             0.01             0.00             0.00
+            18            4          120          118            0            0             0.00             0.00             0.00
+  Time to build edge slopes: 3.367
+--------------------------------------------------------------------------------
+ ERRORS
+--------------------------------------------------------------------------------
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0000 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
+Minimum triangle angle 0.0001 discarded.
