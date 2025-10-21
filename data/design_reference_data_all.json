@@ -1,0 +1,306 @@
+{
+  "index_qc": 356,
+  "renderer_options_qubit": {
+    "Cj": 0,
+    "Lj": "10nH",
+    "_Rj": 0,
+    "design_name": null,
+    "max_mesh_length_jj": "7um",
+    "max_mesh_length_port": "7um",
+    "plot_ansys_fields_options": {
+      "AdjacentSidePlot": "False",
+      "FullModelPlot": "False",
+      "IntrinsicVar": "Phase='0deg'",
+      "PlotFolder": "E Field",
+      "PlotGeomInfo_0": "1",
+      "PlotGeomInfo_1": "Surface",
+      "PlotGeomInfo_2": "FacesList",
+      "PlotGeomInfo_3": "1",
+      "QuantityName": "Mag_E",
+      "StreamlinePlot": "False",
+      "UserSpecifyFolder": "0",
+      "UserSpecifyName": "0",
+      "name": "NAME:Mag_E1"
+    },
+    "project_name": null,
+    "project_path": null,
+    "wb_offset": "0um",
+    "wb_size": 5,
+    "wb_threshold": "400um",
+    "x_buffer_width_mm": 0.2,
+    "y_buffer_width_mm": 0.2
+  },
+  "setup_qubit": {
+    "auto_increase_solution_order": true,
+    "enabled": true,
+    "freq_ghz": 5.0,
+    "max_passes": 30,
+    "min_converged_passes": 1,
+    "min_passes": 2,
+    "name": "sweep_setup",
+    "percent_error": 0.1,
+    "percent_refinement": 30,
+    "reuse_selected_design": false,
+    "reuse_setup": false,
+    "run": {
+      "box_plus_buffer": true,
+      "components": [
+        "Q"
+      ],
+      "name": "sweep_v2.0",
+      "open_terminations": [
+        [
+          "Q",
+          "readout"
+        ]
+      ]
+    },
+    "save_fields": false,
+    "solution_order": "High",
+    "solver_type": "Iterative"
+  },
+  "simulator_qubit": "Ansys HFSS",
+  "claw_to_claw": 147.10356,
+  "claw_to_ground": 135.50188,
+  "cross_to_claw": 10.97035,
+  "cross_to_cross": 173.48223,
+  "cross_to_ground": 173.48223,
+  "ground_to_ground": 373.86346,
+  "units_qubit": "fF",
+  "PI_qubit": "Eli Levenson-Falk, PhD",
+  "date_created_qubit": "2023-09-20-142548",
+  "group_qubit": "LFL",
+  "institution_qubit": "USC",
+  "uploader_qubit": "Andre Kuo",
+  "design_options_qubit": {
+    "aedt_hfss_capacitance": 0,
+    "aedt_hfss_inductance": 9.686e-09,
+    "aedt_q3d_capacitance": 0,
+    "aedt_q3d_inductance": 1e-08,
+    "chip": "main",
+    "connection_pads": {
+      "readout": {
+        "claw_cpw_length": "40um",
+        "claw_cpw_width": "10um",
+        "claw_gap": "5.1um",
+        "claw_length": "310um",
+        "claw_width": "15um",
+        "connector_location": "90",
+        "connector_type": "0",
+        "ground_spacing": "4.1um"
+      }
+    },
+    "cross_gap": "30um",
+    "cross_length": "350um",
+    "cross_width": "30um",
+    "gds_cell_name": "my_other_junction",
+    "hfss_capacitance": 0,
+    "hfss_inductance": 9.686e-09,
+    "hfss_mesh_kw_jj": 7e-06,
+    "hfss_resistance": 0,
+    "layer": "1",
+    "orientation": "-90",
+    "pos_x": "-1500um",
+    "pos_y": "1200um",
+    "q3d_capacitance": 0,
+    "q3d_inductance": "10nH",
+    "q3d_mesh_kw_jj": 7e-06,
+    "q3d_resistance": 0
+  },
+  "design_tool_qubit": "qiskit-metal",
+  "claw_length": "310um",
+  "renderer_options_cavity_claw": null,
+  "setup_cavity_claw": {
+    "basis_order": 1,
+    "max_delta_f": 0.05,
+    "max_passes": 50,
+    "min_converged": 3,
+    "min_converged_passes": null,
+    "min_freq_ghz": 1,
+    "min_passes": 1,
+    "n_modes": 1,
+    "name": "Setup",
+    "pct_refinement": 30,
+    "reuse_selected_design": true,
+    "reuse_setup": true,
+    "vars": {
+      "Cj": "0fF",
+      "Lj": "0nH"
+    }
+  },
+  "simulator_cavity_claw": "Ansys HFSS",
+  "cavity_frequency_GHz": 5.12264233948,
+  "kappa_kHz": 220.101660904,
+  "units_cavity_claw": "Hz",
+  "PI_cavity_claw": "Eli Levenson-Falk, PhD",
+  "date_created_cavity_claw": "2024-07-24-230000",
+  "group_cavity_claw": "LFL",
+  "institution_cavity_claw": "USC",
+  "misc": null,
+  "uploader_cavity_claw": "Ethan Zheng",
+  "coupler_type": "CLT",
+  "design_options_cavity_claw": {
+    "claw_opts": {
+      "connection_pads": {
+        "readout": {
+          "claw_cpw_length": "0um",
+          "claw_cpw_width": "11.7um",
+          "claw_gap": "5.1um",
+          "claw_length": "310um",
+          "claw_width": "15um",
+          "connector_location": "90",
+          "connector_type": "0",
+          "ground_spacing": "10um"
+        }
+      },
+      "cross_gap": "0um",
+      "cross_length": "0um",
+      "cross_width": "0um",
+      "orientation": "-90",
+      "pos_x": "-1500um"
+    },
+    "cplr_opts": {
+      "cap_distance": null,
+      "cap_gap": null,
+      "cap_gap_ground": null,
+      "cap_width": null,
+      "coupling_length": "400um",
+      "coupling_space": "7.9um",
+      "down_length": "50um",
+      "finger_count": null,
+      "finger_length": null,
+      "open_termination": false,
+      "orientation": "-90",
+      "prime_gap": "5.1um",
+      "prime_width": "11.7um",
+      "second_gap": "5.1um",
+      "second_width": "11.7um"
+    },
+    "cpw_opts": {
+      "fillet": "49.9um",
+      "lead": {
+        "end_straight": "100um",
+        "start_jogged_extension": {
+          "0": [
+            "R90",
+            "266.6666666666667um"
+          ]
+        },
+        "start_straight": "100um"
+      },
+      "meander": {
+        "asymmetry": "133.33333333333334um",
+        "spacing": "100um"
+      },
+      "pin_inputs": {
+        "end_pin": {
+          "component": "claw",
+          "pin": "readout"
+        },
+        "start_pin": {
+          "component": "cplr",
+          "pin": "second_end"
+        }
+      },
+      "total_length": "4700um",
+      "trace_gap": "5.1um",
+      "trace_width": "11.7um"
+    }
+  },
+  "design_tool_cavity_claw": "qiskit-metal",
+  "resonator_type": "quarter",
+  "design_options": {
+    "cavity_claw_options": {
+      "coupler_type": "CLT",
+      "coupler_options": {
+        "cap_distance": null,
+        "cap_gap": null,
+        "cap_gap_ground": null,
+        "cap_width": null,
+        "coupling_length": "400um",
+        "coupling_space": "7.9um",
+        "down_length": "50um",
+        "finger_count": null,
+        "finger_length": null,
+        "open_termination": false,
+        "orientation": "-90",
+        "prime_gap": "5.1um",
+        "prime_width": "11.7um",
+        "second_gap": "5.1um",
+        "second_width": "11.7um"
+      },
+      "cpw_opts": {
+        "left_options": {
+          "fillet": "49.9um",
+          "lead": {
+            "end_straight": "100um",
+            "start_jogged_extension": {
+              "0": [
+                "R90",
+                "266.6666666666667um"
+              ]
+            },
+            "start_straight": "100um"
+          },
+          "meander": {
+            "asymmetry": "133.33333333333334um",
+            "spacing": "100um"
+          },
+          "pin_inputs": {
+            "end_pin": {
+              "component": "claw",
+              "pin": "readout"
+            },
+            "start_pin": {
+              "component": "cplr",
+              "pin": "second_end"
+            }
+          },
+          "total_length": "4700um",
+          "trace_gap": "5.1um",
+          "trace_width": "11.7um"
+        }
+      }
+    },
+    "qubit_options": {
+      "aedt_hfss_capacitance": 0,
+      "aedt_hfss_inductance": 9.686e-09,
+      "aedt_q3d_capacitance": 0,
+      "aedt_q3d_inductance": 1e-08,
+      "chip": "main",
+      "connection_pads": {
+        "readout": {
+          "claw_cpw_length": "0um",
+          "claw_cpw_width": "0um",
+          "claw_gap": "5.1um",
+          "claw_length": "310um",
+          "claw_width": "15um",
+          "connector_location": "90",
+          "connector_type": "0",
+          "ground_spacing": "4.1um"
+        }
+      },
+      "cross_gap": "30um",
+      "cross_length": "350um",
+      "cross_width": "30um",
+      "gds_cell_name": "my_other_junction",
+      "hfss_capacitance": 0,
+      "hfss_inductance": 9.686e-09,
+      "hfss_mesh_kw_jj": 7e-06,
+      "hfss_resistance": 0,
+      "layer": "1",
+      "orientation": "-90",
+      "pos_x": "-1500um",
+      "pos_y": "1200um",
+      "q3d_capacitance": 0,
+      "q3d_inductance": "10nH",
+      "q3d_mesh_kw_jj": 7e-06,
+      "q3d_resistance": 0
+    }
+  },
+  "EC": 0.10501468358240976,
+  "EJ": 4.430645340437611,
+  "qubit_frequency_GHz": 1.8175631612019707,
+  "anharmonicity_MHz": -122.80878858765121,
+  "g_MHz": 57.47432796256936
+}

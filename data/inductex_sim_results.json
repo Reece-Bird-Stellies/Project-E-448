@@ -1,0 +1,55 @@
+{
+  "capacitance": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": {
+      "CGROUND-CGROUND": 5.826914198e-13,
+      "CGROUND-CCROSS": -1.623517403e-13,
+      "CGROUND-CCLAW": -1.252582941e-13,
+      "CCROSS-CCROSS": 1.798970169e-13,
+      "CCROSS-CCLAW": -1.020453624e-14,
+      "CCLAW-CCLAW": 1.363455071e-13
+    },
+    "transmon_no_jj": {
+      "CGROUND-CGROUND": 5.718171278e-13,
+      "CGROUND-CCROSS": -1.594953327e-13,
+      "CGROUND-CCLAW": -1.229817822e-13,
+      "CCROSS-CCROSS": 1.791692699e-13,
+      "CCROSS-CCLAW": -1.019931302e-14,
+      "CCLAW-CCLAW": 1.363681181e-13
+    },
+    "resonator": {
+      "CGROUND-CGROUND": 7.5966202e-13,
+      "CGROUND-CRESONATOR": -6.771532071e-13,
+      "CRESONATOR-CRESONATOR": 7.597186931e-13
+    },
+    "feedline": {
+      "CGROUND-CGROUND": 1.32174605e-12,
+      "CGROUND-CFEEDLINE": -7.370731694e-13,
+      "CFEEDLINE-CFEEDLINE": 7.538815173e-13
+    }
+  },
+  "inductance": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": null,
+    "transmon_no_jj": null,
+    "resonator": {
+      "L1": 1.873603821e-09
+    },
+    "feedline": null
+  },
+  "sparams": {
+    "full": null,
+    "full_no_jj": null,
+    "junction": null,
+    "transmon": null,
+    "transmon_no_jj": null,
+    "resonator": null,
+    "feedline": null
+  },
+  "electric_field": {},
+  "magnetic_field": {}
+}

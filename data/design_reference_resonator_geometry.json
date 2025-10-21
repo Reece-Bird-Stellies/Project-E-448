@@ -1,0 +1,16 @@
+{
+  "fillet": "49.9um",
+  "total_length": "4700um",
+  "trace_gap": "5.1um",
+  "trace_width": "11.7um",
+  "end_straight": "100um",
+  "start_jogged_extension": {
+    "0": [
+      "R90",
+      "266.6666666666667um"
+    ]
+  },
+  "start_straight": "100um",
+  "asymmetry": "133.33333333333334um",
+  "spacing": "100um"
+}

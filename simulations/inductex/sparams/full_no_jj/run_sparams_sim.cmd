@@ -1,0 +1,1 @@
+inductex8 control_full_no_jj_sparams.ixi

@@ -1,0 +1,8 @@
+{
+  "qubit_frequency_ghz": 1.8175631612019707,
+  "cavity_frequency_ghz": 5.12264233948,
+  "anharmonicity_mhz": -122.80878858765121,
+  "coupling_g_mhz": 57.47432796256936,
+  "kappa_khz": 220.101660904,
+  "resonator_type": "quarter"
+}
