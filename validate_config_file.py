@@ -1,5 +1,4 @@
 import json, os
-import json, os
 
 # ---------- Default configuration ----------
 DEFAULTS = {
@@ -69,7 +68,7 @@ DEFAULTS = {
                 "number_of_frequencies": 2,
                 "solutions_to_save": 0,
                 "assumed_junction_capacitance": 0,
-                "port_1_resistance": 50,
+                "port_1_resistance": 45,
                 "port_1_inductance": 0,
                 "port_1_capacitance": 0,
                 "port_2_resistance": 1e-12,

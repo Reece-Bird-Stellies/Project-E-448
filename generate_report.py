@@ -113,7 +113,7 @@ def generate_quantum_report(Lj,
 
 
 
-
+    mode_alt_cavity = "mode_2"
 
     # ============================================================================
     # METADATA
@@ -144,12 +144,12 @@ def generate_quantum_report(Lj,
     # ============================================================================
     inductex_Lj                      = Lj * 1e9
     inductex_Cj                      = 0 * 1e15
-    inductex_Cclaw_claw              = results_inductex["capacitance"]["transmon"]["CCLAW-CCLAW"] * 1e15
-    inductex_Cclaw_ground            = abs(results_inductex["capacitance"]["transmon"]["CGROUND-CCLAW"]) * 1e15
-    inductex_Ccross_claw             = abs(results_inductex["capacitance"]["transmon"]["CCROSS-CCLAW"]) * 1e15  # Cg
-    inductex_Ccross_cross            = results_inductex["capacitance"]["transmon"]["CCROSS-CCROSS"] * 1e15  # Cs
-    inductex_Ccross_ground           = abs(results_inductex["capacitance"]["transmon"]["CGROUND-CCROSS"]) * 1e15
-    inductex_Cground_ground          = results_inductex["capacitance"]["transmon"]["CGROUND-CGROUND"] * 1e15
+    inductex_Cclaw_claw              = results_inductex["capacitance"]["transmon_no_jj"]["CCLAW-CCLAW"] * 1e15
+    inductex_Cclaw_ground            = abs(results_inductex["capacitance"]["transmon_no_jj"]["CGROUND-CCLAW"]) * 1e15
+    inductex_Ccross_claw             = abs(results_inductex["capacitance"]["transmon_no_jj"]["CCROSS-CCLAW"]) * 1e15  # Cg
+    inductex_Ccross_cross            = results_inductex["capacitance"]["transmon_no_jj"]["CCROSS-CCROSS"] * 1e15  # Cs
+    inductex_Ccross_ground           = abs(results_inductex["capacitance"]["transmon_no_jj"]["CGROUND-CCROSS"]) * 1e15
+    inductex_Cground_ground          = results_inductex["capacitance"]["transmon_no_jj"]["CGROUND-CGROUND"] * 1e15
     inductex_Lr                      = results_inductex["inductance"]["resonator"]["L1"] * 1e9
     inductex_Cr                      = results_inductex["capacitance"]["resonator"]["CRESONATOR-CRESONATOR"] * 1e15
     inductex_Cfeedline               = results_inductex["capacitance"]["feedline"]["CFEEDLINE-CFEEDLINE"] * 1e15
@@ -159,12 +159,12 @@ def generate_quantum_report(Lj,
     # ============================================================================
     palace_Lj                        = Lj* 1e9
     palace_Cj                        = 0 * 1e15
-    palace_Cclaw_claw                = palace_results["capacitance"]["transmon"]["C3-C3"] * 1e15
-    palace_Cclaw_ground              = abs(palace_results["capacitance"]["transmon"]["C1-C3"]) * 1e15
-    palace_Ccross_claw               = abs(palace_results["capacitance"]["transmon"]["C2-C3"]) * 1e15  # Cg
-    palace_Ccross_cross              = palace_results["capacitance"]["transmon"]["C2-C2"] * 1e15  # Cs
-    palace_Ccross_ground             = abs(palace_results["capacitance"]["transmon"]["C1-C2"]) * 1e15
-    palace_Cground_ground            = palace_results["capacitance"]["transmon"]["C1-C1"] * 1e15
+    palace_Cclaw_claw                = palace_results["capacitance"]["transmon_no_jj"]["C3-C3"] * 1e15
+    palace_Cclaw_ground              = abs(palace_results["capacitance"]["transmon_no_jj"]["C1-C3"]) * 1e15
+    palace_Ccross_claw               = abs(palace_results["capacitance"]["transmon_no_jj"]["C2-C3"]) * 1e15  # Cg
+    palace_Ccross_cross              = palace_results["capacitance"]["transmon_no_jj"]["C2-C2"] * 1e15  # Cs
+    palace_Ccross_ground             = abs(palace_results["capacitance"]["transmon_no_jj"]["C1-C2"]) * 1e15
+    palace_Cground_ground            = palace_results["capacitance"]["transmon_no_jj"]["C1-C1"] * 1e15
     palace_Lr                        = compute_other_values["lr_palace"]*1e9
     palace_Cr                        = palace_results["capacitance"]["resonator"]["C2-C2"] * 1e15
     palace_Cfeedline                 = palace_results["capacitance"]["feedline"]["C2-C2"] * 1e15
@@ -226,9 +226,9 @@ def generate_quantum_report(Lj,
     
     # PALACE
     palace_eigen_Fq                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_1"]
-    palace_eigen_Fc                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_3"]
+    palace_eigen_Fc                  = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"][mode_alt_cavity]
     palace_eigen_Pq                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_1"])
-    palace_eigen_Pc                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_3"])
+    palace_eigen_Pc                  = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"][mode_alt_cavity])
     
     # Eigenmode percentage differences
     # InductEx vs HFSS

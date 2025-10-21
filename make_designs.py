@@ -35,7 +35,7 @@ def _center_and_scale_chip(design, component_name='transmon', scale_factor=1.3):
     # Set chip size and center  
     design.chips.main.size.size_x = f'{chip_width}mm'  
     design.chips.main.size.size_y = f'{chip_height}mm'  
-    design.chips.main.size.size_z = '-280um'                                                                #MAYBE CHANGE THIS
+    design.chips.main.size.size_z = '-750um'                                                                #MAYBE CHANGE THIS
     design.chips.main.size.center_x = f'{comp_center_x}mm'  
     design.chips.main.size.center_y = f'{comp_center_y}mm' 
 

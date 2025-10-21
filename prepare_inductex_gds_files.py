@@ -407,7 +407,7 @@ def process_transmon_gds():
     print(f"✅  Wrote {output_file_single_layer}")
 
 def process_transmon_no_jj_gds():
-    input_file = "gds_files/processed_multi_layer/transmon_processed_multi.gds"
+    input_file = "gds_files/raw/transmon_no_jj.gds"
     output_file_multi_layer = "gds_files/processed_multi_layer/transmon_no_jj_processed_multi.gds"
     output_file_single_layer = "gds_files/processed_single_layer/transmon_no_jj_processed.gds"
 
@@ -417,9 +417,15 @@ def process_transmon_no_jj_gds():
     
     L0_0 = (0,0)
     L1_0 = (1,0)
-    L2_0 = (2,0)
+    L1_10 = (1,10)
 
-    _delete_layer(ly, L2_0)
+    _boolean_layer_operation(ly, top, L1_0, L1_0, L0_0, operation="OR")
+    _delete_layer(ly, L1_0)
+    _boolean_layer_operation(ly, top, L1_10, L1_10, L1_0, operation="OR")
+    _delete_layer(ly, L1_10)
+
+    _convert_layer_to_dtype0(ly, 0)
+    _convert_layer_to_dtype0(ly, 1)
 
     if os.path.exists(output_file_multi_layer):
         os.remove(output_file_multi_layer)
