@@ -51,16 +51,16 @@ def analyse_hamilotonian(H):
         F0 = E_matrix[0, 0] / h
         F1 = E_matrix[1, 1] / h
         F2 = E_matrix[2, 2] / h
-
+        F3 = E_matrix[3, 3] / h
         f12 = F2 - F1
         f01 = F1 - F0
         f20 = F2 - F0
-
+        f30 = F3 - F0
         qubit_frequency     = (f01) * 1e-9  # in GHz
-        cavity_frequency    = (f20) * 1e-9  # in GHz
+        cavity_frequency    = (f30) * 1e-9  # in GHz
         ana_harm            = (f12 - f01) * 1e-6  # in MHz
         
-        g = 0
+        g =  abs((H[0, 2] / h) * 1e-6)  # in MHz
         kappa = 0
         return {
             'qubit_frequency_ghz': qubit_frequency,
