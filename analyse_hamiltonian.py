@@ -18,7 +18,8 @@ def _test_and_diagonalize(H):
         print("Hamiltonian is NOT Hermitian")
     return E_matrix
 
-def analyse_hamilotonian(H):
+
+def analyse_hamilotonian(H, analyse_type="LOM"):
     """Analyse properties of Hamiltonian H."""
     # Protection: check if H is valid
     H_0 = {
@@ -48,19 +49,24 @@ def analyse_hamilotonian(H):
     try:
         E_matrix = _test_and_diagonalize(H)
 
-        F0 = E_matrix[0, 0] / h
-        F1 = E_matrix[1, 1] / h
-        F2 = E_matrix[2, 2] / h
-        F3 = E_matrix[3, 3] / h
-        f12 = F2 - F1
-        f01 = F1 - F0
-        f20 = F2 - F0
-        f30 = F3 - F0
-        qubit_frequency     = (f01) * 1e-9  # in GHz
-        cavity_frequency    = (f30) * 1e-9  # in GHz
-        ana_harm            = (f12 - f01) * 1e-6  # in MHz
+        F = []
+        for energy in np.diag(E_matrix):
+            F.append((energy / h)*1e-9)   # Convert E matrix to frequencies in GHz and store in F list
+        f12 = F[2] - F[1]
+        f13 = F[3] - F[1]
+        f01 = F[1] - F[0]
+        f20 = F[2] - F[0]
+        f30 = F[3] - F[0]
+        f40 = F[4] - F[0]
+        qubit_frequency     = f01
+        cavity_frequency    = f30
+        ana_harm            = (f13 - f01) * 1e3  # in MHz
         
-        g =  abs((H[0, 2] / h) * 1e-6)  # in MHz
+        if analyse_type == "EPR":
+            g =  abs((H[0, 2] / h) * 1e-6)  # in MHz
+        else:
+            g = abs((H[1, 22] / h) * 1e-6)
+        
         kappa = 0
         return {
             'qubit_frequency_ghz': qubit_frequency,
