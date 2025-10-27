@@ -1,0 +1,10 @@
+os
+subprocess
+json
+scipy.constants
+SQDMetal
+SQuADDS
+numpy
+math
+typing
+re 

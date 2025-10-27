@@ -90,30 +90,11 @@ DEFAULTS = {
     "miscellaneous": {
         "sims": {
             "base_chip_scaling_factor": 1.5,
-            "extra_sims": True,
-            "inductex": {
-                "cap_transmon": True,
-                "cap_transmon_no_jj": True,
-                "cap_resonator": True,
-                "cap_feedline": True,
-                "induc_resonator": True,
-                "s_parm_transmon": True,
-                "s_parm_transmon_no_jj": True,
-                "s_parm_resonator": True,
-                "efield_whole": True,
-                "hfield_whole": True
-            },
-            "palace": {
-                "cap_transmon": True,
-                "cap_transmon_no_jj": True,
-                "cap_resonator": True,
-                "cap_feedline": True,
-                "eigenmode_full": True,
-                "eigenmode_full_no_jj": True,
-                "eigenmode_resonator": True
-            }
+            "run_inductex": True,
+            "run_palace_setup": True,
+            "run_palace": True,
         }
-    }
+     } 
 }
 
 # ---------- Validation keys ----------
@@ -133,9 +114,6 @@ REQUIRED_PATHS = [
     "quantum_analysis.lom.cavity_truncation",
     "quantum_analysis.lom.charge_truncation",
     "quantum_analysis.epr.mode_truncation",
-    "miscellaneous.sims.extra_sims",
-    "miscellaneous.sims.inductex.cap_transmon",
-    "miscellaneous.sims.palace.eigenmode_full",
 ]
 
 # ---------- Helper functions ----------

@@ -139,7 +139,7 @@ def _cpb_hamiltonian(Ec, Ej, ng, Nmax):
 # =========================
 # Qubit Eigenstate Calculation
 # =========================
-def _extract_Wj_n_phi(Lj, Csigma, Nmax, Nq):
+def _extract_e_matrix_and_n_phi(Lj, Csigma, Nmax, Nq):
     """
     Diagonalize the CPB Hamiltonian and extract qubit energies and charge matrix elements.
     
@@ -167,13 +167,13 @@ def _extract_Wj_n_phi(Lj, Csigma, Nmax, Nq):
     ng = 0.0
     
     H, n_charge = _cpb_hamiltonian(Ec, Ej, ng, Nmax)
-    E, U = np.linalg.eigh(H)
-    idx = np.argsort(E)[:Nq]
-    Wj = E[idx]
-    Uq = U[:, idx]
-    n_phi = Uq.conj().T @ n_charge @ Uq
+    E_raw, U    = np.linalg.eigh(H)
+    idx         = np.argsort(E_raw)[:Nq]
+    e_matrix    = E_raw[idx]
+    Uq          = U[:, idx]
+    n_phi       = Uq.conj().T @ n_charge @ Uq
     
-    return (Wj, n_phi)
+    return (e_matrix, n_phi)
 
 # =========================
 # Coupling Strength Calculation
@@ -242,7 +242,7 @@ def compute_hamiltonian_lom(Lj, Lr, Cj, Cs, Cg, Cr, Nc, Nq, Nmax):
     )
     
     # Extract qubit energies and charge matrix elements
-    (Wj, n_phi) = _extract_Wj_n_phi(Lj, Csigma, Nmax, Nq)
+    (Wj, n_phi) = _extract_e_matrix_and_n_phi(Lj, Csigma, Nmax, Nq)
     
     # Resonator Hamiltonian: H_r = ℏ*ω_r*a†a ⊗ I_q
     Hr = hbar * Wr * np.kron(Iq_hat, a_hat_dagger @ a_hat)

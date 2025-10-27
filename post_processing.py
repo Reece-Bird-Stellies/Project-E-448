@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.constants import h, e
 e, h
-def compute_other_values(ref_design_specs, ref_cap_data, results_inductex, results_palace):
+def post_processing(ref_design_specs, ref_cap_data, results_inductex, results_palace):
     mode_alt_cavity = "mode_2"
     Fc_hfss         = ref_design_specs["cavity_frequency_ghz"] * 1e9  # Convert GHz to Hz 
     Lr_inductex     = results_inductex["inductance"]["resonator"]["L1"] # Inductance not given so use inductex result

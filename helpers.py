@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from scipy.constants import e, hbar, h
 
-def load_best_design_from_json(file_path="data/design_reference_data_all.json"):
+def _load_best_design_from_json(file_path="data/design_reference_data_all.json"):
     """
     Load the saved best_design from a JSON file and return it.
     If pandas is available, return a pandas.Series, otherwise return the raw dict/list.
@@ -162,7 +162,7 @@ def fetch_design_fast():
     and returns: best_design, ref_design_specs, ref_capacitance_specs,
                  qubit_geo, resonator_geo, feedline_geo, LJs
     """
-    best_design                                  = load_best_design_from_json()
+    best_design                                  = _load_best_design_from_json()
 
     # ========= EXTRACT NESTED OPTIONS (MATCH JSON KEYS) =========     
     qubit_options                                = best_design["design_options_qubit"]     #CHECK TO MAKE THERE ARE NO MISSING VALUES MAY NEED TO TRANSFER TO ANOTEHR 
