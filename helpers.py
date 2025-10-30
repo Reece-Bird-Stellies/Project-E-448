@@ -298,3 +298,39 @@ def extract_um(value: str) -> float:
     """Extract a float value from a string like '30um'."""
     return float(value.replace('um', ''))
 
+def check_dispersive_regime(f_q, f_c, g, unit="GHz"):
+    """
+    Check whether a qubit–cavity system is in the dispersive regime.
+
+    Parameters
+    ----------
+    f_q : float
+        Qubit frequency (Hz, MHz, or GHz depending on 'unit')
+    f_c : float
+        Cavity frequency (same unit as f_q)
+    g : float
+        Coupling strength (same unit as f_q)
+    unit : str, optional
+        Unit string for display purposes ("Hz", "MHz", or "GHz"). Default is "GHz".
+
+    Prints
+    ------
+    - Detuning Δ = f_q - f_c
+    - Ratio g / |Δ|
+    - Whether the dispersive condition (|Δ| >> g) holds
+    """
+    delta = f_q - f_c
+    ratio = abs(g / delta) if delta != 0 else float('inf')
+
+    print(f"Qubit frequency:  {f_q:.6g} {unit}")
+    print(f"Cavity frequency: {f_c:.6g} {unit}")
+    print(f"Coupling (g):     {g:.6g} {unit}")
+    print(f"\nDetuning Δ = f_q - f_c = {delta:.6g} {unit}")
+    print(f"Ratio g / |Δ| = {ratio:.4f}")
+
+    if ratio < 0.05:
+        print("✅ Strongly dispersive regime (excellent approximation).")
+    elif ratio < 0.1:
+        print("⚠️  Moderately dispersive regime (approximation still valid).")
+    else:
+        print("❌ Not in the dispersive regime (hybridized states).")

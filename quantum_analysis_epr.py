@@ -30,7 +30,7 @@ def _ladder_ops(N: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
 def _zero_point_phases(EJ_J: float, p_c: float, p_q: float, w_c: float, w_q: float) -> Tuple[float, float]:
     """
     φ_c^2 = p_c ħ ω_c / (2 E_J), φ_q^2 = p_q ħ ω_q / (2 E_J).
-    Returns (φ_c, φ_q), dimensionless phase amplitudes at the junction.
+    Returns (φ_q, φ_c), dimensionless phase amplitudes at the junction.
     """
     if EJ_J <= 0:
         raise ValueError("EJ must be > 0.")
@@ -41,7 +41,7 @@ def _zero_point_phases(EJ_J: float, p_c: float, p_q: float, w_c: float, w_q: flo
 
     phi_c = np.sqrt(p_c * hbar * w_c / (2.0 * EJ_J))
     phi_q = np.sqrt(p_q * hbar * w_q / (2.0 * EJ_J))
-    return (float(phi_c), float(phi_q))
+    return (float(phi_q), float(phi_c))
 
 def _josephson_energy_from_lj(Lj_H: float) -> float:
     """
@@ -92,10 +92,10 @@ def _cosine_series(X: np.ndarray, order: int = 6) -> np.ndarray:
 # =========================
 def _build_two_mode_operators(N: int) -> Tuple[np.ndarray, ...]:
     """
-    Build mode operators for a two-mode Hilbert space (cavity ⊗ qubit), each truncated to N.
+    Build mode operators for a two-mode Hilbert space (qubit ⊗ cavity), each truncated to N.
     
     Returns a tuple in the order:
-      (a_c, adag_c, n_c, a_q, adag_q, n_q)
+      (a_q, adag_q, n_q, a_c, adag_c, n_c)
       
     Shapes:
       - single-mode ops: (N,N)
@@ -103,12 +103,12 @@ def _build_two_mode_operators(N: int) -> Tuple[np.ndarray, ...]:
     """
     a, adag, n          = _ladder_ops(N)
     I                   = np.eye(N, dtype=np.complex128)    # Same dimension truncation 
-    Ic = I
     Iq = I
-    a_c, adag_c, n_c    = np.kron(a, Iq), np.kron(adag, Iq), np.kron(n, Iq)
-    a_q, adag_q, n_q    = np.kron(Ic, a), np.kron(Ic, adag), np.kron(Ic, n)
+    Ic = I
+    a_q, adag_q, n_q    = np.kron(a, Ic), np.kron(adag, Ic), np.kron(n, Ic)
+    a_c, adag_c, n_c    = np.kron(Iq, a), np.kron(Iq, adag), np.kron(Iq, n)
 
-    return (a_c, adag_c, n_c, a_q, adag_q, n_q)
+    return (a_q, adag_q, n_q, a_c, adag_c, n_c)
 
 
 # =========================
@@ -135,8 +135,8 @@ def compute_hamiltonian_epr(
 
     Returns dict with:
       H, H_lin, H_nl [J]
-      operators (a_c, adag_c, n_c, a_q, adag_q, n_q)
-      scalars: EJ [J], w_c, w_q [rad/s], phi_c, phi_q (dimensionless), N, cos_order
+      operators (a_q, adag_q, n_q, a_c, adag_c, n_c)
+      scalars: EJ [J], w_c, w_q [rad/s], phi_q, phi_c (dimensionless), N, cos_order
     """
     if any(x <= 0 for x in (f_c_Hz, f_q_Hz)):
         raise ValueError("Frequencies (Hz) must be > 0.")
@@ -145,13 +145,13 @@ def compute_hamiltonian_epr(
     w_q                                     = 2.0 * np.pi * f_q_Hz
     EJ                                      = _josephson_energy_from_lj(Lj_H)
 
-    a_c, adag_c, n_c, a_q, adag_q, n_q      = _build_two_mode_operators(N)
+    a_q, adag_q, n_q, a_c, adag_c, n_c      = _build_two_mode_operators(N)
 
     # Linear Hamiltonian (number operators)
-    H_lin                                   = hbar * (w_c * n_c + w_q * n_q)
+    H_lin                                   = hbar * (w_q * n_q + w_c * n_c)
 
     # Nonlinear part: -EJ[cos(φJ) + φJ^2/2]
-    phi_c, phi_q                            = _zero_point_phases(EJ, p_c, p_q, w_c, w_q)
+    phi_q, phi_c                            = _zero_point_phases(EJ, p_c, p_q, w_c, w_q)
     phiJ                                    = phi_q * (a_q + adag_q) + phi_c * (a_c + adag_c)    #Change to phj_hat
     cos_phiJ                                = _cosine_series(phiJ, order=cos_order)
     H_nl                                    = -EJ * (cos_phiJ + (phiJ @ phiJ)/2 )
@@ -161,4 +161,3 @@ def compute_hamiltonian_epr(
     H                                       = H_lin + H_nl
 
     return H
-

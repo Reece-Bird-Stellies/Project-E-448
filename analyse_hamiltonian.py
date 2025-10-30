@@ -19,7 +19,7 @@ def _test_and_diagonalize(H):
     return E_matrix
 
 
-def analyse_hamilotonian(H, analyse_type="LOM"):
+def analyse_hamilotonian(H, Nc, Nq, analyse_type="LOM"):
     """Analyse properties of Hamiltonian H."""
     # Protection: check if H is valid
     H_0 = {
@@ -58,15 +58,19 @@ def analyse_hamilotonian(H, analyse_type="LOM"):
         f20 = F[2] - F[0]
         f30 = F[3] - F[0]
         f40 = F[4] - F[0]
-        qubit_frequency     = f01
-        cavity_frequency    = f30
-        ana_harm            = (f13 - f01) * 1e3  # in MHz
         
         if analyse_type == "EPR":
-            g =  abs((H[0, 2] / h) * 1e-6)  # in MHz
+            g = abs((H[0, 2*Nc] / h) * 1e-6)  # in MHz
+            qubit_frequency     = f01
+            cavity_frequency    = f30
+            ana_harm            = (f13 - f01) * 1e3  # in MHz
         else:
-            g = abs((H[1, 22] / h) * 1e-6)
-        
+            g = abs((H[1, Nc] / h) * 1e-6)
+
+            qubit_frequency     = f01
+            cavity_frequency    = f30
+            ana_harm            = (f13 - f01) * 1e3  # in MHz
+
         kappa = 0
         return {
             'qubit_frequency_ghz': qubit_frequency,

@@ -78,15 +78,15 @@ def _compute_constants(Lj, Lr, Cj, Cs, Cg, Cr, Nc, Nq):
         - a_hat: Cavity annihilation operator (Nc×Nc)
         - a_hat_dagger: Cavity creation operator (Nc×Nc)
     """
-    Csigma = Cj + Cs + Cg
-    beta = Cg / Csigma
-    Wr = 1 / np.sqrt(Lr * Cr)
-    Vrms = np.sqrt(hbar * Wr / (2 * Cr))
+    Csigma          = Cj + Cs + Cg
+    beta            = Cg / Csigma
+    Wr              = 1 / np.sqrt(Lr * Cr)
+    Vrms            = np.sqrt(hbar * Wr / (2 * Cr))
     
-    Ic_hat = np.eye(Nc)
-    Iq_hat = np.eye(Nq)
-    a_hat = _a_op(Nc)
-    a_hat_dagger = _adag_op(Nc)
+    Ic_hat          = np.eye(Nc)
+    Iq_hat          = np.eye(Nq)
+    a_hat           = _a_op(Nc)                                 # Would also create the single ladder ops for the qubit but it ist used here
+    a_hat_dagger    = _adag_op(Nc)
     
     return (Csigma, beta, Wr, Vrms, Ic_hat, Iq_hat, a_hat, a_hat_dagger)
 
@@ -250,7 +250,7 @@ def compute_hamiltonian_lom(Lj, Lr, Cj, Cs, Cg, Cr, Nc, Nq, Nmax):
     # Qubit Hamiltonian: H_q = sum_j E_j |j⟩⟨j| ⊗ I_c
     proj_terms = []
     for j in range(Nq):
-        x = Wj[j] * np.kron(np.outer(Iq_hat[j], Iq_hat[j]), Ic_hat)
+        x = Wj[j] * np.kron(np.outer(Iq_hat[j], Iq_hat[j]), Ic_hat)   #hbar already included in Wj
         proj_terms.append(x)
     Hq = np.sum(proj_terms, axis=0)
     
