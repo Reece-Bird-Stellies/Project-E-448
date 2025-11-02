@@ -62,14 +62,14 @@ def analyse_hamilotonian(H, Nc, Nq, analyse_type="LOM"):
         if analyse_type == "EPR":
             g = abs((H[0, 2*Nc] / h) * 1e-6)  # in MHz
             qubit_frequency     = f01
-            cavity_frequency    = f30
-            ana_harm            = (f13 - f01) * 1e3  # in MHz
+            cavity_frequency    = f20
+            ana_harm            = (f12 - f01) * 1e3  # in MHz
         else:
-            g = abs((H[1, Nc] / h) * 1e-6)
+            g = abs((H[1+1, Nc+1] / h) * 1e-6)
 
             qubit_frequency     = f01
-            cavity_frequency    = f30
-            ana_harm            = (f13 - f01) * 1e3  # in MHz
+            cavity_frequency    = f20
+            ana_harm            = (f12 - f01) * 1e3  # in MHz
 
         kappa = 0
         return {

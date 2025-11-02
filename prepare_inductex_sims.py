@@ -364,6 +364,8 @@ $End"""
     _make_ldf_file(param_string, layers_list, output_path)
 
 def make_inductex_cap_sim(design, design_name, create_mask, mask_component=None, inductex_ixi_config=None, inductex_ldf_config=None):
+    if design_name is "full" or design_name is "full_no_jj":   # Shit implementation
+        mask_component = "resonator"
     if create_mask and mask_component:
         mask_bounds = design.components[mask_component].qgeometry_bounds()
         mask_bounds = mask_bounds * 1e3  # convert to um
