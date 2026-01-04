@@ -1,0 +1,4 @@
+﻿InductEx v7.1.44 (8 Beta) (4 December 2025). Copyright 2003-2025 Coenrad Fourie
+
+Controlled exit.
+(113) Licence key unpacked incorrectly.

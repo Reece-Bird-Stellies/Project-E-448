@@ -1,0 +1,12 @@
+$PARAMSTRING
+    -l process_junction_cap.ldf
+    -qt 
+    -zoff
+$END
+
+$STRUCT
+    Name cap
+    $GDS
+        name junction_cap.gds
+    $END
+$END

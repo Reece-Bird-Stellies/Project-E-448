@@ -1,0 +1,70 @@
+﻿InductEx v7.1.44 (8 Beta) (4 December 2025). Copyright 2003-2025 Coenrad Fourie
+Licenced to:
+  Reece Bird, until 30 Jun 2026. [Super]
+
+Licensed for ACADEMIC USE ONLY.
+
+Execution start time stamp: 30 Dec 2025 20:41:08
+
+Parameter string: control_transmon_cap.ixi -l process_transmon_cap.ldf -qt -zoff 
+
+Licence file: C:\SUN Magnetics\InductEx\licenses\ix_license.txt
+
+Model and simulation settings:
+  - Solution method:       EQS
+  - Mesh:                  Tetras
+  - Fidelity:              High
+  - Polygon hole bridging: Existing vertices
+
+Netlist input: c:\Users\Reece\Desktop\4th Year Work\2nd Semester\Project (E) 448\Simulations\Final\simulations\inductex\capacitance\transmon\control_transmon_cap.cir
+  +============+======+========+====================+
+  | #Inductors | #M/k | #Ports | #Fundamental loops |
+  +------------+------+--------+--------------------+
+  | 0          | 0    | 0      | 0                  |
+  +============+======+========+====================+
+
+Layout input files processed:
+  Chip 0
+    Layout file : c:\Users\Reece\Desktop\4th Year Work\2nd Semester\Project (E) 448\Simulations\Final\simulations\inductex\capacitance\transmon\control_transmon_cap.ixi
+    Process File: c:\Users\Reece\Desktop\4th Year Work\2nd Semester\Project (E) 448\Simulations\Final\simulations\inductex\capacitance\transmon\process_transmon_cap.ldf
+    Layer sequence: (90 SIL) (0 MAIN) {110 TERM} {100 TEXT} 
+    +=======+==================+=======+=======+=========+========+=========+===========+
+    | Name  | Top-level struct | #Poly | #Term | TecUnit | DBUnit | SegSize | SegGrowth |
+    +-------+------------------+-------+-------+---------+--------+---------+-----------+
+    | Chip0 | cap              | 5     | 0     | 1E-06   | 1E-09  | 10      | 5         |
+    +=======+==================+=======+=======+=========+========+=========+===========+
+
+
+Layer penetration depths adjusted for temperature:
+  MAIN:   T=0.01 K  TC=1.2 K            Lambda(T)=16 nm
+
+Capacitance extraction overrides inductance extraction.
+Model info: [0] Chip0
+  +=========+=====+======+
+  | Layer   | SIL | MAIN |
+  +---------+-----+------+
+  | Objects | 0   | 15   |
+  +=========+=====+======+
+
+Mesh info:
+  +============+=========+
+  | #Triangles | #Tetras |
+  +------------+---------+
+  | 27855      | 0       |
+  +============+=========+
+
+
+
+Maxwell capacitance matrix (grounded at infinity) [F]
+         cground      ccross        cclaw       
+cground  3.69817E-13  -9.40826E-14  -8.93099E-14
+ccross                1.07775E-13   -6.80112E-15
+cclaw                               9.89049E-14 
+
+SPICE capacitance matrix (floating at infinity) [F]
+         cground  ccross       cclaw      
+cground           1.00633E-13  9.19658E-14
+ccross                         6.89929E-15
+cclaw                                     
+
+Job finished in 20.118 seconds.
