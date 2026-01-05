@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 30 Dec 2025 20:41:08
+Execution start time stamp: 05 Jan 2026 14:41:21
 
 Parameter string: control_transmon_cap.ixi -l process_transmon_cap.ldf -qt -zoff 
 
@@ -50,21 +50,9 @@ Mesh info:
   +============+=========+
   | #Triangles | #Tetras |
   +------------+---------+
-  | 27855      | 0       |
+  | 35423      | 0       |
   +============+=========+
 
 
-
-Maxwell capacitance matrix (grounded at infinity) [F]
-         cground      ccross        cclaw       
-cground  3.69817E-13  -9.40826E-14  -8.93099E-14
-ccross                1.07775E-13   -6.80112E-15
-cclaw                               9.89049E-14 
-
-SPICE capacitance matrix (floating at infinity) [F]
-         cground  ccross       cclaw      
-cground           1.00633E-13  9.19658E-14
-ccross                         6.89929E-15
-cclaw                                     
-
-Job finished in 20.118 seconds.
+Controlled exit.
+(6) Error opening TTH capacitance file c:\Users\Reece\Desktop\4th Year Work\2nd Semester\Project (E) 448\Simulations\Final\simulations\inductex\capacitance\transmon\output\q.txt.

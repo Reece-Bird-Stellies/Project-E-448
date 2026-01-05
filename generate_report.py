@@ -1,3 +1,16 @@
+def safe_get(obj, *keys, scale=1.0, abs_val=False):
+    try:
+        for k in keys:
+            if obj is None:
+                return 0.0
+            obj = obj[k]
+        if obj is None:
+            return 0.0
+        val = abs(obj) if abs_val else obj
+        return val * scale
+    except (KeyError, TypeError):
+        return 0.0
+
 def _calculate_percentage_diff(value, reference):
     """
     Return signed percent diff string (e.g., '+2.34%').
@@ -89,42 +102,43 @@ def generate_quantum_report(
     
     # -------------------- ELECTROSTATICS (HFSS ref) --------------------
     hfss_Lj             = Lj * 1e9
-    hfss_Cj             = compute_other_values["cj_hfss"]
-    hfss_Cclaw_claw     = best_design["claw_to_claw"]
-    hfss_Cclaw_ground   = best_design["claw_to_ground"]
-    hfss_Ccross_claw    = best_design["cross_to_claw"]       # Cg
-    hfss_Ccross_cross   = best_design["cross_to_cross"]      # Cs
-    hfss_Ccross_ground  = best_design["cross_to_ground"]
-    hfss_Cground_ground = best_design["ground_to_ground"]
-    hfss_Lr             = results_inductex["inductance"]["resonator"]["L1"] * 1e9
-    hfss_Cr             = compute_other_values["cr_hfss"] * 1e15
-    hfss_Cfeedline      = 0
-    
+    hfss_Cj             = safe_get(compute_other_values, "cj_hfss")
+    hfss_Cclaw_claw     = safe_get(best_design, "claw_to_claw")
+    hfss_Cclaw_ground   = safe_get(best_design, "claw_to_ground")
+    hfss_Ccross_claw    = safe_get(best_design, "cross_to_claw")
+    hfss_Ccross_cross   = safe_get(best_design, "cross_to_cross")
+    hfss_Ccross_ground  = safe_get(best_design, "cross_to_ground")
+    hfss_Cground_ground = safe_get(best_design, "ground_to_ground")
+    hfss_Lr             = safe_get(results_inductex, "inductance", "resonator", "L1", scale=1e9)
+    hfss_Cr             = safe_get(compute_other_values, "cr_hfss", scale=1e15)
+    hfss_Cfeedline      = 0.0
+
     # -------------------- ELECTROSTATICS (InductEx) --------------------
     inductex_Lj             = Lj * 1e9
-    inductex_Cj             = 0 * 1e15
-    inductex_Cclaw_claw     = results_inductex["capacitance"]["transmon_no_jj"]["CCLAW-CCLAW"] * 1e15
-    inductex_Cclaw_ground   = abs(results_inductex["capacitance"]["transmon_no_jj"]["CGROUND-CCLAW"]) * 1e15
-    inductex_Ccross_claw    = abs(results_inductex["capacitance"]["transmon_no_jj"]["CCROSS-CCLAW"]) * 1e15
-    inductex_Ccross_cross   = results_inductex["capacitance"]["transmon_no_jj"]["CCROSS-CCROSS"] * 1e15
-    inductex_Ccross_ground  = abs(results_inductex["capacitance"]["transmon_no_jj"]["CGROUND-CCROSS"]) * 1e15
-    inductex_Cground_ground = results_inductex["capacitance"]["transmon_no_jj"]["CGROUND-CGROUND"] * 1e15
-    inductex_Lr             = results_inductex["inductance"]["resonator"]["L1"] * 1e9
-    inductex_Cr             = results_inductex["capacitance"]["resonator"]["CRESONATOR-CRESONATOR"] * 1e15
-    inductex_Cfeedline      = results_inductex["capacitance"]["feedline"]["CFEEDLINE-CFEEDLINE"] * 1e15
-    
+    inductex_Cj             = 0.0
+    inductex_Cclaw_claw     = safe_get(results_inductex, "capacitance", "transmon_no_jj", "CCLAW-CCLAW", scale=1e15)
+    inductex_Cclaw_ground   = safe_get(results_inductex, "capacitance", "transmon_no_jj", "CGROUND-CCLAW", scale=1e15, abs_val=True)
+    inductex_Ccross_claw    = safe_get(results_inductex, "capacitance", "transmon_no_jj", "CCROSS-CCLAW", scale=1e15, abs_val=True)
+    inductex_Ccross_cross   = safe_get(results_inductex, "capacitance", "transmon_no_jj", "CCROSS-CCROSS", scale=1e15)
+    inductex_Ccross_ground  = safe_get(results_inductex, "capacitance", "transmon_no_jj", "CGROUND-CCROSS", scale=1e15, abs_val=True)
+    inductex_Cground_ground = safe_get(results_inductex, "capacitance", "transmon_no_jj", "CGROUND-CGROUND", scale=1e15)
+    inductex_Lr             = safe_get(results_inductex, "inductance", "resonator", "L1", scale=1e9)
+    inductex_Cr             = safe_get(results_inductex, "capacitance", "resonator", "CRESONATOR-CRESONATOR", scale=1e15)
+    inductex_Cfeedline      = safe_get(results_inductex, "capacitance", "feedline", "CFEEDLINE-CFEEDLINE", scale=1e15)
+
     # -------------------- ELECTROSTATICS (PALACE) --------------------
     palace_Lj             = Lj * 1e9
-    palace_Cj             = 0 * 1e15
-    palace_Cclaw_claw     = palace_results["capacitance"]["transmon_no_jj"]["C3-C3"] * 1e15
-    palace_Cclaw_ground   = abs(palace_results["capacitance"]["transmon_no_jj"]["C1-C3"]) * 1e15
-    palace_Ccross_claw    = abs(palace_results["capacitance"]["transmon_no_jj"]["C2-C3"]) * 1e15
-    palace_Ccross_cross   = palace_results["capacitance"]["transmon_no_jj"]["C2-C2"] * 1e15
-    palace_Ccross_ground  = abs(palace_results["capacitance"]["transmon_no_jj"]["C1-C2"]) * 1e15
-    palace_Cground_ground = palace_results["capacitance"]["transmon_no_jj"]["C1-C1"] * 1e15
-    palace_Lr             = compute_other_values["lr_palace"] * 1e9
-    palace_Cr             = palace_results["capacitance"]["resonator"]["C2-C2"] * 1e15
-    palace_Cfeedline      = palace_results["capacitance"]["feedline"]["C2-C2"] * 1e15
+    palace_Cj             = 0.0
+    palace_Cclaw_claw     = safe_get(palace_results, "capacitance", "transmon_no_jj", "C3-C3", scale=1e15)
+    palace_Cclaw_ground   = safe_get(palace_results, "capacitance", "transmon_no_jj", "C1-C3", scale=1e15, abs_val=True)
+    palace_Ccross_claw    = safe_get(palace_results, "capacitance", "transmon_no_jj", "C2-C3", scale=1e15, abs_val=True)
+    palace_Ccross_cross   = safe_get(palace_results, "capacitance", "transmon_no_jj", "C2-C2", scale=1e15)
+    palace_Ccross_ground  = safe_get(palace_results, "capacitance", "transmon_no_jj", "C1-C2", scale=1e15, abs_val=True)
+    palace_Cground_ground = safe_get(palace_results, "capacitance", "transmon_no_jj", "C1-C1", scale=1e15)
+    palace_Lr             = safe_get(compute_other_values, "lr_palace", scale=1e9)
+    palace_Cr             = safe_get(palace_results, "capacitance", "resonator", "C2-C2", scale=1e15)
+    palace_Cfeedline      = safe_get(palace_results, "capacitance", "feedline", "C2-C2", scale=1e15)
+
 
     # -------------------- ELECTROSTATICS DELTAS --------------------
     diff_inductex_Lj           = _calculate_percentage_diff(inductex_Lj, hfss_Lj)
@@ -160,29 +174,26 @@ def generate_quantum_report(
     mean_diff_palace_cg_cs = f"{(abs_diff_palace_cg + abs_diff_palace_cs) / 2:.2f}%"
     
     # -------------------- EIGENMODE ANALYSIS --------------------
-    # HFSS
-    hfss_eigen_Fq = best_design["qubit_frequency_GHz"]
-    hfss_eigen_Fc = best_design["cavity_frequency_GHz"]
-    hfss_eigen_Pq = 0
-    hfss_eigen_Pc = 0
-    
-    # InductEx
-    inductex_eigen_Fq = 0
-    inductex_eigen_Fc = 0
-    inductex_eigen_Pq = 0
-    inductex_eigen_Pc = 0
-    
-    # PALACE
-    palace_eigen_Fq = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"]["mode_1"]
-    palace_eigen_Fc = palace_results["eigenmode"]["full"]["eigen_mode_frequencies"][mode_alt_cavity]
-    palace_eigen_Pq = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"]["mode_1"])
-    palace_eigen_Pc = abs(palace_results["eigenmode"]["full"]["eigen_mode_epr"][mode_alt_cavity])
-    
-    # Design values
-    design_eigen_Fq = quantum_config["design_specs"]["qubit_frequency_ghz"]
-    design_eigen_Fc = quantum_config["design_specs"]["cavity_frequency_ghz"]
-    design_eigen_Pq = 0
-    design_eigen_Pc = 0
+    hfss_eigen_Fq = safe_get(best_design, "qubit_frequency_GHz")
+    hfss_eigen_Fc = safe_get(best_design, "cavity_frequency_GHz")
+    hfss_eigen_Pq = 0.0
+    hfss_eigen_Pc = 0.0
+
+    inductex_eigen_Fq = 0.0
+    inductex_eigen_Fc = 0.0
+    inductex_eigen_Pq = 0.0
+    inductex_eigen_Pc = 0.0
+
+    palace_eigen_Fq = safe_get(palace_results, "eigenmode", "full", "eigen_mode_frequencies", "mode_1")
+    palace_eigen_Fc = safe_get(palace_results, "eigenmode", "full", "eigen_mode_frequencies", mode_alt_cavity)
+    palace_eigen_Pq = safe_get(palace_results, "eigenmode", "full", "eigen_mode_epr", "mode_1", abs_val=True)
+    palace_eigen_Pc = safe_get(palace_results, "eigenmode", "full", "eigen_mode_epr", mode_alt_cavity, abs_val=True)
+
+    design_eigen_Fq = safe_get(quantum_config, "design_specs", "qubit_frequency_ghz")
+    design_eigen_Fc = safe_get(quantum_config, "design_specs", "cavity_frequency_ghz")
+    design_eigen_Pq = 0.0
+    design_eigen_Pc = 0.0
+
 
     # Deltas
     diff_eigen_hfss_Fq_design = _calculate_percentage_diff(hfss_eigen_Fq, design_eigen_Fq)

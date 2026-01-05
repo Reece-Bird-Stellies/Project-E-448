@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 30 Dec 2025 20:43:28
+Execution start time stamp: 05 Jan 2026 14:41:26
 
 Parameter string: control_resonator_ind.ixi -l process_resonator_ind.ldf -n circuit_resonator_ind.cir -th -zoff -hb 0 
 
@@ -39,59 +39,3 @@ Layout input files processed:
     | Chip0 | cap              | 3     | 4     | 1E-06   | 1E-09  | 10      | 5         |
     +=======+==================+=======+=======+=========+========+=========+===========+
 
-
-Layer penetration depths adjusted for temperature:
-  GD:     T=0.01 K  TC=1.2 K            Lambda(T)=16 nm
-  MAIN:   T=0.01 K  TC=1.2 K            Lambda(T)=16 nm
-
-Ports:
-  +====+======+=========+===========+
-  | Nr | Name | Type    | Amplitude |
-  +----+------+---------+-----------+
-  | 0  | p1   | Voltage | 1         |
-  | 1  | p2   | Voltage | 1         |
-  +====+======+=========+===========+
-
-Terminals:
-  +======+======+=======+===================+==========+
-  | Name | Chip | Layer | Geometry          | BasePoly |
-  +------+------+-------+-------------------+----------+
-  | p1+  | 0    | main  | Line/Edge Surface | 20       |
-  | p1-  | 0    | gd    | Line/Edge Surface | 19       |
-  | p2+  | 0    | main  | Line/Edge Surface | 4        |
-  | p2-  | 0    | gd    | Line/Edge Surface | 3        |
-  +======+======+=======+===================+==========+
-
-Model info: [0] Chip0
-  +=========+=====+====+======+
-  | Layer   | SIL | GD | MAIN |
-  +---------+-----+----+------+
-  | Objects | 0   | 6  | 3    |
-  +=========+=====+====+======+
-
-Mesh info:
-  +============+=========+
-  | #Triangles | #Tetras |
-  +------------+---------+
-  | 48         | 129870  |
-  +============+=========+
-
-Time allocation (s):
-  +=================+==========+=======+==========+=======+
-  | Input file read | Polygons | Mesh  | 3D model | TTH   |
-  +-----------------+----------+-------+----------+-------+
-  | 0.157           | 0.227    | 3.996 | 0.163    | 298.8 |
-  +=================+==========+=======+==========+=======+
-
-
-SVD solution information (A*x = b):
- - Unknowns = 1; rank = 1. 
- - Condition number:                   1
- - Max error (Max(|A*x - b|)):         4.71006E-07
- - Relative error (||A*x - b||/||b||): 4.71006E-05%
-
-Inductance [H]
-Name      Design        Extracted     AbsDiff       PercDiff
-L1        --            1.28286E-09   +1.2829E-09   --%
-
-Job finished in 303.450 seconds.

@@ -1,11 +1,11 @@
 {
   "fillet": "49.9um",
-  "total_length": "3275um",
+  "total_length": "4700um",
   "trace_gap": "5.1um",
   "trace_width": "11.7um",
   "end_straight": null,
   "start_jogged_extension": null,
   "start_straight": "50um",
-  "asymmetry": "-175.0um",
+  "asymmetry": "-200.0um",
   "spacing": "100um"
 }

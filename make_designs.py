@@ -39,7 +39,7 @@ def _center_and_scale_chip(design, component_name='transmon', scale_factor=1.3):
     design.chips.main.size.center_x = f'{comp_center_x}mm'  
     design.chips.main.size.center_y = f'{comp_center_y}mm' 
 
-def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
+def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator=False):
     full_design = designs.DesignPlanar({}, overwrite_enabled=True);
 
     # Set up chip dimensions 
@@ -121,7 +121,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     )
     # Launchpads
     # launch pads are placed arbitrarily as x,y positions where not given on blueprint
-    x1 = '-2000um'  # Replace this with database length?
+    x1 = '-2000um'  
     y1 = '0um'
     x2 = '2000um'
     launch_options1 = dict(
@@ -211,7 +211,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     )
     """
 
-    # Open to ground placed at arbirary x postiion.Y position calcualted to get CLT coupling coupling_space
+    # Short to ground placed at arbirary x postiion. Y position calculated to get CLT coupling coupling_space
     prime_width         = extract_um(feedline_geo["prime_width"])
     prime_gap           = extract_um(feedline_geo["prime_gap"])
     coupling_space      = extract_um(feedline_geo["coupling_space"])
@@ -219,7 +219,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     trace_width         = extract_um(resonator_geo["trace_width"])
     y1_um               = extract_um(y1)
     
-    y_pos_otg = y1_um - (prime_width/2 + prime_gap + coupling_space + trace_gap + trace_width/2)
+    y_pos_stg = y1_um - (prime_width/2 + prime_gap + coupling_space + trace_gap + trace_width/2)
     ShortToGround(
             full_design,
             'stg1',
@@ -227,7 +227,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
                     chip='main',
                     layer=layer_otg,
                     pos_x='-0.2mm',              # Arbitrary x position
-                    pos_y=f'{y_pos_otg}um',      # Calculated y position for proper coupling space 
+                    pos_y=f'{y_pos_stg}um',      # Calculated y position for proper coupling space 
                     orientation=180,
                     termination_gap = resonator_geo["trace_gap"],    # Doesn't do anything for STG
             )
@@ -295,6 +295,11 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     resonator_total_length  = extract_um(resonator_geo['total_length'])
     clt_down_length         = extract_um(feedline_geo['down_length'])       # CLT adds extra lenth to resonator so need to account for this
     new_total_length        = resonator_total_length + clt_down_length
+    if curved_resonator:
+        fillet_length =resonator_geo['fillet']
+    else:
+        fillet_length ='0um'
+        
     RouteMeander(
         full_design,
         'resonator',
@@ -304,7 +309,7 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
             trace_gap=resonator_geo['trace_gap'],
             total_length=f"{new_total_length}um",
             hfss_wire_bonds=False,
-            fillet=resonator_geo['fillet'],
+            fillet=fillet_length,
             lead=dict(
                 start_straight=feedline_geo["coupling_length"],    # Replicating CLT
                 end_straight=resonator_geo['start_straight']        # Move resonator start to end as coupling distance but be fixed
@@ -347,13 +352,13 @@ def make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo):
     full_design.delete_component('xmon')
     return full_design
 
-def make_full_no_jj_design(best_design, qubit_geo, resonator_geo, feedline_geo):
-    full_no_jj_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo)
+def make_full_no_jj_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator=False):
+    full_no_jj_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator)
     full_no_jj_design.delete_component('junction')
     return full_no_jj_design
 
-def make_junction_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3):
-    junction_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo)
+def make_junction_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3, curved_resonator=False):
+    junction_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator)
     junction_design.delete_component('LP1')
     junction_design.delete_component('LP2')
     junction_design.delete_component('stg1')
@@ -363,8 +368,8 @@ def make_junction_design(best_design, qubit_geo, resonator_geo, feedline_geo, sc
     _center_and_scale_chip(junction_design, component_name='junction', scale_factor=scaling_factor)
     return junction_design
 
-def make_transmon_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3):
-    transmon_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo)
+def make_transmon_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3, curved_resonator=False):
+    transmon_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator)
     transmon_design.delete_component('LP1')
     transmon_design.delete_component('LP2')
     transmon_design.delete_component('stg1')
@@ -373,8 +378,8 @@ def make_transmon_design(best_design, qubit_geo, resonator_geo, feedline_geo, sc
     _center_and_scale_chip(transmon_design, component_name='transmon', scale_factor=scaling_factor)
     return transmon_design
 
-def make_transmon_no_jj_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3):
-    transmon_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo)
+def make_transmon_no_jj_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3, curved_resonator=False):
+    transmon_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator)
     transmon_design.delete_component('LP1')
     transmon_design.delete_component('LP2')
     transmon_design.delete_component('stg1')
@@ -384,8 +389,8 @@ def make_transmon_no_jj_design(best_design, qubit_geo, resonator_geo, feedline_g
     _center_and_scale_chip(transmon_design, component_name='transmon', scale_factor=scaling_factor)
     return transmon_design
 
-def make_resonator_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3):
-    resonator_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo)
+def make_resonator_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3, curved_resonator=False):
+    resonator_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator)
     pin_coords_transmon = resonator_design.components['transmon'].pins['readout']['middle']
     pin_coords_stg1 = resonator_design.components['stg1'].pins['short']['middle']
     otg1 = OpenToGround(
@@ -412,6 +417,17 @@ def make_resonator_design(best_design, qubit_geo, resonator_geo, feedline_geo, s
                     termination_gap = resonator_geo["trace_gap"],
             )
     )
+    
+    # Get the existing route  
+    route = resonator_design.components['resonator']  
+    
+    # Update pin inputs to connect to OTG components  
+    route.options.pin_inputs = Dict(  
+        start_pin=Dict(component='otg1', pin='open'),  
+        end_pin=Dict(component='otg2', pin='open')  
+    )  
+
+    resonator_design.delete_component('stg1')
     resonator_design.delete_component('LP1')
     resonator_design.delete_component('LP2')
     resonator_design.delete_component('feedline')
@@ -420,8 +436,8 @@ def make_resonator_design(best_design, qubit_geo, resonator_geo, feedline_geo, s
     _center_and_scale_chip(resonator_design, component_name='resonator', scale_factor=scaling_factor)
     return resonator_design
 
-def make_feedline_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3):
-    feedline_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo)
+def make_feedline_design(best_design, qubit_geo, resonator_geo, feedline_geo, scaling_factor=1.3, curved_resonator=False):
+    feedline_design = make_full_design(best_design, qubit_geo, resonator_geo, feedline_geo, curved_resonator)
     feedline_design.delete_component('stg1')
     feedline_design.delete_component('resonator')
     feedline_design.delete_component('transmon')

@@ -1,11 +1,11 @@
 {
   "cross_gap": "30um",
-  "cross_length": "210um",
+  "cross_length": "270um",
   "cross_width": "30um",
   "claw_cpw_length": "40um",
   "claw_cpw_width": "10um",
   "claw_gap": "5.1um",
-  "claw_length": "190um",
+  "claw_length": "250um",
   "claw_width": "15um",
   "connector_location": "90",
   "connector_type": "0",

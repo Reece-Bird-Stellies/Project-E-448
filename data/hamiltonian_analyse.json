@@ -1,0 +1,42 @@
+{
+  "results_lom_hfss": {
+    "qubit_frequency_ghz": 2.8506564142649413,
+    "cavity_frequency_ghz": 5.545255328394885,
+    "anharmonicity_mhz": -156.05750013499798,
+    "coupling_g_mhz": 67.73709523329778,
+    "kappa_khz": 0,
+    "h_dimension": 25
+  },
+  "results_lom_inductex": {
+    "qubit_frequency_ghz": 2.9449955019895073,
+    "cavity_frequency_ghz": 5.722048350484955,
+    "anharmonicity_mhz": -167.94265349405978,
+    "coupling_g_mhz": 50.58558152708779,
+    "kappa_khz": 0,
+    "h_dimension": 25
+  },
+  "results_lom_palace": {
+    "qubit_frequency_ghz": 0,
+    "cavity_frequency_ghz": 0,
+    "anharmonicity_mhz": 0,
+    "coupling_g_mhz": 0,
+    "kappa_khz": 0,
+    "h_dimension": 0
+  },
+  "results_epr_inductex": {
+    "qubit_frequency_ghz": 0,
+    "cavity_frequency_ghz": 0,
+    "anharmonicity_mhz": 0,
+    "coupling_g_mhz": 0,
+    "kappa_khz": 0,
+    "h_dimension": 0
+  },
+  "results_epr_palace": {
+    "qubit_frequency_ghz": 0,
+    "cavity_frequency_ghz": 0,
+    "anharmonicity_mhz": 0,
+    "coupling_g_mhz": 0,
+    "kappa_khz": 0,
+    "h_dimension": 0
+  }
+}

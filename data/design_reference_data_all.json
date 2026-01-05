@@ -1,11 +1,11 @@
 {
-  "index_qc": 1900,
-  "claw_to_claw": 102.50358,
-  "claw_to_ground": 94.66779,
-  "cross_to_claw": 7.2447,
-  "cross_to_cross": 100.07658,
-  "cross_to_ground": 100.07658,
-  "ground_to_ground": 246.94274,
+  "index_qc": 602,
+  "claw_to_claw": 124.89207,
+  "claw_to_ground": 114.95193,
+  "cross_to_claw": 9.36517,
+  "cross_to_cross": 130.86719,
+  "cross_to_ground": 130.86719,
+  "ground_to_ground": 303.89678,
   "units_qubit": "fF",
   "design_options_qubit": {
     "aedt_hfss_capacitance": 0,
@@ -18,7 +18,7 @@
         "claw_cpw_length": "40um",
         "claw_cpw_width": "10um",
         "claw_gap": "5.1um",
-        "claw_length": "190um",
+        "claw_length": "250um",
         "claw_width": "15um",
         "connector_location": "90",
         "connector_type": "0",
@@ -26,7 +26,7 @@
       }
     },
     "cross_gap": "30um",
-    "cross_length": "210um",
+    "cross_length": "270um",
     "cross_width": "30um",
     "gds_cell_name": "my_other_junction",
     "hfss_capacitance": 0,
@@ -44,7 +44,7 @@
   },
   "design_tool_qubit": "qiskit-metal",
   "PI_qubit": "Eli Levenson-Falk, PhD",
-  "date_created_qubit": "2023-09-20-142549",
+  "date_created_qubit": "2023-09-20-142548",
   "group_qubit": "LFL",
   "institution_qubit": "USC",
   "uploader_qubit": "Andre Kuo",
@@ -108,9 +108,9 @@
     "solver_type": "Iterative"
   },
   "simulator_qubit": "Ansys HFSS",
-  "claw_length": "190um",
-  "cavity_frequency_GHz": 7.20562650895,
-  "kappa_kHz": 405.80760307199995,
+  "claw_length": "250um",
+  "cavity_frequency_GHz": 5.23867575168,
+  "kappa_kHz": 210.513077332,
   "units_cavity_claw": "Hz",
   "coupler_type": "CLT",
   "design_options_cavity_claw": {
@@ -120,11 +120,11 @@
           "claw_cpw_length": "0um",
           "claw_cpw_width": "11.7um",
           "claw_gap": "5.1um",
-          "claw_length": "190um",
+          "claw_length": "250um",
           "claw_width": "15um",
           "connector_location": "90",
           "connector_type": "0",
-          "ground_spacing": "4.1um"
+          "ground_spacing": "10um"
         }
       },
       "cross_gap": "0um",
@@ -138,7 +138,7 @@
       "cap_gap": null,
       "cap_gap_ground": null,
       "cap_width": null,
-      "coupling_length": "350um",
+      "coupling_length": "400um",
       "coupling_space": "7.9um",
       "down_length": "50um",
       "finger_count": null,
@@ -158,7 +158,7 @@
         "start_straight": "50um"
       },
       "meander": {
-        "asymmetry": "-175.0um",
+        "asymmetry": "-200.0um",
         "spacing": "100um"
       },
       "pin_inputs": {
@@ -171,7 +171,7 @@
           "pin": "second_end"
         }
       },
-      "total_length": "3275um",
+      "total_length": "4700um",
       "trace_gap": "5.1um",
       "trace_width": "11.7um"
     }
@@ -179,7 +179,7 @@
   "design_tool_cavity_claw": "qiskit-metal",
   "resonator_type": "quarter",
   "PI_cavity_claw": "Eli Levenson-Falk, PhD",
-  "date_created_cavity_claw": "2024-07-12-141659",
+  "date_created_cavity_claw": "2024-07-24-230000",
   "group_cavity_claw": "LFL",
   "institution_cavity_claw": "USC",
   "misc": null,
@@ -212,7 +212,7 @@
         "cap_gap": null,
         "cap_gap_ground": null,
         "cap_width": null,
-        "coupling_length": "350um",
+        "coupling_length": "400um",
         "coupling_space": "7.9um",
         "down_length": "50um",
         "finger_count": null,
@@ -233,7 +233,7 @@
             "start_straight": "50um"
           },
           "meander": {
-            "asymmetry": "-175.0um",
+            "asymmetry": "-200.0um",
             "spacing": "100um"
           },
           "pin_inputs": {
@@ -246,7 +246,7 @@
               "pin": "second_end"
             }
           },
-          "total_length": "3275um",
+          "total_length": "4700um",
           "trace_gap": "5.1um",
           "trace_width": "11.7um"
         }
@@ -263,7 +263,7 @@
           "claw_cpw_length": "0um",
           "claw_cpw_width": "0um",
           "claw_gap": "5.1um",
-          "claw_length": "190um",
+          "claw_length": "250um",
           "claw_width": "15um",
           "connector_location": "90",
           "connector_type": "0",
@@ -271,7 +271,7 @@
         }
       },
       "cross_gap": "30um",
-      "cross_length": "210um",
+      "cross_length": "270um",
       "cross_width": "30um",
       "gds_cell_name": "my_other_junction",
       "hfss_capacitance": 0,
@@ -288,9 +288,9 @@
       "q3d_resistance": 0
     }
   },
-  "EC": 0.18048824356790302,
-  "EJ": 10.278024216322235,
-  "qubit_frequency_GHz": 3.662129651932757,
-  "anharmonicity_MHz": -205.10983874211598,
-  "g_MHz": 98.90343319796943
+  "EC": 0.13812952534393005,
+  "EJ": 8.136545771741885,
+  "qubit_frequency_GHz": 2.853105648970196,
+  "anharmonicity_MHz": -156.5508312991959,
+  "g_MHz": 71.74096381136455
 }

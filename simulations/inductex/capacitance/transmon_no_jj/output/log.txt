@@ -8,46 +8,50 @@ Times:
 --------------------------------------------------------------------------------
 Chip 0
   Base map polygons: 21
-  Base map mesh triangles: 9370
+  Base map mesh triangles: 12190
        Poly#  AllEdgsLinked     AllTrisCCW    AllTrisLinked
   -------------------------
          Poly#  Constraints       Points    Triangles      BadTris   Iterations  TimeTriangulate       TimeRefine        TimeClean
-             0            9          458          456            0            0             0.00             0.00             0.00
-             1           24         1933         3276            0         4571             0.00             0.02             0.00
-             2            4          170          168            0            0             0.00             0.00             0.00
-             3            9          483          481            0            0             0.00             0.01             0.00
-             4           22          318          316            0            0             0.00             0.00             0.00
-             5            8          540          911            0         1087             0.00             0.01             0.00
-             6           23          229          227            0            0             0.00             0.00             0.00
-             7           14           96           94            0            0             0.00             0.00             0.00
-             8           12          216          309            0          163             0.00             0.00             0.00
-             9           14          150          148            0            0             0.00             0.00             0.00
+             0            9          566          564            0            0             0.00             0.01             0.00
+             1           24         2588         4440            0         6555             0.00             0.03             0.00
+             2            4          206          204            0            0             0.00             0.00             0.00
+             3            9          591          589            0            0             0.00             0.01             0.00
+             4           22          390          388            0            0             0.00             0.00             0.00
+             5            8          673         1139            0         1434             0.00             0.01             0.00
+             6           23          277          275            0            0             0.00             0.00             0.00
+             7           14          108          106            0            0             0.00             0.00             0.00
+             8           12          260          373            0          204             0.00             0.00             0.00
+             9           14          186          184            0            0             0.00             0.00             0.00
             10            6           26           24            0            0             0.00             0.00             0.00
-            11           23          236          236            0            4             0.00             0.00             0.00
-            12            6           17           15            0            0             0.00             0.00             0.00
+            11           25          295          296            0            6             0.00             0.00             0.00
+            12            4            7            5            0            0             0.00             0.00             0.00
             13            4           22           20            0            0             0.00             0.00             0.00
-            14           22          266          264            0            0             0.00             0.00             0.00
-            15           14          467          738            0          600             0.00             0.00             0.00
-            16           12          410          646            0          587             0.00             0.00             0.00
-            17            6           82           80            0            0             0.00             0.00             0.00
-            18            6           82           80            0            0             0.00             0.00             0.00
-            19           14          466          736            0          603             0.00             0.00             0.00
-            20            4          147          145            0            0             0.00             0.00             0.00
-  Time to build edge slopes: 0.361
+            14           22          338          336            0            0             0.00             0.00             0.00
+            15           14          606          968            0          798             0.00             0.01             0.00
+            16           12          573          924            0          856             0.00             0.01             0.00
+            17            6          106          104            0            0             0.00             0.00             0.00
+            18            6          106          104            0            0             0.00             0.00             0.00
+            19           14          605          966            0          821             0.00             0.01             0.00
+            20            4          183          181            0            0             0.00             0.00             0.00
+  Time to build edge slopes: 0.482
 --------------------------------------------------------------------------------
  ERRORS
 --------------------------------------------------------------------------------
-LawsonFlipToCDT : Triangle 414 nodes 471 472 80, (neighbours -1 61 59) edge 1 mismatched. Neighbour nodes 81 116 469, (neighbours 63 62 418).]
-LawsonFlipToCDT : Triangle 200 nodes 412 155 298, (neighbours 199 202 201) edge 1 mismatched. Neighbour nodes 411 298 299, (neighbours 201 -1 244).]
-LawsonFlipToCDT : Triangle 204 nodes 303 410 411, (neighbours 238 -1 238) edge 2 mismatched. Neighbour nodes 303 409 410, (neighbours 236 -1 240).]
-LawsonFlipToCDT : Triangle 199 nodes 413 155 298, (neighbours 198 201 200) edge 1 mismatched. Neighbour nodes 412 298 299, (neighbours 200 -1 202).]
-LawsonFlipToCDT : Triangle 198 nodes 414 155 298, (neighbours 197 200 199) edge 1 mismatched. Neighbour nodes 413 298 299, (neighbours 199 -1 201).]
-LawsonFlipToCDT : Triangle 238 nodes 305 410 411, (neighbours 234 -1 234) edge 2 mismatched. Neighbour nodes 305 409 410, (neighbours 232 -1 236).]
-LawsonFlipToCDT : Triangle 197 nodes 415 155 298, (neighbours 196 199 198) edge 1 mismatched. Neighbour nodes 414 298 299, (neighbours 198 -1 200).]
-LawsonFlipToCDT : Triangle 196 nodes 416 118 155, (neighbours 397 396 196) edge 1 mismatched. Neighbour nodes 118 415 416, (neighbours 196 -1 397).]
-LawsonFlipToCDT : Triangle 197 nodes 416 155 298, (neighbours 396 198 197) edge 1 mismatched. Neighbour nodes 415 298 299, (neighbours 197 -1 199).]
-LawsonFlipToCDT : Triangle 196 nodes 118 155 298, (neighbours 396 198 196) edge 1 mismatched. Neighbour nodes 416 299 300, (neighbours 197 -1 199).]
-LawsonFlipToCDT : Triangle 397 nodes 418 118 298, (neighbours 399 398 397) edge 1 mismatched. Neighbour nodes 118 417 418, (neighbours 397 -1 399).]
-LawsonFlipToCDT : Triangle 398 nodes 419 118 298, (neighbours 400 399 398) edge 1 mismatched. Neighbour nodes 118 418 419, (neighbours 398 -1 400).]
-LawsonFlipToCDT : Triangle 399 nodes 420 118 298, (neighbours 401 400 399) edge 1 mismatched. Neighbour nodes 118 419 420, (neighbours 399 -1 401).]
-LawsonFlipToCDT : Triangle 304 nodes 80 472 325, (neighbours 59 302 304) edge 0 mismatched. Neighbour nodes 80 81 463, (neighbours -1 432 430).]
+LawsonFlipToCDT : Triangle 487 nodes 584 585 8, (neighbours -1 498 75) edge 2 mismatched. Neighbour nodes 584 96 97, (neighbours 487 -1 502).]
+LawsonFlipToCDT : Triangle 260 nodes 377 502 503, (neighbours 294 -1 294) edge 2 mismatched. Neighbour nodes 377 501 502, (neighbours 292 -1 296).]
+LawsonFlipToCDT : Triangle 294 nodes 379 502 503, (neighbours 290 -1 290) edge 2 mismatched. Neighbour nodes 379 501 502, (neighbours 288 -1 292).]
+LawsonFlipToCDT : Triangle 192 nodes 663 216 235, (neighbours 193 190 191) edge 1 mismatched. Neighbour nodes 662 235 236, (neighbours 191 -1 189).]
+LawsonFlipToCDT : Triangle 39 nodes 59 60 77, (neighbours -1 57 55) edge 1 mismatched. Neighbour nodes 78 79 59, (neighbours -1 56 39).]
+LawsonFlipToCDT : Triangle 192 nodes 215 216 235, (neighbours -1 191 192) edge 1 mismatched. Neighbour nodes 663 235 236, (neighbours 192 -1 190).]
+LawsonFlipToCDT : Triangle 252 nodes 508 146 195, (neighbours 489 488 252) edge 1 mismatched. Neighbour nodes 146 507 508, (neighbours 252 -1 489).]
+LawsonFlipToCDT : Triangle 489 nodes 510 146 368, (neighbours 491 490 489) edge 1 mismatched. Neighbour nodes 146 509 510, (neighbours 489 -1 491).]
+LawsonFlipToCDT : Triangle 489 nodes 511 368 369, (neighbours 491 -1 491) edge 2 mismatched. Neighbour nodes 511 146 368, (neighbours 492 490 490).]
+LawsonFlipToCDT : Triangle 491 nodes 512 146 368, (neighbours 493 490 491) edge 1 mismatched. Neighbour nodes 511 368 369, (neighbours 491 -1 489).]
+LawsonFlipToCDT : Triangle 492 nodes 513 146 368, (neighbours 494 490 492) edge 1 mismatched. Neighbour nodes 512 369 370, (neighbours 491 -1 489).]
+LawsonFlipToCDT : Triangle 491 nodes 513 368 369, (neighbours 493 -1 493) edge 2 mismatched. Neighbour nodes 513 146 368, (neighbours 494 490 492).]
+LawsonFlipToCDT : Triangle 493 nodes 514 146 368, (neighbours 495 490 493) edge 1 mismatched. Neighbour nodes 370 512 513, (neighbours 489 -1 491).]
+LawsonFlipToCDT : Triangle 494 nodes 515 146 368, (neighbours 496 490 494) edge 1 mismatched. Neighbour nodes 370 512 513, (neighbours 489 -1 491).]
+LawsonFlipToCDT : Triangle 495 nodes 516 146 368, (neighbours 497 496 495) edge 1 mismatched. Neighbour nodes 146 515 516, (neighbours 495 -1 497).]
+LawsonFlipToCDT : Triangle 30 nodes 466 467 53, (neighbours -1 29 31) edge 2 mismatched. Neighbour nodes 466 54 55, (neighbours 30 -1 421).]
+LawsonFlipToCDT : Triangle 29 nodes 52 53 466, (neighbours -1 31 419) edge 1 mismatched. Neighbour nodes 54 55 465, (neighbours -1 32 421).]
+LawsonFlipToCDT : Triangle 30 nodes 465 466 53, (neighbours -1 419 30) edge 1 mismatched. Neighbour nodes 466 467 52, (neighbours -1 28 29).]

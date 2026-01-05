@@ -4,8 +4,8 @@ from scipy.constants import Planck, e, hbar, h
 def _test_and_diagonalize(H):
     if np.allclose(H, H.conj().T):
         print("Hamiltonian is Hermitian")
-        evals, evecs    = np.linalg.eigh(H)   # diagonalize if you want energies/eigenstates
-        E_matrix        = np.diag(evals)              # diagonalized Hamiltonian
+        evals, evecs    = np.linalg.eigh(H)             # diagonalize if you want energies/eigenstates
+        E_matrix        = np.diag(evals)                # diagonalized Hamiltonian
 
         # Verify diagonalization: V^† H V = Λ
         H_diag          = evecs.conj().T @ H @ evecs
@@ -57,16 +57,15 @@ def analyse_hamilotonian(H, Nc, Nq, analyse_type="LOM"):
         f01 = F[1] - F[0]
         f20 = F[2] - F[0]
         f30 = F[3] - F[0]
-        f40 = F[4] - F[0]
+        #f40 = F[4] - F[0]
         
         if analyse_type == "EPR":
-            g = abs((H[0, 2*Nc] / h) * 1e-6)  # in MHz
+            g                   = abs((H[0, 2*Nc] / h) * 1e-6)  # in MHz
             qubit_frequency     = f01
             cavity_frequency    = f20
             ana_harm            = (f12 - f01) * 1e3  # in MHz
         else:
-            g = abs((H[1, Nc] / h) * 1e-6)
-
+            g                   = abs((H[1, Nc] / h) * 1e-6)
             qubit_frequency     = f01
             cavity_frequency    = f30
             ana_harm            = (f13 - f01) * 1e3  # in MHz

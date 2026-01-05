@@ -4,7 +4,7 @@ Licenced to:
 
 Licensed for ACADEMIC USE ONLY.
 
-Execution start time stamp: 30 Dec 2025 20:41:44
+Execution start time stamp: 05 Jan 2026 14:41:25
 
 Parameter string: control_resonator_cap.ixi -l process_resonator_cap.ldf -qt -zoff 
 
@@ -34,35 +34,3 @@ Layout input files processed:
     | Chip0 | cap              | 3     | 0     | 1E-06   | 1E-09  | 10      | 5         |
     +=======+==================+=======+=======+=========+========+=========+===========+
 
-
-Layer penetration depths adjusted for temperature:
-  MAIN:   T=0.01 K  TC=1.2 K            Lambda(T)=16 nm
-
-Capacitance extraction overrides inductance extraction.
-Model info: [0] Chip0
-  +=========+=====+======+
-  | Layer   | SIL | MAIN |
-  +---------+-----+------+
-  | Objects | 0   | 9    |
-  +=========+=====+======+
-
-Mesh info:
-  +============+=========+
-  | #Triangles | #Tetras |
-  +------------+---------+
-  | 55543      | 0       |
-  +============+=========+
-
-
-
-Maxwell capacitance matrix (grounded at infinity) [F]
-            cground      cresonator  
-cground     8.26709E-13  -5.45575E-13
-cresonator               5.51371E-13 
-
-SPICE capacitance matrix (floating at infinity) [F]
-            cground  cresonator 
-cground              5.51254E-13
-cresonator                      
-
-Job finished in 29.206 seconds.
