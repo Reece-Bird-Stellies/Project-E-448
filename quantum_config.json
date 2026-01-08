@@ -1,10 +1,10 @@
 {
   "design_specs": {
-    "qubit_frequency_ghz": 2.1,
-    "cavity_frequency_ghz": 4.8,
-    "anharmonicity_mhz": -190,
-    "coupling_g_mhz": 40,
-    "kappa_khz": 180,
+    "qubit_frequency_ghz": 2.8,
+    "cavity_frequency_ghz": 5,
+    "anharmonicity_mhz": -150,
+    "coupling_g_mhz": 80,
+    "kappa_khz": 300,
     "resonator_type": "quarter"
   },
   "simulations": {
@@ -61,7 +61,7 @@
         "fine_mesh_max_size_components": 0.00012,
         "fine_mesh_min_size_junction": 6e-06,
         "fine_mesh_max_size_junction": 6e-05,
-        "starting_frequency": 1000000000.0,
+        "starting_frequency": 2000000000.0,
         "number_of_frequencies": 2,
         "solutions_to_save": 0,
         "assumed_junction_capacitance": 0,

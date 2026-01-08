@@ -1,270 +1,277 @@
 import numpy as np
-from scipy.constants import e, hbar, h
-from typing import Tuple, Dict, Any, Optional
-import pandas as pd
+from scipy.constants import e, hbar
 
-# =========================
-# Ladder Operators
-# =========================
+# ============================================================
+# Ladder Operators (Truncated Bosonic Fock Space)
+# ============================================================
 def _a_op(N: int) -> np.ndarray:
     """
-    Construct the bosonic annihilation operator for a truncated Fock space.
-    
+    Construct the bosonic annihilation operator â for a truncated Fock space.
+
     The annihilation operator is defined as:
-        a = sum_{n=1}^{N-1} sqrt(n) |n-1><n|
-    
+            N-1
+        â =  Σ √n |n-1⟩⟨n|
+            n=1
+
     Args:
-        N: Dimension of the truncated Fock space (number of photon states)
-    
+        N : Dimension of the truncated Fock space
+
     Returns:
-        N×N complex matrix representing the annihilation operator
+        A : NxN complex matrix representing â
     """
-    A = np.zeros((N, N), dtype=complex)
+    A = np.zeros((N, N), dtype=complex) # Allocate NxN zero matrix
     for n in range(1, N):
-        A[n-1, n] = np.sqrt(n)
+        A[n-1, n] = np.sqrt(n)          # Populate superdiagonal with √n
     return A
+
 
 def _adag_op(N: int) -> np.ndarray:
     """
-    Construct the bosonic creation operator for a truncated Fock space.
-    
+    Construct the bosonic creation operator â† for a truncated Fock space.
+
     The creation operator is defined as:
-        a† = sum_{n=0}^{N-2} sqrt(n+1) |n+1><n|
-    
+            N-2
+        â† = Σ √(n+1) |n+1⟩⟨n|
+            n=0
     Args:
-        N: Dimension of the truncated Fock space (number of photon states)
-    
+        N : Dimension of the truncated Fock space
+
     Returns:
-        N×N complex matrix representing the creation operator
+        A_dag : NxN complex matrix representing â†
     """
-    Adag = np.zeros((N, N), dtype=complex)
+    A_dag = np.zeros((N, N), dtype=complex)
     for n in range(0, N-1):
-        Adag[n+1, n] = np.sqrt(n+1)
-    return Adag
+        A_dag[n+1, n] = np.sqrt(n+1)    # Populate subdiagonal with √(n+1)
+    return A_dag
 
-# =========================
-# System Parameters and Operators
-# =========================
-def _compute_constants(Lj, Lr, Cj, Cs, Cg, Cr, Nc, Nq):
+
+# ============================================================
+# System Constants and Basic Operators
+# ============================================================
+def _compute_constants(Lr, Cj, Cs, Cg, Cr, Nc, Nq):
     """
-    Compute derived physical parameters and construct identity and ladder operators.
-    
-    This function calculates:
-    - Total qubit capacitance (Csigma)
-    - Capacitive coupling ratio (beta)
-    - Resonator frequency (Wr)
-    - RMS voltage fluctuations (Vrms)
+    Compute derived circuit parameters and construct basic operators.
+
+    This routine computes:
+    - Total qubit capacitance ΣC
+    - Capacitive coupling ratio β
+    - Resonator angular frequency ω_r
+    - Zero-point voltage fluctuations V_zpf
     - Identity operators for cavity and qubit subspaces
-    - Ladder operators for the cavity mode
-    
-    Args:
-        Lj: Josephson inductance (H)
-        Lr: Resonator inductance (H)
-        Cj: Josephson junction capacitance (F)
-        Cs: Shunt capacitance (F)
-        Cg: Coupling capacitance (F)
-        Cr: Resonator capacitance (F)
-        Nc: Number of cavity Fock states to include
-        Nq: Number of qubit energy levels to include
-    
-    Returns:
-        Tuple containing:
-        - Csigma: Total qubit capacitance (F)
-        - beta: Capacitive coupling ratio (dimensionless)
-        - Wr: Resonator angular frequency (rad/s)
-        - Vrms: RMS voltage of resonator zero-point fluctuations (V)
-        - Ic_hat: Identity operator for cavity subspace (Nc×Nc)
-        - Iq_hat: Identity operator for qubit subspace (Nq×Nq)
-        - a_hat: Cavity annihilation operator (Nc×Nc)
-        - a_hat_dagger: Cavity creation operator (Nc×Nc)
-    """
-    Csigma          = Cj + Cs + Cg
-    beta            = Cg / Csigma
-    Wr              = 1 / np.sqrt(Lr * Cr)
-    Vrms            = np.sqrt((hbar * Wr) / (2 * Cr))
-    
-    Ic_hat          = np.eye(Nc)
-    Iq_hat          = np.eye(Nq)
-    a_hat           = _a_op(Nc)   # Would also create the single ladder ops for the qubit but it ist used here
-    a_hat_dagger    = _adag_op(Nc)
-    
-    return (Csigma, beta, Wr, Vrms, Ic_hat, Iq_hat, a_hat, a_hat_dagger)
+    - Cavity ladder operators â and â†
 
-# =========================
-# Cooper Pair Box Hamiltonian
-# =========================
+    Args:
+        Lr : Resonator inductance (H)
+        Cj : Junction capacitance (F)
+        Cs : Shunt capacitance (F)
+        Cg : Coupling capacitance (F)
+        Cr : Resonator capacitance (F)
+        Nc : Number of cavity Fock states
+        Nq : Number of qubit energy levels
+
+    Returns:
+        Csigma       : Total qubit capacitance ΣC
+        beta         : Capacitive coupling ratio β
+        Wr           : Resonator angular frequency ω_r (rad/s)
+        Vzpf         : RMS zero-point voltage fluctuations V_zpf
+        Ic_hat       : Cavity identity operator
+        Iq_hat       : Qubit identity operator
+        a_hat        : Cavity annihilation operator â
+        a_hat_dagger : Cavity creation operator â†
+    """
+    Csigma       = Cj + Cs + Cg
+    beta         = Cg / Csigma
+    Wr           = 1 / np.sqrt(Lr * Cr)
+    Vzpf         = np.sqrt((hbar * Wr) / (2 * Cr))
+
+    Ic_hat       = np.eye(Nc)  # NcxNc identity matrix
+    Iq_hat       = np.eye(Nq)  # NqxNq identity matrix
+    a_hat        = _a_op(Nc)
+    a_hat_dagger = _adag_op(Nc)
+
+    return (Csigma, beta, Wr, Vzpf, Ic_hat, Iq_hat, a_hat, a_hat_dagger)
+
+
+# ============================================================
+# Cooper Pair Box Hamiltonian (Charge Basis)
+# ============================================================
 def _cpb_hamiltonian(Ec, Ej, ng, Nmax):
     """
     Construct the Cooper Pair Box (CPB) Hamiltonian in the charge basis.
-    
+
     The CPB Hamiltonian is:
-        H = 4*Ec*(n - ng)^2 - Ej*cos(φ)
-    
-    In the charge basis |N⟩ (N = -Nmax, ..., Nmax), this becomes:
-        H = 4*Ec*sum_N (N - ng)^2 |N⟩⟨N| - (Ej/2)*sum_N (|N⟩⟨N+1| + |N+1⟩⟨N|)
-    
+        Ĥ = 4E_c (n̂ - n_g)^2 - E_J cos(φ̂ )
+
+    In the truncated charge basis |N⟩ with N ∈ [-Nmax, …, Nmax],
+    this becomes:
+
+        Charging term:
+            4E_c (N - n_g)^2 |N⟩⟨N|
+
+        Josephson term:
+            -(E_J / 2) ( |N⟩⟨N+1| + |N+1⟩⟨N| )
+
     Args:
-        Ec: Charging energy (J)
-        Ej: Josephson energy (J)
-        ng: Offset charge (dimensionless, in units of Cooper pairs)
-        Nmax: Maximum charge number (basis spans -Nmax to +Nmax)
-    
+        Ec   : Charging energy E_c (J)
+        Ej   : Josephson energy E_J (J)
+        ng   : Offset charge n_g (dimensionless)
+        Nmax : Maximum charge index
+
     Returns:
-        Tuple containing:
-        - H: CPB Hamiltonian matrix in charge basis (dim×dim, where dim = 2*Nmax+1)
-        - n_charge: Charge number operator diagonal matrix
+        H        : CPB Hamiltonian matrix
+        n_charge : Charge number operator n̂
     """
-    Nvals       = np.arange(-Nmax, Nmax+1)
-    dim         = Nvals.size
-    basis       = np.eye(dim)
-    
-    n_charge    = np.diag(Nvals.astype(float))
-    
-    # Charging energy term: 4*Ec*(n - ng)^2 (diagonal)
-    proj_terms  = []
+    Nvals    = np.arange(-Nmax, Nmax + 1)   # Creates a 1D array: [-Nmax, -Nmax+1, ...,-2, -1, 0, 1, 2, ..., Nmax]
+    dim      = Nvals.size
+    basis    = np.eye(dim)                  # Creates a (2*Nmax + 1)x(2*Nmax + 1) identity matrix
+
+    n_charge = np.diag(Nvals.astype(float)) # Places the values of Nvals on the diagonal
+
+    proj_terms = []
     for i, N in enumerate(Nvals):
-        weighted = (N - ng)**2 * np.outer(basis[i], basis[i])
+        weighted = (N - ng)**2 * np.outer(basis[i], basis[i]) # Outer product = |N⟩⟨N| 
         proj_terms.append(weighted)
     Hc = 4 * Ec * np.sum(proj_terms, axis=0)
-    
-    # Josephson energy term: -(Ej/2)*cos(φ) ≈ -(Ej/2)*(|N⟩⟨N+1| + h.c.) (off-diagonal)
-    hop_terms   = []
+
+    hop_terms = []
     for i in range(dim - 1):
-        hop_terms.append(np.outer(basis[i], basis[i+1]) + np.outer(basis[i+1], basis[i]))
-    Hj = -(Ej/2) * np.sum(hop_terms, axis=0)
-    
+        hop_terms.append(
+            np.outer(basis[i], basis[i + 1]) +
+            np.outer(basis[i + 1], basis[i])
+        )
+    Hj = -(Ej / 2) * np.sum(hop_terms, axis=0)
+
     H = Hc + Hj
     return (H, n_charge)
 
-# =========================
-# Qubit Eigenstate Calculation
-# =========================
-def _extract_e_matrix_and_n_phi(Lj, Csigma, Nmax, Nq):
-    """
-    Diagonalize the CPB Hamiltonian and extract qubit energies and charge matrix elements.
-    
-    This function:
-    1. Constructs the CPB Hamiltonian in the charge basis
-    2. Diagonalizes to find energy eigenstates
-    3. Keeps only the lowest Nq energy levels
-    4. Transforms the charge operator to the energy eigenstate basis
-    
-    Args:
-        Lj: Josephson inductance (H)
-        Csigma: Total qubit capacitance (F)
-        Nmax: Maximum charge number for CPB basis
-        Nq: Number of lowest energy levels to keep
-    
-    Returns:
-        Tuple containing:
-        - Wj: Array of qubit energy eigenvalues for lowest Nq states (J)
-        - n_phi: Charge operator matrix elements in energy eigenstate basis (Nq×Nq)
-                 n_phi[i,j] = ⟨φ_i|n̂|φ_j⟩ where |φ_i⟩ are energy eigenstates
-    """
-    phi0    = hbar / (2*e)
-    Ec      = (e**2) / (2 * Csigma)
-    Ej      = phi0**2 / Lj
-    ng      = 0.0
-    
-    H, n_charge = _cpb_hamiltonian(Ec, Ej, ng, Nmax)
-    E_raw, U    = np.linalg.eigh(H)
-    #idx         = np.argsort(E_raw)[:Nq]
-    #e_matrix    = E_raw[idx]
-    #Uq          = U[:, idx]
-    #n_phi       = Uq.conj().T @ n_charge @ Uq
-    n_phi       = U.conj().T @ n_charge @ U
-    
-    return (E_raw, n_phi)
-    #return(e_matrix, n_phi)
 
-# =========================
-# Coupling Strength Calculation
-# =========================
-def _compute_gij(i, j, beta, Vrms, n_phi):
+# ============================================================
+# Qubit Eigenproblem and Charge Matrix Elements
+# ============================================================
+def _extract_Ej_levels_and_n_phi(Lj, Csigma, Nmax):
     """
-    Compute the qubit-cavity coupling strength between energy levels i and j.
-    
-    The coupling strength in the dispersive/charge regime is:
-        g_ij = (2*β*e*V_rms/ℏ) * ⟨φ_i|n̂|φ_j⟩
-    
-    where:
-    - β is the capacitive coupling ratio Cg/(Cj+Cs+Cg)
-    - V_rms is the RMS voltage of resonator zero-point fluctuations
-    - ⟨φ_i|n̂|φ_j⟩ is the charge matrix element between eigenstates
-    
+    Diagonalize the CPB Hamiltonian and extract qubit eigenenergies
+    and charge matrix elements in the energy eigenbasis.
+
+    Procedure:
+    1. Construct CPB Hamiltonian in the charge basis
+    2. Diagonalize Ĥ |φ_j⟩ = E_j |φ_j⟩
+    3. Transform n̂ → n̂_φ = U† n̂ U
+
     Args:
-        Iq_hat: Identity operator for qubit subspace (unused, kept for consistency)
-        i: Index of first energy level
-        j: Index of second energy level
-        beta: Capacitive coupling ratio (dimensionless)
-        Vrms: RMS voltage fluctuations (V)
-        n_phi: Charge operator matrix in eigenstate basis
-    
+        Lj     : Josephson inductance (H)
+        Csigma : Total qubit capacitance ΣC
+        Nmax   : Charge basis truncation
+
     Returns:
-        g_ij: Coupling strength between levels i and j (rad/s)
+        Ej_levels : Qubit eigenenergies E_j (J)
+        n_phi     : Charge operator ⟨φ_i|n̂|φ_j⟩
     """
-    gij = (2*beta*e*Vrms / hbar) * n_phi[i, j]
+    phi0            = hbar / (2 * e)
+    Ec              = (e**2) / (2 * Csigma)
+    Ej_levels       = phi0**2 / Lj
+    ng              = 0.0
+
+    H, n_charge     = _cpb_hamiltonian(Ec, Ej_levels, ng, Nmax)
+    Ej_levels, U    = np.linalg.eigh(H)             # Returns eigenvalues (Ej_levels) and eigenvectors (columns of U)
+
+    n_phi       = U.conj().T @ n_charge @ U     # Use @ for matrix multiplication
+
+    return (Ej_levels, n_phi)
+
+# ============================================================
+# Qubit-Cavity Coupling Strength
+# ============================================================
+def _compute_gij(i, j, beta, Vzpf, n_phi):
+    """
+    Compute the qubit-cavity coupling rate g_ij between levels i and j.
+
+    The coupling strength is:
+        g_ij = (2 β e V_zpf / ℏ) ⟨φ_i|n̂|φ_j⟩
+
+    Args:
+        i     : Initial qubit level index
+        j     : Final qubit level index
+        beta  : Capacitive coupling ratio β
+        Vzpf  : Zero-point RMS voltage V_zpf
+        n_phi : Charge operator in eigenbasis
+
+    Returns:
+        g_ij : Coupling strength (rad/s)
+    """
+    gij = (2 * beta * e * Vzpf / hbar) * n_phi[i, j]
     return gij
 
-# =========================
-# Total System Hamiltonian
-# =========================
+
+# ============================================================
+# Full System Hamiltonian (Local Oscillator Method)
+# ============================================================
 def compute_hamiltonian_lom(Lj, Lr, Cj, Cs, Cg, Cr, Nc, Nq, Nmax):
     """
-    Construct the full Hamiltonian for a CPB qubit coupled to a resonator cavity.
-    
-    The total Hamiltonian in the dressed state basis is:
-        H = H_r + H_q + H_i
-    
-    where:
-    - H_r = ℏ*ω_r*a†a is the resonator Hamiltonian
-    - H_q = sum_j E_j |j⟩⟨j| is the qubit Hamiltonian in energy eigenbasis
-    - H_i = sum_ij ℏ*g_ij |i⟩⟨j| ⊗ (a + a†) is the interaction Hamiltonian
-    
-    The full Hilbert space has dimension Nq × Nc.
-    Basis ordering: |qubit state⟩ ⊗ |cavity state⟩
-    
+    Construct the full Hamiltonian for a CPB qubit coupled to a resonator.
+
+    The total Hamiltonian is:
+        Ĥ = Ĥ_r + Ĥ_q + Ĥ_i
+
+    with:
+        Ĥ_r = ℏ ω_r ( Î_q ⊗ â† â )
+  
+                Nq-1
+        Ĥ_q = ℏ  Σ   ω_j |φ_j⟩⟨φ_j| ⊗ Î_c
+                j=0
+
+               Nq-1
+        Ĥ_i = ℏ  Σ   g_ij |φ_i⟩⟨φ_j| ⊗ ( â + â† )
+              i,j=0
+              
+    The Hilbert space ordering is:
+        |qubit_state⟩ ⊗ |cavity_state⟩
+
     Args:
-        Lj: Josephson inductance (H)
-        Lr: Resonator inductance (H)
-        Cj: Josephson junction capacitance (F)
-        Cs: Shunt capacitance (F)
-        Cg: Coupling capacitance (F)
-        Cr: Resonator capacitance (F)
-        Nc: Number of cavity Fock states
-        Nq: Number of qubit energy levels
-        Nmax: Maximum charge number for CPB diagonalization
-    
+        Lj   : Josephson inductance (H)
+        Lr   : Resonator inductance (H)
+        Cj   : Junction capacitance (F)
+        Cs   : Shunt capacitance (F)
+        Cg   : Coupling capacitance (F)
+        Cr   : Resonator capacitance (F)
+        Nc   : Cavity Fock space dimension
+        Nq   : Number of qubit energy levels
+        Nmax : Charge basis truncation
+
     Returns:
-        H: Total Hamiltonian matrix (Nq*Nc × Nq*Nc) in units of Joules
+        Dictionary containing:
+            H  : Total Hamiltonian
+            Hr : Resonator Hamiltonian
+            Hq : Qubit Hamiltonian
+            Hi : Interaction Hamiltonian
     """
-    # Compute system parameters and operators
-    (Csigma, beta, Wr, Vrms, Ic_hat, Iq_hat, a_hat, a_hat_dagger) = _compute_constants(
-        Lj, Lr, Cj, Cs, Cg, Cr, Nc, Nq
+    (Csigma, beta, Wr, Vzpf, Ic_hat, Iq_hat, a_hat, a_hat_dagger) = _compute_constants(
+        Lr, Cj, Cs, Cg, Cr, Nc, Nq
     )
-    
-    # Extract qubit energies and charge matrix elements
-    (e_matrix, n_phi) = _extract_e_matrix_and_n_phi(Lj, Csigma, Nmax, Nq)
-    
-    # Resonator Hamiltonian: H_r = ℏ*ω_r*a†a ⊗ I_q
-    Hr = hbar * Wr * np.kron(Iq_hat, a_hat_dagger @ a_hat)
-    
-    # Qubit Hamiltonian: H_q = sum_j E_j |j⟩⟨j| ⊗ I_c
+
+    (Ej_levels, n_phi) = _extract_Ej_levels_and_n_phi(Lj, Csigma, Nmax)  # E = ℏ ω, therefore Ej = ℏ ω_j
+
+    Hr          = hbar * Wr * np.kron(Iq_hat, a_hat_dagger @ a_hat)      # np.kron(x, y) = x ⊗ y
+
     proj_terms = []
     for j in range(Nq):
-        x = e_matrix[j] * np.kron(np.outer(Iq_hat[j], Iq_hat[j]), Ic_hat)   #hbar already included in e_matrix
+        x = Ej_levels[j] * np.kron(
+            np.outer(Iq_hat[j], Iq_hat[j]),
+            Ic_hat
+        )
         proj_terms.append(x)
-    Hq = np.sum(proj_terms, axis=0)
-    
-    # Interaction Hamiltonian: H_i = sum_ij ℏ*g_ij |i⟩⟨j| ⊗ (a + a†)
+    Hq          = np.sum(proj_terms, axis=0)
+
     proj_terms2 = []
     for i in range(Nq):
         for j in range(Nq):
-            gij = _compute_gij(i, j, beta, Vrms, n_phi)
-            x = gij * np.kron(np.outer(Iq_hat[i], Iq_hat[j]), a_hat + a_hat_dagger)
+            gij = _compute_gij(i, j, beta, Vzpf, n_phi)
+            x   = gij * np.kron(
+                np.outer(Iq_hat[i], Iq_hat[j]),
+                a_hat + a_hat_dagger
+            )
             proj_terms2.append(x)
-    Hi = hbar * np.sum(proj_terms2, axis=0)
-    
-    # Total Hamiltonian
-    H = Hr + Hq + Hi
+    Hi          = hbar * np.sum(proj_terms2, axis=0)
+
+    H           = Hr + Hq + Hi
     return dict(H=H, Hr=Hr, Hq=Hq, Hi=Hi)
