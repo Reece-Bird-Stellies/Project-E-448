@@ -26,57 +26,44 @@ def _get_inductex_time(file_path):
         return None
 
 def _get_inductex_capacitance_results(file_path):
-    """
-    Extracts capacitance results from an InductEx elements.txt file.
-    
-    Args:
-        file_path: Path to the elements.txt file
-    
-    Returns:
-        Dictionary of capacitance results (Maxwell only), or None if file not found or invalid
-    """
     try:
         with open(file_path, 'r') as file:
             capacitance_results = {}
             for line in file:
-                # Check if line contains Maxwell capacitance (ignore SPICE)
                 if '(Maxwell)' in line:
                     parts = line.split()
                     if len(parts) >= 2:
-                        #parts[0] is the capacitor name (e.g., "CGROUND-CCROSS(Maxwell)")
-                        # parts[1] is the value
-                        cap_name = parts[0].replace('(Maxwell)', '')  # Remove (Maxwell) suffix
+                        cap_name = parts[0].replace('(Maxwell)', '')
                         cap_value = float(parts[1])
-                        capacitance_results[cap_name] = cap_value
-            
-            return capacitance_results if capacitance_results else None
-    except (FileNotFoundError, ValueError, IOError) as e:
-        return None
 
+                        if cap_value < 0:
+                            print(f"[INFO] Negative capacitance {cap_name}: {cap_value} → using abs")
+
+                        capacitance_results[cap_name] = abs(cap_value)
+
+            return capacitance_results if capacitance_results else None
+    except (FileNotFoundError, ValueError, IOError):
+        return None
+    
 def _get_inductex_inductance_results(file_path):
-    """
-    Extracts inductance results from an InductEx elements.txt file.
-    
-    Args:
-        file_path: Path to the elements.txt file
-    
-    Returns:
-        Dictionary of inductance results, or None if file not found or invalid
-    """
     try:
         with open(file_path, 'r') as file:
             inductance_results = {}
             for line in file:
                 parts = line.split()
-                # Check if line starts with 'L' and has a value
                 if len(parts) >= 2 and parts[0].startswith('L'):
-                    inductor_name = parts[0]
-                    inductor_value = float(parts[1])
-                    inductance_results[inductor_name] = inductor_value
-            
+                    name = parts[0]
+                    value = float(parts[1])
+
+                    if value < 0:
+                        print(f"[INFO] Negative inductance {name}: {value} → using abs")
+
+                    inductance_results[name] = abs(value)
+
             return inductance_results if inductance_results else None
-    except (FileNotFoundError, ValueError, IOError) as e:
+    except (FileNotFoundError, ValueError, IOError):
         return None
+
     
 def _get_inductex_sparams_results(file_path):
     """

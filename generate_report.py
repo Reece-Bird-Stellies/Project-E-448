@@ -92,7 +92,6 @@ def generate_quantum_report(
     """Generate a single-string HTML report for quantum simulation results."""
 
     mode_alt_cavity = "mode_2"
-
     # -------------------- METADATA --------------------
     creator               = best_design["uploader_qubit"]
     institution           = best_design["institution_qubit"]
@@ -109,8 +108,8 @@ def generate_quantum_report(
     hfss_Ccross_cross   = safe_get(best_design, "cross_to_cross")
     hfss_Ccross_ground  = safe_get(best_design, "cross_to_ground")
     hfss_Cground_ground = safe_get(best_design, "ground_to_ground")
-    hfss_Lr             = safe_get(results_inductex, "inductance", "resonator", "L1", scale=1e9)
-    hfss_Cr             = safe_get(compute_other_values, "cr_hfss", scale=1e15)
+    hfss_Lr             = safe_get(compute_other_values, "Lr_hfss", scale=1e9)
+    hfss_Cr             = safe_get(results_inductex, "capacitance", "resonator", "CRESONATOR-CRESONATOR", scale=1e15)
     hfss_Cfeedline      = 0.0
 
     # -------------------- ELECTROSTATICS (InductEx) --------------------
@@ -602,8 +601,8 @@ def generate_quantum_report(
             <tr><td><strong>C<sub>cross-cross</sub> (C<sub>s</sub>) (fF)</strong></td><td class="reference">{hfss_Ccross_cross:.4f}</td><td>{inductex_Ccross_cross:.4f}</td><td class="diff">{diff_inductex_Ccross_cross}</td><td>{palace_Ccross_cross:.4f}</td><td class="diff">{diff_palace_Ccross_cross}</td></tr>
             <tr><td><strong>C<sub>cross-ground</sub> (fF)</strong></td><td class="reference">{hfss_Ccross_ground:.4f}</td><td>{inductex_Ccross_ground:.4f}</td><td class="diff">{diff_inductex_Ccross_ground}</td><td>{palace_Ccross_ground:.4f}</td><td class="diff">{diff_palace_Ccross_ground}</td></tr>
             <tr><td><strong>C<sub>ground-ground</sub> (fF)</strong></td><td class="reference">{hfss_Cground_ground:.4f}</td><td>{inductex_Cground_ground:.4f}</td><td class="diff">{diff_inductex_Cground_ground}</td><td>{palace_Cground_ground:.4f}</td><td class="diff">{diff_palace_Cground_ground}</td></tr>
-            <tr><td><strong>L<sub>r</sub> (nH)</strong></td><td class="reference">{hfss_Lr:.4f} (InductEx)</td><td>{inductex_Lr:.4f}</td><td class="diff">{diff_inductex_Lr}</td><td>{palace_Lr:.4f}***</td><td class="diff">{diff_palace_Lr}</td></tr>
-            <tr><td><strong>C<sub>r</sub> (fF)</strong></td><td class="reference">{hfss_Cr:.4f}**</td><td>{inductex_Cr:.4f}</td><td class="diff">{diff_inductex_Cr}</td><td>{palace_Cr:.4f}</td><td class="diff">{diff_palace_Cr}</td></tr>
+            <tr><td><strong>L<sub>r</sub> (nH)</strong></td><td class="reference">{hfss_Lr:.4f}**</td><td>{inductex_Lr:.4f}</td><td class="diff">{diff_inductex_Lr}</td><td>{palace_Lr:.4f}***</td><td class="diff">{diff_palace_Lr}</td></tr>
+            <tr><td><strong>C<sub>r</sub> (fF)</strong></td><td class="reference">{hfss_Cr:.4f} (InductEx)</td><td>{inductex_Cr:.4f}</td><td class="diff">{diff_inductex_Cr}</td><td>{palace_Cr:.4f}</td><td class="diff">{diff_palace_Cr}</td></tr>
             <tr><td><strong>C<sub>feedline</sub> (fF)</strong></td><td class="reference">{hfss_Cfeedline:.4f}</td><td>{inductex_Cfeedline:.4f}</td><td class="diff">{diff_inductex_Cfeedline}</td><td>{palace_Cfeedline:.4f}</td><td class="diff">{diff_palace_Cfeedline}</td></tr>
         </tbody>
     </table>
@@ -611,8 +610,8 @@ def generate_quantum_report(
     <div class="description">
         <p><strong>*</strong> Extracted using E<sub>c</sub>, C<sub>g</sub> and C<sub>s</sub>:</p>
         <div class="formula">\\( C_j = \\frac{{e^2}}{{2E_c}} - C_g - C_s \\approx 0 \\)</div>
-        <p><strong>**</strong> Extracted using InductEx resonator inductance value as reference and HFSS reference cavity frequency:</p>
-        <div class="formula">\\( C_r = \\frac{{1}}{{(2\\pi F_c)^2 \\cdot L_r}} \\)</div>
+        <p><strong>**</strong> Extracted using InductEx resonator capacitance value as reference and HFSS reference cavity frequency:</p>
+        <div class="formula">\\( L_r = \\frac{{1}}{{(2\\pi F_c)^2 \\cdot C_r}} \\)</div>
         <p><strong>***</strong> Extracted using PALACE resonator capacitance and PALACE cavity frequency:</p>
         <div class="formula">\\( L_r = \\frac{{1}}{{(2\\pi F_c)^2 \\cdot C_r}} \\)</div>
         <p style="margin-top: 20px;"><strong>Mean % difference for C<sub>g</sub> and C<sub>s</sub> for InductEx:</strong> {mean_diff_inductex_cg_cs}</p>

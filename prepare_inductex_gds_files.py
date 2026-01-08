@@ -101,8 +101,14 @@ def _make_path_element(ly, cell, layer_tuple, start_coord, end_coord, width=0.5)
     dbu = ly.dbu  # micron per database unit
 
     # Convert µm coordinates to database units (integer grid)
-    p1 = pya.Point(int(start_coord[0] / dbu), int(start_coord[1] / dbu))
-    p2 = pya.Point(int(end_coord[0] / dbu), int(end_coord[1] / dbu))
+    p1 = pya.Point(
+        round(start_coord[0] / dbu),
+        round(start_coord[1] / dbu)
+    )
+    p2 = pya.Point(
+        round(end_coord[0] / dbu),
+        round(end_coord[1] / dbu)
+    )
 
     path = pya.Path([p1, p2], int(width / dbu))
     cell.shapes(layer_index).insert(path)

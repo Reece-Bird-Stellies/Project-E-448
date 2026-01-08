@@ -19,9 +19,17 @@ def _test_and_diagonalize(H):
     return E_matrix
 
 
-def analyse_hamilotonian(H, Nc, Nq, analyse_type="LOM"):
+def analyse_hamilotonian(Hamiltonians, Nc, Nq, analyse_type="LOM"):
     """Analyse properties of Hamiltonian H."""
     # Protection: check if H is valid
+    # qubit first ordering
+    try: 
+        H  = Hamiltonians['H']  # Extract the Hamiltonians from the dictionary
+        Hq = Hamiltonians['Hq']
+        Hr = Hamiltonians['Hr']
+    except:
+        H = Hamiltonians
+    
     H_0 = {
             'qubit_frequency_ghz': 0,
             'cavity_frequency_ghz': 0,
@@ -46,31 +54,42 @@ def analyse_hamilotonian(H, Nc, Nq, analyse_type="LOM"):
         print(f"Hamiltonian is too small ({H.shape}) - need at least 3x3 - returning zero results")
         return H_0
     
-    try:
-        E_matrix = _test_and_diagonalize(H)
-
-        F = []
-        for energy in np.diag(E_matrix):
-            F.append((energy / h)*1e-9)   # Convert E matrix to frequencies in GHz and store in F list
-        f12 = F[2] - F[1]
-        f13 = F[3] - F[1]
-        f01 = F[1] - F[0]
-        f20 = F[2] - F[0]
-        f30 = F[3] - F[0]
-        #f40 = F[4] - F[0]
-        
+    try:    
         if analyse_type == "EPR":
+            E_matrix   = _test_and_diagonalize(H)
+            
+            F = []
+            for energy in np.diag(E_matrix):
+                F.append((energy / h)*1e-9)   # Convert E matrix to frequencies in GHz and store in frequency list
+                
+            f21 = F[2] - F[1]
+            f10 = F[1] - F[0]
+            f20 = F[2] - F[0]
+            
             g                   = abs((H[0, 2*Nc] / h) * 1e-6)  # in MHz
-            qubit_frequency     = f01
+            qubit_frequency     = f10
             cavity_frequency    = f20
-            ana_harm            = (f12 - f01) * 1e3  # in MHz
+            ana_harm            = (f21 - f10) * 1e3  # in MHz
         else:
-            g                   = abs((H[1, Nc] / h) * 1e-6)
-            qubit_frequency     = f01
-            cavity_frequency    = f30
-            ana_harm            = (f13 - f01) * 1e3  # in MHz
+            E_matrix   = _test_and_diagonalize(H)
+            E_q_matrix = _test_and_diagonalize(Hq)
+            E_r_matrix = _test_and_diagonalize(Hr)
+            
+            F_q = []
+            for energy in np.diag(E_q_matrix):
+                F_q.append((energy / h)*1e-9)   # Convert E matrix to frequencies in GHz and store in frequency list
+            
+            F_r = []
+            for energy in np.diag(E_r_matrix):
+                F_r.append((energy / h)*1e-9)   # Convert E matrix to frequencies in GHz and store in frequency list
+                
 
+            qubit_frequency     = F_q[Nc] - F_q[0]
+            cavity_frequency    = F_r[Nq] - F_r[0]
+            ana_harm            = ((F_q[2*Nc] - F_q[Nc]) - (F_q[Nc] - F_q[0])) *1e3
+            g                   = abs((H[1, Nc] / h) * 1e-6)
         kappa = 0
+        
         return {
             'qubit_frequency_ghz': qubit_frequency,
             'cavity_frequency_ghz': cavity_frequency,

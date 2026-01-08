@@ -5,21 +5,21 @@ def post_processing(ref_design_specs, ref_cap_data, results_inductex, results_pa
     mode_alt_cavity = "mode_2"
     try: 
         Fc_hfss         = ref_design_specs["cavity_frequency_ghz"] * 1e9            # Convert GHz to Hz 
-        Lr_inductex     = results_inductex["inductance"]["resonator"]["L1"]         # Inductance not given so use inductex result
+        cr_inductex     = results_inductex["capacitance"]["resonator"]["CRESONATOR-CRESONATOR"]
         Ec              = ref_cap_data["EC"] * 1e9 * h                              # Convert GHz to Hz and then to J
         Cs              = ref_cap_data["cross_to_cross"] * 1e-15                    # Convert fF to F
         Cg              = ref_cap_data["cross_to_claw"] * 1e-15                     # Convert fF to F
         cj_hfss         = e**2 / (2*Ec) - Cg - Cs
-        cr_hfss         = 1 / ((2*np.pi*Fc_hfss)**2 * Lr_inductex)
+        Lr_hfss         = 1 / ((2*np.pi*Fc_hfss)**2 * cr_inductex)
     except TypeError:
         print("InductEx results or reference data are incomplete. Ensure that inductance simulations have been run and reference design data is available.")
         Fc_hfss         = None
-        Lr_inductex     = None
         Ec              = None
         Cs              = None
         Cg              = None
         cj_hfss         = None
-        cr_hfss         = None
+        cr_inductex     = None
+        Lr_hfss         = None
 
     try:
         Fc_palace       = results_palace["eigenmode"]["full"]["eigen_mode_frequencies"][mode_alt_cavity] * 1e9                         # Changed this to use frequency from full
@@ -33,6 +33,6 @@ def post_processing(ref_design_specs, ref_cap_data, results_inductex, results_pa
     
     return {
         "cj_hfss": cj_hfss,
-        "cr_hfss": cr_hfss,
+        "Lr_hfss": Lr_hfss,
         "lr_palace": lr_palace
     }

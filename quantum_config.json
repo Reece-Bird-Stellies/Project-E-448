@@ -1,10 +1,10 @@
 {
   "design_specs": {
-    "qubit_frequency_ghz": 3.7,
-    "cavity_frequency_ghz": 6.98,
-    "anharmonicity_mhz": -210,
-    "coupling_g_mhz": 100,
-    "kappa_khz": 405,
+    "qubit_frequency_ghz": 2.1,
+    "cavity_frequency_ghz": 4.8,
+    "anharmonicity_mhz": -190,
+    "coupling_g_mhz": 40,
+    "kappa_khz": 180,
     "resonator_type": "quarter"
   },
   "simulations": {
@@ -20,7 +20,7 @@
         "sparams_p2_resistance": 50
       },
       "layer_definition_file": {
-        "segment_size_um": 10,
+        "segment_size_um": 5,
         "substrate_choice": "silicon",
         "thickness_um": 0.07,
         "lambda0_um": 0.016,
@@ -34,7 +34,7 @@
       "capacitance": {
         "mesh_refinement": 0,
         "dielectric_material": "silicon",
-        "solver_order": 2,
+        "solver_order": 3,
         "solver_tolerance": 1e-08,
         "solver_max_iterations": 500,
         "mesh_min_size": 1e-05,
@@ -61,7 +61,7 @@
         "fine_mesh_max_size_components": 0.00012,
         "fine_mesh_min_size_junction": 6e-06,
         "fine_mesh_max_size_junction": 6e-05,
-        "starting_frequency": 2000000000.0,
+        "starting_frequency": 1000000000.0,
         "number_of_frequencies": 2,
         "solutions_to_save": 0,
         "assumed_junction_capacitance": 0,
